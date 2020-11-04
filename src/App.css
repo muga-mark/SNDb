@@ -1,7 +1,65 @@
 * {
   margin: 0;
+  /* background-color: #ECF0F3; */
+  
+}
+
+body {
+  background-color: #ECF0F3;
 }
 
 .App {
-  background-color: #474b4f;
+  height: 100%;
+  /* background-color: #ECF0F3; */
 }
+
+.landingPage {
+  margin: 30px;
+}
+
+.movies {
+  text-align: center;
+  color: rgb(170,33,31);
+  width: fit-content;
+  border-radius: 20px;
+  padding: 10px 25px;
+  margin: 50px 50px 20px 50px;
+  box-shadow: inset 8px 8px 8px #cbced1,
+              inset -8px -8px 8px #ffffff;
+}
+
+.movies_container {
+  border-radius: 20px;
+  padding: 10px;
+  margin: 20px 50px 20px 50px;
+  box-shadow: inset 8px 8px 8px #cbced1,
+              inset -8px -8px 8px #ffffff;
+}
+
+
+.slick-slide div {
+  outline: none;
+  /* background-color: #ECF0F3 !important; */
+}
+.slick-prev {
+  left: calc(-3.5% + 0px) !important;
+  z-index: 1;
+  top: 34% !important;
+}
+.slick-next {
+  right: calc(-0.5% + 2px) !important;
+  z-index: 1;
+  top: 34% !important;
+}
+.slick-prev:before {
+  font-size: 55px !important;
+  color: #D1312D !important;
+  line-height: 1;
+  /* margin-bottom: 20px; */
+}
+.slick-next:before {
+  font-size: 55px !important;
+  color: #D1312D !important;
+  line-height: 1;
+}
+

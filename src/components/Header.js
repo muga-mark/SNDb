@@ -1,15 +1,15 @@
 import React from 'react';
 import './Header.css';
-import logo from '../image/sndb-icon-2.png';
+// import logo from '../image/sndb-icon-2.png';
 
 function Header() {
     return (
         <div className="header">
-            <img 
+            {/* <img 
                 src={logo} 
                 alt="logo" 
                 className="logo"
-            />
+            /> */}
         </div>
     )
 }

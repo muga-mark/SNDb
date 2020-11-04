@@ -1,34 +1,97 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Movie from './components/Movie';
+import Slider from "react-slick";
+import { MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, MOVIE_SEARCH_API } from './api';
 import './App.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const FEATURED_API = "https://api.themoviedb.org/3/discover/movie?api_key=311f76d68ef44dd18eb2aff84f4b78dd&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
-
-const MOVIE_TOPRATED_API = "https://api.themoviedb.org/3/movie/top_rated?api_key=311f76d68ef44dd18eb2aff84f4b78dd&language=en-US&page=1";
-
-const MOVIE_SEARCH_API = "https://api.themoviedb.org/search/movie?&api_key=311f76d68ef44dd18eb2aff84f4b78dd&query=";
-
-const MOVIE_DETAILS_API = "https://api.themoviedb.org/3/movie/movie_id?api_key=311f76d68ef44dd18eb2aff84f4b78dd&language=en-US";
-
-const MOVIE_TRAILER_API = "https://api.themoviedb.org/3/movie/movie_id/videos?api_key=311f76d68ef44dd18eb2aff84f4b78dd&language=en-US";
 
 function App() {
-  const [movies, setMovies] = useState([]);
+  const [moviesPopular, setMoviesPopular] = useState([]);
+  const [moviesUpcoming, setMoviesUpcoming ] = useState([]);
+  const [moviesTopRated, setMoviesTopRated] = useState([]);
+  
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 5
+  };
 
   useEffect(() => {
+    fetch(MOVIE_POPULAR_API)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      setMoviesPopular(data.results);
+    });
+
+    fetch(MOVIE_UPCOMING_API)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      setMoviesUpcoming(data.results);
+    });
+
     fetch(MOVIE_TOPRATED_API)
     .then(res => res.json())
     .then(data => {
       console.log(data);
-      setMovies(data.results);
-    })
+      setMoviesTopRated(data.results);
+    });
+
+
   }, [])
 
   return (
     <div className="App">
       <Header />
-      {movies.length>0 && movies.map((movie)=> <Movie key={movie.id} {...movie} />)}
+      <div className="landingPage">
+
+
+        <div className="movies">
+          <h2>Popular Movies</h2>
+        </div>
+        <div className="movies_container">
+          <Slider {...settings}>
+            {moviesPopular.length>0 && moviesPopular.map((movie)=> (
+              <div>
+                <Movie key={movie.id} {...movie} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        <div className="movies">
+          <h2>Upcoming Movies</h2>
+        </div>
+        <div className="movies_container">
+          <Slider {...settings}>
+            {moviesUpcoming.length>0 && moviesUpcoming.map((movie)=> (
+              <div>
+                <Movie key={movie.id} {...movie} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        <div className="movies">
+          <h2>Top Rated Movies</h2>
+        </div>
+        <div className="movies_container">
+          <Slider {...settings}>
+            {moviesTopRated.length>0 && moviesTopRated.map((movie)=> (
+              <div>
+                <Movie key={movie.id} {...movie} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+      </div>
     </div>
   );
 }
