@@ -5,14 +5,9 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import ReactPlayer from 'react-player';
+import { API_KEY, MOVIE_DETAILS_API, IMG_API } from '../api';
 import { makeStyles } from '@material-ui/core/styles';
 import './Movie.css';
-
-const IMG_API = "https://image.tmdb.org/t/p/w1280";
-
-const MOVIE_DETAILS_API = "https://api.themoviedb.org/3/movie/movie_id?api_key=311f76d68ef44dd18eb2aff84f4b78dd&language=en-US";
-
-
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -23,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         backgroundColor: theme.palette.background.paper,
         width: '70vw',
+        outline: 'none',
     },
 }));
 
@@ -31,7 +27,7 @@ function Movie ({ title, poster_path, overview, vote_average, release_date, id }
     const [open, setOpen] = useState(false);
     const [trailer, setTrailer] = useState([]);
     
-    const MOVIE_TRAILER_API = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=311f76d68ef44dd18eb2aff84f4b78dd&language=en-US`;
+    const MOVIE_TRAILER_API = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
 
     const trailer_url = `https://www.youtube.com/watch?v=${trailer}`;
 

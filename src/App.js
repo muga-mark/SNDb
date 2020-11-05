@@ -18,7 +18,32 @@ function App() {
     infinite: false,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 5
+    slidesToScroll: 5,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
 
   useEffect(() => {
@@ -52,10 +77,10 @@ function App() {
       <div className="landingPage">
 
 
-        <div className="movies">
+        <div className="content__title">
           <h2>Popular Movies</h2>
         </div>
-        <div className="movies_container">
+        <div className="content__container">
           <Slider {...settings}>
             {moviesPopular.length>0 && moviesPopular.map((movie)=> (
               <div>
@@ -65,10 +90,10 @@ function App() {
           </Slider>
         </div>
 
-        <div className="movies">
+        <div className="content__title">
           <h2>Upcoming Movies</h2>
         </div>
-        <div className="movies_container">
+        <div className="content__container">
           <Slider {...settings}>
             {moviesUpcoming.length>0 && moviesUpcoming.map((movie)=> (
               <div>
@@ -78,10 +103,10 @@ function App() {
           </Slider>
         </div>
 
-        <div className="movies">
+        <div className="content__title">
           <h2>Top Rated Movies</h2>
         </div>
-        <div className="movies_container">
+        <div className="content__container">
           <Slider {...settings}>
             {moviesTopRated.length>0 && moviesTopRated.map((movie)=> (
               <div>

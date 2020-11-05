@@ -14,10 +14,10 @@ body {
 }
 
 .landingPage {
-  margin: 30px;
+  margin: 10px;
 }
 
-.movies {
+.content__title {
   text-align: center;
   color: rgb(170,33,31);
   width: fit-content;
@@ -28,7 +28,7 @@ body {
               inset -8px -8px 8px #ffffff;
 }
 
-.movies_container {
+.content__container {
   border-radius: 20px;
   padding: 10px;
   margin: 20px 50px 20px 50px;
