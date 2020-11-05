@@ -15,12 +15,19 @@ function App() {
   
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
     initialSlide: 0,
     responsive: [
+      {
+        breakpoint: 1220,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+        }
+      },
       {
         breakpoint: 1024,
         settings: {
@@ -29,18 +36,10 @@ function App() {
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 800,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
         }
       }
     ]
@@ -76,9 +75,8 @@ function App() {
       <Header />
       <div className="landingPage">
 
-
         <div className="content__title">
-          <h2>Popular Movies</h2>
+          <span>Popular Movies</span>
         </div>
         <div className="content__container">
           <Slider {...settings}>
@@ -91,7 +89,7 @@ function App() {
         </div>
 
         <div className="content__title">
-          <h2>Upcoming Movies</h2>
+          <span>Upcoming Movies</span>
         </div>
         <div className="content__container">
           <Slider {...settings}>
@@ -104,7 +102,7 @@ function App() {
         </div>
 
         <div className="content__title">
-          <h2>Top Rated Movies</h2>
+          <span>Top Rated Movies</span>
         </div>
         <div className="content__container">
           <Slider {...settings}>

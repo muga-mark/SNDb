@@ -16,9 +16,20 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
     },
     paper: {
-        backgroundColor: theme.palette.background.paper,
-        width: '70vw',
+        // backgroundColor: theme.palette.background.paper,
         outline: 'none',
+        [theme.breakpoints.up('xs')]: {
+            width: '90vw',
+        },
+        // [theme.breakpoints.up('sm')]: {
+        //     width: '85vw',
+        // },
+        [theme.breakpoints.up('md')]: {
+            width: '70vw',
+        },
+        // [theme.breakpoints.up('lg')]: {
+        //     width: '70vw',
+        // },
     },
 }));
 

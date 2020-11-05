@@ -14,7 +14,7 @@ body {
 }
 
 .landingPage {
-  margin: 10px;
+  margin: 60px 10px;
 }
 
 .content__title {
@@ -24,16 +24,18 @@ body {
   border-radius: 20px;
   padding: 10px 25px;
   margin: 50px 50px 20px 50px;
-  box-shadow: inset 8px 8px 8px #cbced1,
-              inset -8px -8px 8px #ffffff;
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
+}
+.content__title > span {
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .content__container {
   border-radius: 20px;
   padding: 10px;
   margin: 20px 50px 20px 50px;
-  box-shadow: inset 8px 8px 8px #cbced1,
-              inset -8px -8px 8px #ffffff;
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
 }
 
 
@@ -42,24 +44,72 @@ body {
   /* background-color: #ECF0F3 !important; */
 }
 .slick-prev {
-  left: calc(-3.5% + 0px) !important;
+  /* left: calc(-3.5% + 0px) !important; */
+  left: -45px !important;
   z-index: 1;
   top: 34% !important;
 }
 .slick-next {
-  right: calc(-0.5% + 2px) !important;
+  right: -10px !important;
   z-index: 1;
   top: 34% !important;
 }
 .slick-prev:before {
   font-size: 55px !important;
   color: #D1312D !important;
-  line-height: 1;
-  /* margin-bottom: 20px; */
+  line-height: 1 !important;
 }
 .slick-next:before {
   font-size: 55px !important;
   color: #D1312D !important;
-  line-height: 1;
+  line-height: 1 !important;
 }
 
+@media screen and (max-width: 380px) {
+  .content__title {
+    padding: 10px 25px;
+    margin: 50px 50px 20px 50px;
+  }
+  .content__title > span {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+  }
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media screen and (max-width: 600px) {
+  .slick-prev {
+    left: -32px !important;
+  }
+  .slick-next {
+    right: -18px !important;
+  }
+  .slick-prev:before {
+    font-size: 35px !important;
+  }
+  .slick-next:before {
+    font-size: 35px !important;
+  }
+  
+  .content__title {
+    padding: 10px 25px;
+    margin: 50px 15px 20px 15px;
+  }
+  
+  .content__container {
+    padding: 10px;
+    margin: 20px 15px 20px 15px;
+  }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media screen and (min-width: 992px) {
+  
+}
