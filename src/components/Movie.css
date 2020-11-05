@@ -81,10 +81,10 @@
 
 @media screen and (max-width: 380px) {
     .movie_info_title {
-        height: 40px !important;
+        height: 35px !important;
     }
     .movie_info_title > p {
-        height: 40px !important;
+        height: 35px !important;
         font-size: 14px !important;
         font-weight: 600 !important;
     }
@@ -101,6 +101,53 @@
 
     .movie_info_trailer {
         width: 115px; 
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .movie_info_trailer > button {
+        height: 25px;
+        font-size: 12px;
+    }
+    .movie_info_trailer > button .MuiSvgIcon-root {
+        font-size: 16px !important;
+    }
+
+    .movie_info_more {
+        font-size: 12px !important;
+    }
+    .movie_info_more_rating .MuiSvgIcon-root {
+        color: #F5C518;
+        font-size: 20px !important;
+    }
+    .movie_info_more_rating > span {
+        font-size: 14px !important;
+        margin-left: 2px !important;
+    }
+
+}
+
+@media screen and (min-width: 380px) and (max-width: 510px) {
+    .movie_info_title {
+        height: 35px !important;
+    }
+    .movie_info_title > p {
+        height: 35px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+    }
+
+    .movie {
+        margin: 10px 5px !important;
+        height: 360px !important;
+        width: 160px !important;
+    }
+    .movie_poster {
+        height: 220px !important;
+        width: 160px !important;
+    }
+
+    .movie_info_trailer {
+        width: 140px; 
         margin-top: 10px;
         margin-bottom: 20px;
     }
