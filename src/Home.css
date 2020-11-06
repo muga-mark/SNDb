@@ -1,55 +1,58 @@
-* {
-  margin: 0;
-}
+/* .Toastify__toast {
+    position: relative;
+    min-height: 64px;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    padding: 8px;
+    border-radius: 1px;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 15px 0 rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    max-height: 800px;
+    overflow: hidden;
+    font-family: sans-serif;
+    cursor: pointer;
+    direction: ltr;
 
-body {
-  background-color: #ECF0F3;
-}
+    max-width: fit-content;
+    padding: 8px 15px !important;
+    min-height: 40px;
+} */
 
-.App {
-  height: 100%;
-}
+/* .Toastify__toast-body {
+    margin-right: 10px;
+} */
 
-::-webkit-scrollbar {
-  width: 13px;
-}
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px rgb(182, 126, 126); 
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: #D1312D; 
-}
-
-.content__movies {
-  margin: 60px 10px;
+.content {
+    margin: 60px 10px;
 }
 
 .content__title {
-  text-align: center;
-  cursor: pointer;
-  color: rgb(170,33,31);
-  width: fit-content;
-  border-radius: 20px;
-  padding: 10px 25px;
-  margin: 40px 40px 20px 40px;
-  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fdfdfd;
+    text-align: center;
+    cursor: pointer;
+    color: rgb(170,33,31);
+    width: fit-content;
+    border-radius: 20px;
+    padding: 10px 25px;
+    margin: 40px 40px 20px 40px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fdfdfd;
 }
 .content__title:hover {
-  box-shadow: 10px 10px 10px #cbced1, -5px -5px 10px #eceaea;
+    box-shadow: 10px 10px 10px #cbced1, -5px -5px 10px #eceaea;
 }
+
 .content__title > span {
   font-size: 26px;
   font-weight: 700;
 }
 
-.content__container {
+.content__container {   
+    height: 500px;
   border-radius: 20px;
   padding: 10px 10px;
   margin: 20px 40px 20px 40px;
   box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
 }
-
 
 .react-multiple-carousel__arrow {
   border-radius: 10px !important;
@@ -91,6 +94,10 @@ body {
     font-size: 18px !important;
     font-weight: 700 !important;
   }
+
+  .content__container {   
+    height: 360px;
+}
 }
 
 @media screen and (min-width: 380px) and (max-width: 600px) {

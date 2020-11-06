@@ -10,9 +10,15 @@
 
 .movie {
     border-radius: 15px;
-    margin: 20px 15px 20px 15px;
+    /* margin: 20px 15px 20px 15px; */
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     background-color: #ECF0F3;
     box-shadow: 5px 5px 10px #cbced1, -5px -5px 10px #ffffff;
+}
+.movie_poster {
+    border-radius: 15px 15px 0 0;
 }
 
 .movie_info {
@@ -53,6 +59,9 @@
     font-weight: 500;
     background-color: rgb(209,49,45);
 }
+.movie_info_trailer > button:hover {
+    background-color: #AA211F;
+}
 .movie_info_trailer > button .MuiSvgIcon-root {
     font-size: 18px;
 }
@@ -90,7 +99,9 @@
     }
 
     .movie {
-        margin: 10px 5px !important;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
         height: 340px !important;
         width: 135px !important;
     }
@@ -126,7 +137,7 @@
 
 }
 
-@media screen and (min-width: 380px) and (max-width: 510px) {
+@media screen and (min-width: 380px) and (max-width: 600px) {
     .movie_info_title {
         height: 35px !important;
     }
@@ -137,7 +148,9 @@
     }
 
     .movie {
-        margin: 10px 5px !important;
+        margin: 0 auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
         height: 360px !important;
         width: 160px !important;
     }

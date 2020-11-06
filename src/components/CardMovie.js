@@ -7,7 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import ReactPlayer from 'react-player';
 import { API_KEY, MOVIE_DETAILS_API, IMG_API } from '../api';
 import { makeStyles } from '@material-ui/core/styles';
-import './Movie.css';
+import './CardMovie.css';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Movie ({ title, poster_path, overview, vote_average, release_date, id }) {
+function CardMovie ({ title, poster_path, overview, vote_average, release_date, id }) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [trailer, setTrailer] = useState([]);
@@ -41,6 +41,7 @@ function Movie ({ title, poster_path, overview, vote_average, release_date, id }
     const MOVIE_TRAILER_API = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
 
     const trailer_url = `https://www.youtube.com/watch?v=${trailer}`;
+    
 
     const handleOpen = () => {
         setOpen(true);
@@ -54,10 +55,10 @@ function Movie ({ title, poster_path, overview, vote_average, release_date, id }
         fetch(MOVIE_TRAILER_API)
         .then(res => res.json())
         .then(data => {
-          console.log("trailer",data.results);
+        //   console.log("trailer",data.results);
           setTrailer(data.results[0]?.key);
         })
-      }, [])
+      }, [ MOVIE_TRAILER_API ])
 
     return (
         <div className="movie">
@@ -73,10 +74,16 @@ function Movie ({ title, poster_path, overview, vote_average, release_date, id }
                 </div>
                 
                 <div className="movie_info_trailer">
-                    <button type="button" onClick={handleOpen}>
-                    <PlayArrowIcon />
-                    <span>Trailer</span>
+
+                    <button type="button" onClick={handleOpen} disabled={!trailer}>
+                        <PlayArrowIcon />
+                        {!trailer?
+                            <span>No Trailer</span>
+                        :
+                            <span>Trailer</span>    
+                        }
                     </button>
+
                 </div>
                 
                 <div className="movie_info_more">
@@ -124,4 +131,4 @@ function Movie ({ title, poster_path, overview, vote_average, release_date, id }
     );
 }
 
-export default Movie;
+export default CardMovie;
