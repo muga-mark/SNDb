@@ -5,6 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import ReactPlayer from 'react-player';
+import SpinnerCardCustom from "../components/SpinnerCardCustom";
 import { API_KEY, MOVIE_DETAILS_API, IMG_API } from '../api';
 import { makeStyles } from '@material-ui/core/styles';
 import './CardMovie.css';
@@ -37,6 +38,7 @@ function CardMovie ({ title, poster_path, overview, vote_average, release_date, 
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [trailer, setTrailer] = useState([]);
+    const [imageLoading, setImageLoading] = useState(false);
     
     const MOVIE_TRAILER_API = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
 
@@ -58,16 +60,26 @@ function CardMovie ({ title, poster_path, overview, vote_average, release_date, 
         //   console.log("trailer",data.results);
           setTrailer(data.results[0]?.key);
         })
-      }, [ MOVIE_TRAILER_API ])
 
+      }, [ MOVIE_TRAILER_API, poster_path ])
+
+      
     return (
         <div className="movie">
             
-            <img 
-                src={IMG_API + poster_path} 
-                alt={title} 
-                className="movie_poster"
-            />
+            {imageLoading?
+                <div className="movie_poster">
+                    <SpinnerCardCustom loading={imageLoading} />
+                </div>
+            :
+                <img 
+                    src={IMG_API + poster_path} 
+                    alt={title} 
+                    className="movie_poster"
+                />
+            }
+            
+
             <div className="movie_info">
                 <div className="movie_info_title">
                     <p>{title}</p>

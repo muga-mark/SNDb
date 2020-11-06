@@ -4,7 +4,7 @@ import CardTV from './components/CardTV';
 // import { ToastContainer } from 'react-toastify';
 import { MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_POPULAR_API, TV_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API, MOVIE_SEARCH_API } from './api';
 
-import SpinnerCustom from "./components/SpinnerCustom";
+import SpinnerContentCustom from "./components/SpinnerContentCustom";
 import CarouselCustom from "./components/CarouselCustom";
 import './Home.css';
 
@@ -50,7 +50,7 @@ function Home() {
     fetch(MOVIE_TOPRATED_API)
     .then(res => res.json())
     .then(data => {
-    //   console.log("TOP RATED MOVIES", data);
+      console.log("TOP RATED MOVIES", data);
       setMoviesTopRated(data.results);
       setMoviesTopRatedLoading(false);
     });
@@ -99,7 +99,7 @@ function Home() {
         </div>
         <div className="content__container">
             {moviesPopularLoading?
-                <SpinnerCustom loading={moviesPopularLoading} />
+                <SpinnerContentCustom loading={moviesPopularLoading} />
             :
                 <CarouselCustom content=
                     {moviesPopular.length>0 && moviesPopular.map((result)=> (
@@ -116,7 +116,7 @@ function Home() {
         </div>
         <div className="content__container">
             {moviesUpcomingLoading?
-                <SpinnerCustom loading={moviesUpcomingLoading} />
+                <SpinnerContentCustom loading={moviesUpcomingLoading} />
             :
                 <CarouselCustom content=
                     {moviesUpcoming.length>0 && moviesUpcoming.map((result)=> (
@@ -133,7 +133,7 @@ function Home() {
         </div>
         <div className="content__container">
             {moviesTopRatedLoading?
-                <SpinnerCustom loading={moviesTopRatedLoading} />
+                <SpinnerContentCustom loading={moviesTopRatedLoading} />
             :
                 <CarouselCustom content=
                     {moviesTopRated.length>0 && moviesTopRated.map((result)=> (
@@ -150,7 +150,7 @@ function Home() {
         </div>
         <div className="content__container">
             {tvPopularLoading?
-                <SpinnerCustom loading={tvPopularLoading} />
+                <SpinnerContentCustom loading={tvPopularLoading} />
             :
                 <CarouselCustom content=
                     {tvPopular.length>0 && tvPopular.map((result)=> (
@@ -167,7 +167,7 @@ function Home() {
         </div>
         <div className="content__container">
             {tvTopRatedLoading?
-                <SpinnerCustom loading={tvTopRatedLoading} />
+                <SpinnerContentCustom loading={tvTopRatedLoading} />
             :
                 <CarouselCustom content=
                     {tvTopRated.length>0 && tvTopRated.map((result)=> (
@@ -184,7 +184,7 @@ function Home() {
         </div>
         <div className="content__container">
             {tvAiringTodayLoading?
-                <SpinnerCustom loading={tvAiringTodayLoading} />
+                <SpinnerContentCustom loading={tvAiringTodayLoading} />
             :
                 <CarouselCustom content=
                     {tvAiringToday.length>0 && tvAiringToday.map((result)=> (
@@ -201,7 +201,7 @@ function Home() {
         </div>
         <div className="content__container">
             {tvOnTheAirLoading?
-                <SpinnerCustom loading={tvOnTheAirLoading} />
+                <SpinnerContentCustom loading={tvOnTheAirLoading} />
             :
                 <CarouselCustom content=
                     {tvOnTheAir.length>0 && tvOnTheAir.map((result)=> (

@@ -55,7 +55,7 @@ function CardTV ({ name, poster_path, overview, vote_average, first_air_date, id
         fetch(TV_TRAILER_API)
         .then(res => res.json())
         .then(data => {
-            console.log("trailer",data.results);
+            // console.log("trailer",data.results);
             setTrailer(data.results[0]?.key);
         })
 

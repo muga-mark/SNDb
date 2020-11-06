@@ -13,12 +13,12 @@ const override = css`
     width: 100%;    
 `;
 
-function SpinnerCustom({ loading }) {
+function SpinnerContentCustom({ loading }) {
     return (
         <div className="spinner">
             <PulseLoader
                 css={override}
-                size={50}
+                size={30}
                 color={"#D1312D"}
                 loading={loading}
             />
@@ -26,4 +26,4 @@ function SpinnerCustom({ loading }) {
     )
 }
 
-export default SpinnerCustom
+export default SpinnerContentCustom
