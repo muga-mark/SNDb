@@ -38,7 +38,6 @@ function CardMovie ({ title, poster_path, overview, vote_average, release_date, 
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [trailer, setTrailer] = useState([]);
-    const [imageLoading, setImageLoading] = useState(false);
     
     const MOVIE_TRAILER_API = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
 
@@ -61,24 +60,18 @@ function CardMovie ({ title, poster_path, overview, vote_average, release_date, 
           setTrailer(data.results[0]?.key);
         })
 
-      }, [ MOVIE_TRAILER_API, poster_path ])
+
+      }, [ MOVIE_TRAILER_API ])
 
       
     return (
         <div className="movie">
             
-            {imageLoading?
-                <div className="movie_poster">
-                    <SpinnerCardCustom loading={imageLoading} />
-                </div>
-            :
-                <img 
-                    src={IMG_API + poster_path} 
-                    alt={title} 
-                    className="movie_poster"
-                />
-            }
-            
+            <img 
+                src={IMG_API + poster_path} 
+                alt={title} 
+                className="movie_poster"
+            />
 
             <div className="movie_info">
                 <div className="movie_info_title">

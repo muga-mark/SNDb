@@ -41,13 +41,17 @@
     box-shadow: 10px 10px 10px #cbced1, -5px -5px 10px #eceaea;
 }
 
+.content__link {
+  text-decoration: none;
+}
+
 .content__title > span {
   font-size: 26px;
   font-weight: 700;
 }
 
 .content__container {   
-    height: 500px;
+  height: 500px;
   border-radius: 20px;
   padding: 10px 10px;
   margin: 20px 40px 20px 40px;
@@ -156,3 +160,5 @@
     top: 25%;
   }
 }
+
+
