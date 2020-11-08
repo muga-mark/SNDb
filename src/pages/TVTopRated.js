@@ -5,18 +5,43 @@ import SpinnerContentCustom from "../components/SpinnerContentCustom";
 import Pagination from '@material-ui/lab/Pagination';
 import '../pages/z_styles.css';
 
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 40,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+}));
+
 
 function TVTopRated() {
-    const [page, setPage] = React.useState(1);
-    const TV_TOPRATED_API = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`;
-
+    const [page, setPage] = useState(1);
     const [ tvTopRated, setTVTopRated ] = useState([]);
     const [ tvTopRatedLoading, setTVTopRatedLoading ] = useState(true);
     const [ tvTopRatedTotalPages, setTVTopRatedTotalPages ] = useState(0);
     
+    const classes = useStyles();
+    const [ sortBy, setSortBy ] = useState("vote_average.desc");
+
+    const TV_TOPRATED_API = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&page=${page}&timezone=America%2FNew_York&vote_average.gte=3&vote_count.gte=500&include_null_first_air_dates=false&with_original_language=en`;
+
     const handleChange = (event, value) => {
       setPage(value);
     //   console.log("NEXT PAGE", page);
+    };
+
+    const sortHandleChange = (event) => {
+        setSortBy(event.target.value);
+        setPage(1);
     };
 
     useEffect(() => {
@@ -43,8 +68,40 @@ function TVTopRated() {
                 </div>
             :
                 <>
-                    <div className="page__title">
-                        <span>Top Rated TV Shows</span>
+                    <div className="page__content_header">
+                        <div className="page__title">
+                            <span>Top Rated TV Shows</span>
+                        </div>
+
+                        <div className="page__filter">
+                            <FormControl className={classes.formControl}>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={sortBy}
+                                    onChange={sortHandleChange}
+                                >
+                                    <MenuItem  value={"vote_average.desc"}>
+                                        <div className="menuItem"> Rating <ArrowDownwardIcon/> </div>
+                                    </MenuItem >
+                                    <MenuItem  value={"vote_average.asc"}>
+                                        <div className="menuItem"> Rating <ArrowUpwardIcon/> </div>
+                                    </MenuItem>
+                                    <MenuItem  value={"release_date.asc"}>
+                                        <div className="menuItem"> Date <ArrowDownwardIcon/> </div>
+                                    </MenuItem >
+                                    <MenuItem  value={"release_date.desc"}>
+                                        <div className="menuItem"> Date <ArrowUpwardIcon/> </div>
+                                    </MenuItem >
+                                    <MenuItem  value={"original_title.asc"}>
+                                        <div className="menuItem"> Title A-Z </div>
+                                    </MenuItem >
+                                    <MenuItem  value={"original_title.desc"}>
+                                        <div className="menuItem"> Title Z-A </div>
+                                    </MenuItem >
+                                </Select>
+                            </FormControl>
+                        </div>
                     </div>
                 
                     <div className="page__content_container">
@@ -62,7 +119,8 @@ function TVTopRated() {
                                 color="secondary" 
                                 page={page} 
                                 onChange={handleChange} 
-                                siblingCount={2}
+                                siblingCount={1}
+                                size='small'
                             />
                         </div>
                     </div>

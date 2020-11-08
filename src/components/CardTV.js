@@ -8,7 +8,7 @@ import ReactPlayer from 'react-player';
 import { API_KEY, MOVIE_DETAILS_API, IMG_API } from '../api';
 import { makeStyles } from '@material-ui/core/styles';
 import 'react-toastify/dist/ReactToastify.css';
-import './CardTV.css';
+import './Card.css';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -56,7 +56,9 @@ function CardTV ({ name, poster_path, overview, vote_average, first_air_date, id
         .then(res => res.json())
         .then(data => {
             // console.log("trailer",data.results);
-            setTrailer(data.results[0]?.key);
+            if(data.results){
+                setTrailer(data.results[0]?.key);
+            }
         })
 
       }, [ TV_TRAILER_API ])
@@ -64,11 +66,13 @@ function CardTV ({ name, poster_path, overview, vote_average, first_air_date, id
     return (
         <div className="movie">
             
-            <img 
-                src={IMG_API + poster_path} 
-                alt={name} 
-                className="movie_poster"
-            />
+            <div className="movie_poster">
+                <img 
+                    src={IMG_API + poster_path} 
+                    alt={name} 
+                    className="poster"
+                />
+            </div>
 
             <div className="movie_info">
                 <div className="movie_info_title">

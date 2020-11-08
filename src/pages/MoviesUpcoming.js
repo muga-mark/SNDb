@@ -7,7 +7,7 @@ import '../pages/z_styles.css';
 
 
 function MoviesUpcoming() {
-    const [page, setPage] = React.useState(1);
+    const [page, setPage] = useState(1);
     const MOVIE_UPCOMING_API = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`;
 
     const [ moviesUpcoming, setMoviesUpcoming ] = useState([]);
@@ -43,29 +43,32 @@ function MoviesUpcoming() {
                 </div>
             :
                 <>
-                    <div className="page__title">
-                        <span>Upcoming Movies</span>
-                    </div>
-                
-                    <div className="page__content_container">
-                        <div className="page__content">
-                            {moviesUpcoming.length>0 && moviesUpcoming.map((result)=> (
-                                <div key={result.id} className="movie_content">
-                                    <CardMovie key={result.id} {...result} />
-                                </div>
-                            ))}
+                    <div className="page__content_header">
+                        <div className="page__title">
+                            <span>Upcoming Movies</span>
                         </div>
+                    </div>
+                    
+                        <div className="page__content_container">
+                            <div className="page__content">
+                                {moviesUpcoming.length>0 && moviesUpcoming.map((result)=> (
+                                    <div key={result.id} className="movie_content">
+                                        <CardMovie key={result.id} {...result} />
+                                    </div>
+                                ))}
+                            </div>
 
-                        <div className="page__content page__content_pagination">
-                            <Pagination 
-                                count={moviesUpcomingTotalPages} 
-                                color="secondary" 
-                                page={page} 
-                                onChange={handleChange} 
-                                siblingCount={2}
-                            />
+                            <div className="page__content page__content_pagination">
+                                <Pagination 
+                                    count={moviesUpcomingTotalPages} 
+                                    color="secondary" 
+                                    page={page} 
+                                    onChange={handleChange} 
+                                    siblingCount={1}
+                                    size='small'
+                                />
+                            </div>
                         </div>
-                    </div>
                 </>
             }
             

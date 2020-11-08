@@ -1,16 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../image/sndb-icon-2.png';
 import './Header.css';
-// import logo from '../image/sndb-icon-2.png';
+
 
 function Header() {
     return (
-        <div className="header">
-            {/* <img 
-                src={logo} 
-                alt="logo" 
-                className="logo"
-            /> */}
-        </div>
+        <Link to='/'>
+            <div className="header">
+                <img 
+                    src={logo} 
+                    alt="logo" 
+                    className="logo"
+                />
+            </div>
+        </Link>
     )
 }
 

@@ -15,7 +15,8 @@
 }
 
 .logo {
-    width: 120px;
-    margin: 10px;
-    background-color: #222629; 
+    width: 84px;
+    height: 36px;
+    margin: 10px 20px;
+    /* background-color: #222629;  */
 }

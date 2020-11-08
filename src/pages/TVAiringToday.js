@@ -7,7 +7,7 @@ import '../pages/z_styles.css';
 
 
 function TVAiringToday() {
-    const [page, setPage] = React.useState(1);
+    const [page, setPage] = useState(1);
     const TV_AIRINGTODAY_API = `https://api.themoviedb.org/3/tv/airing_today?api_key=${API_KEY}&language=en-US&page=${page}`;
 
     const [ tvAiringToday, setTVAiringToday ] = useState([]);
@@ -43,8 +43,10 @@ function TVAiringToday() {
                 </div>
             :
                 <>
-                    <div className="page__title">
-                        <span>Airing Today TV Shows</span>
+                    <div className="page__content_header">
+                        <div className="page__title">
+                            <span>Airing Today TV Shows</span>
+                        </div>
                     </div>
                 
                     <div className="page__content_container">
@@ -62,7 +64,8 @@ function TVAiringToday() {
                                 color="secondary" 
                                 page={page} 
                                 onChange={handleChange} 
-                                siblingCount={2}
+                                siblingCount={1}
+                                size='small'
                             />
                         </div>
                     </div>

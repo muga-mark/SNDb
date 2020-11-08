@@ -8,7 +8,7 @@ import ReactPlayer from 'react-player';
 import SpinnerCardCustom from "../components/SpinnerCardCustom";
 import { API_KEY, MOVIE_DETAILS_API, IMG_API } from '../api';
 import { makeStyles } from '@material-ui/core/styles';
-import './CardMovie.css';
+import './Card.css';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -57,7 +57,10 @@ function CardMovie ({ title, poster_path, overview, vote_average, release_date, 
         .then(res => res.json())
         .then(data => {
         //   console.log("trailer",data.results);
-          setTrailer(data.results[0]?.key);
+            if(data.results){
+                setTrailer(data.results[0]?.key);
+            }
+          
         })
 
 
@@ -67,11 +70,13 @@ function CardMovie ({ title, poster_path, overview, vote_average, release_date, 
     return (
         <div className="movie">
             
-            <img 
-                src={IMG_API + poster_path} 
-                alt={title} 
-                className="movie_poster"
-            />
+            <div className="movie_poster">
+                <img 
+                    src={IMG_API + poster_path} 
+                    alt={title} 
+                    className="poster"
+                />
+            </div>
 
             <div className="movie_info">
                 <div className="movie_info_title">

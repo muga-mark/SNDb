@@ -43,8 +43,10 @@ function TVOnTheAir() {
                 </div>
             :
                 <>
-                    <div className="page__title">
-                        <span>On The Air TV Shows</span>
+                    <div className="page__content_header">
+                        <div className="page__title">
+                            <span>On The Air TV Shows</span>
+                        </div>
                     </div>
                 
                     <div className="page__content_container">
@@ -62,7 +64,8 @@ function TVOnTheAir() {
                                 color="secondary" 
                                 page={page} 
                                 onChange={handleChange} 
-                                siblingCount={2}
+                                siblingCount={1}
+                                size='small'
                             />
                         </div>
                     </div>

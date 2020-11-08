@@ -90,18 +90,14 @@
     top: 20%;
   }
 
-  .content__title {
-    padding: 10px 25px;
-    margin: 50px 50px 20px 50px;
-  }
   .content__title > span {
-    font-size: 18px !important;
+    font-size: 16px !important;
     font-weight: 700 !important;
   }
 
   .content__container {   
     height: 360px;
-}
+  }
 }
 
 @media screen and (min-width: 380px) and (max-width: 600px) {
@@ -125,18 +121,21 @@
     right: 0 !important;
     top: 20%;
   }
+  .content__container {   
+    height: 390px;
+  }
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 600px) {  
   .content__title {
-    padding: 10px 25px;
-    margin: 50px 15px 20px 15px;
+    padding: 10px 25px !important;
+    margin: 50px 15px 20px 15px !important;
   }
   
   .content__container {
-    padding: 10px;
-    margin: 20px 15px 20px 15px;
+    padding: 10px !important;
+    margin: 20px 15px 20px 15px !important;
   }
 
 }
