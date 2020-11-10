@@ -44,9 +44,14 @@
     box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fdfdfd;
 }
 
+.content > a {
+  /* display: block; */
+  width: fit-content;
+}
+
 .content__link {
   text-decoration: none;
-  max-width: 500px;
+  display: block;
 }
 
 .content__title > span {
