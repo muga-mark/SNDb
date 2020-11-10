@@ -18,5 +18,28 @@
     width: 84px;
     height: 36px;
     margin: 10px 20px;
-    /* background-color: #222629;  */
+}
+
+@media screen and (max-width: 380px) {
+    .header {
+        padding-left: 25px;
+        /* padding-right: 30px; */
+    }
+
+    .logo {
+        margin: 10px 0px !important; 
+    }
+}
+
+@media screen and (min-width: 380px) and (max-width: 500px) {
+
+    .logo {
+        margin: 10px 0px !important; 
+    }
+
+}
+
+@media screen and (min-width: 500px) and (max-width: 600px) {
+    
+
 }

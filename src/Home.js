@@ -20,6 +20,7 @@ function Home({ moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcom
                 <span>Popular Movies</span>
             </div>
         </Link>
+
             <div className="content__container">
                 {moviesPopularLoading?
                     <SpinnerContentCustom loading={moviesPopularLoading} />
