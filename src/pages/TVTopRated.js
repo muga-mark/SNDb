@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { API_KEY, MOVIE_SEARCH_API } from '../api';
+import { API_KEY } from '../api';
 import CardTV from '../components/CardTV';
 import SpinnerContentCustom from "../components/SpinnerContentCustom";
 import Pagination from '@material-ui/lab/Pagination';

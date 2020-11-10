@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import StarIcon from '@material-ui/icons/Star';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import ReactPlayer from 'react-player';
-import { API_KEY, MOVIE_DETAILS_API, IMG_API } from '../api';
+import { API_KEY, IMG_API } from '../api';
 import { makeStyles } from '@material-ui/core/styles';
 import 'react-toastify/dist/ReactToastify.css';
 import './Card.css';
@@ -61,17 +62,19 @@ function CardTV ({ name, poster_path, overview, vote_average, first_air_date, id
             }
         })
 
-      }, [ TV_TRAILER_API ])
+    }, [ TV_TRAILER_API ])
 
     return (
         <div className="movie">
             
             <div className="movie_poster">
-                <img 
-                    src={IMG_API + poster_path} 
-                    alt={name} 
-                    className="poster"
-                />
+                <Link to={`/tv/${id}`} className="poster__link">
+                    <img 
+                        src={IMG_API + poster_path} 
+                        alt={name} 
+                        className="poster"
+                    />
+                </Link>
             </div>
 
             <div className="movie_info">

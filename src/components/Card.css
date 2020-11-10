@@ -23,6 +23,10 @@
     border-radius: 15px 15px 0 0;
 }
 
+.poster__link {
+    text-decoration: none;
+}
+
 .movie_info {
     display: flex;
     flex-direction: column;
@@ -82,7 +86,7 @@
     align-items: center;
 }
 .movie_info_more_rating .MuiSvgIcon-root {
-    color: #F5C518;
+    color: #E4BB24;
     font-size: 28px;
 }
 .movie_info_more_rating > span {

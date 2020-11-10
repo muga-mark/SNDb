@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { API_KEY, MOVIE_SEARCH_API } from '../api';
+import { API_KEY } from '../api';
 import CardMovie from '../components/CardMovie';
 import SpinnerContentCustom from "../components/SpinnerContentCustom";
 import Pagination from '@material-ui/lab/Pagination'
@@ -9,12 +9,10 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+
 
 const useStyles = makeStyles((theme) => ({
     formControl: {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_POPULAR_API, TV_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API, MOVIE_SEARCH_API } from './api';
+import { MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_POPULAR_API, TV_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API } from './api';
 
 import Header from './components/Header';
 import Home from './Home';
@@ -11,6 +11,8 @@ import TVPopular from './pages/TVPopular';
 import TVTopRated from './pages/TVTopRated';
 import TVAiringToday from './pages/TVAiringToday';
 import TVOnTheAir from './pages/TVOnTheAir';
+import InfoMovie from './pages/InfoMovie';
+import InfoTV from './pages/InfoTV';
 
 import "react-multi-carousel/lib/styles.css";
 import './App.css';
@@ -18,8 +20,7 @@ import './App.css';
 function App() {
   const [ moviesPopular, setMoviesPopular ] = useState([]);
   const [ moviesPopularLoading, setMoviesPopularLoading ] = useState(true);
-  const [ moviesPopularTotalPages, setMoviesPopularTotalPages ] = useState(0);
-
+  
   const [ moviesUpcoming, setMoviesUpcoming ] = useState([]);
   const [ moviesUpcomingLoading, setMoviesUpcomingLoading ] = useState(true);
 
@@ -44,7 +45,6 @@ function App() {
     .then(data => {
       console.log("popular movies", data);
       setMoviesPopular(data.results);
-      setMoviesPopularTotalPages(data.total_pages);
       setMoviesPopularLoading(false);
     });
 
@@ -125,41 +125,47 @@ function App() {
 
           <Route exact path ="/movie/popular">
             <Header />
-            <MoviesPopular 
-              moviesPopular={moviesPopular} 
-              moviesPopularLoading={moviesPopularLoading} 
-              moviesPopularTotalPages={moviesPopularTotalPages}
-            />
+            <MoviesPopular />
           </Route>
 
           <Route exact path ="/movie/upcoming">
             <Header />
-            <MoviesUpcoming moviesUpcoming={moviesUpcoming} moviesUpcomingLoading={moviesUpcomingLoading} />
+            <MoviesUpcoming />
           </Route>
 
           <Route exact path ="/movie/top-rated">
             <Header />
-            <MoviesTopRated moviesTopRated={moviesTopRated} moviesTopRatedLoading={moviesTopRatedLoading} />
+            <MoviesTopRated />
           </Route>
 
           <Route exact path ="/tv/popular">
             <Header />
-            <TVPopular tvPopular={tvPopular} tvPopularLoading={tvPopularLoading} />
+            <TVPopular />
           </Route>
 
           <Route exact path ="/tv/top-rated">
             <Header />
-            <TVTopRated tvTopRated={tvTopRated} tvTopRatedLoading={tvTopRatedLoading} />
+            <TVTopRated />
           </Route>
 
           <Route exact path ="/tv/airing-today">
             <Header />
-            <TVAiringToday tvAiringToday={tvAiringToday} tvAiringTodayLoading={tvAiringTodayLoading} />
+            <TVAiringToday />
           </Route>
       
           <Route exact path ="/tv/on-the-air-today">
             <Header />
-            <TVOnTheAir tvOnTheAir={tvOnTheAir} tvOnTheAirLoading={tvOnTheAirLoading} />
+            <TVOnTheAir />
+          </Route>
+
+          <Route exact path ="/movie/:movieId">
+            <Header />
+            <InfoMovie />
+          </Route>
+
+          <Route exact path ="/tv/:TVId">
+            <Header />
+            <InfoTV />
           </Route>
 
           <Route path="*">
