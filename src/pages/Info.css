@@ -1,11 +1,14 @@
 .marginTop {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 .marginRight {
     margin-right: 3px;
 }
 .marginRightLeft {
     margin: 0 5px;
+}
+.width {
+    width: 85px !important;
 }
 
 .page {
@@ -22,6 +25,7 @@
     /* margin: 20px 15px 20px 15px; */
     padding: 20px;
     width: fit-content;
+    height: fit-content;
     /* margin: 0 auto; */
     margin-top: 20px;
     margin-bottom: 20px;
@@ -48,9 +52,14 @@
     flex-direction: column;
     margin: 50px;
 }
+.movie__overview_container {
+    margin-top: 20px;
+ }
 
 .movie__title_container {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .movie__title_container > span {
@@ -64,16 +73,24 @@
 .movie__ratings_container {
     display: flex;
     align-items: center;
+    /* height: 50px; */
 }
+
+
 .movie__ratings {
     color: rgb(170,33,31);
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 700;
 }
 .movie__ratings > .MuiSvgIcon-root {
     color: #E4BB24;
     font-size: 35px;
     align-items: center;
+}
+.movie__ratings_small {
+    font-size: 12px;
+    color: rgb(170,33,31);
+    height: fit-content;
 }
 
 
@@ -92,9 +109,7 @@
     color: rgba(170, 33, 31, 0.774) !important;
 }
 
-.movie__overview_container {
-   margin-top: 35px;
-}
+
 
 .movie__info_trailer {
     width: 180px; 
@@ -126,14 +141,28 @@
 .movie__crew {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
+}
+
+.director__container {
+    display: flex;
+    /* flex-direction: row nowrap; */
+    
 }
 
 .director {
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
+    width: 80%;
 }
 
-.writers > div {
+.writers__container {
     display: flex;
-    flex-direction: row;
+}
+.writers {
+    display: flex;
+    /* flex-direction: row; */
+    flex-flow: row wrap;
+    /* height: 60px; */
+    width: 80%;
 }
