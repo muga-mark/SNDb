@@ -11,7 +11,7 @@
     width: 85px !important;
 }
 
-.page {
+.info_page {
     margin: 60px 100px;
 }
 
@@ -196,7 +196,7 @@
 .cast_profile__container {
     border-radius: 15px 15px 0 0;
     width: 160px;
-    height: 200px;
+    height: 220px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -93,7 +93,7 @@ function InfoTV({ }) {
     
 
     return (
-        <div className="page">
+        <div className="info_page">
             {TVDetailsLoading?
                 <div className="page__spinner">
                     <SpinnerContentCustom loading={TVDetailsLoading} />

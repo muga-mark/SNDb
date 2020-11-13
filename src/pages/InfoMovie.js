@@ -154,7 +154,7 @@ function InfoMovie({ }) {
     
 
     return (
-        <div className="page">
+        <div className="info_page">
             <div className="details__container">
                 {movieDetailsLoading?
                     <div className="page__spinner">
