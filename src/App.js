@@ -96,7 +96,7 @@ function App() {
       setTVOnTheAirLoading(false);
     });
 
-  }, []);
+  }, [MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_POPULAR_API, TV_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API]);
 
   return (
     <div className="App">

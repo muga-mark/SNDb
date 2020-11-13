@@ -166,3 +166,66 @@
     /* height: 60px; */
     width: 80%;
 }
+
+.details__container {
+    height: 500px;
+}
+
+.cast__container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.cast {
+    border-radius: 15px;
+    margin: 20px 15px 20px 15px;
+    /* margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px; */
+    background-color: #ECF0F3;
+    box-shadow: 5px 5px 10px #cbced1, -5px -5px 10px #ffffff;
+    /* padding: 10px; */
+    width: 160px;
+    height: 305px;
+}
+
+
+
+.cast_profile__container {
+    border-radius: 15px 15px 0 0;
+    width: 160px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e5e5e6;
+}
+.cast_profile__container > .MuiSvgIcon-root {
+    font-size: 80px;
+    color: #c7c7c9;
+    
+}
+.cast_profile {
+    border-radius: 15px 15px 0 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cast_name__container {
+    padding: 10px;
+
+}
+
+.cast_name__container > span {
+    display: flex;
+    /* padding: 0px 10px; */
+}
+
+.cast_name {
+    font-size: 16px;
+    font-weight: 700;
+    /* color: rgba(170, 33, 31, 0.774); */
+    color: rgb(170,33,31);
+}
