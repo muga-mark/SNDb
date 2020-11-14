@@ -1,0 +1,81 @@
+.menuItem {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.menuItem > .MuiSvgIcon-root {
+    margin-left: 3px;
+}
+
+@media screen and (max-width: 380px) {
+    .MuiInputBase-input {
+        font-size: 10px !important;
+    }
+    
+    .MuiMenuItem-root {
+        font-size: 10px !important;
+    }
+
+    .menuItem > .MuiSvgIcon-root {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (min-width: 380px) and (max-width: 500px) {
+    .MuiInputBase-input {
+        font-size: 12px !important;
+    }
+    
+    .MuiMenuItem-root {
+        font-size: 12px !important;
+    }
+
+    .menuItem > .MuiSvgIcon-root {
+        font-size: 14px !important;
+    }
+}
+
+@media screen and (min-width: 500px) and (max-width: 600px) {
+    .MuiInputBase-input {
+        font-size: 16px !important;
+    }
+    
+    .MuiMenuItem-root {
+        font-size: 16px !important;
+    }
+
+    .menuItem > .MuiSvgIcon-root {
+        font-size: 18px !important;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .MuiInputBase-input {
+        font-size: 18px !important;
+    }
+    
+    .MuiMenuItem-root {
+        font-size: 18px !important;
+    }
+
+    .menuItem > .MuiSvgIcon-root {
+        font-size: 20px !important;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .MuiInputBase-input {
+        font-size: 18px !important;
+    }
+    
+    .MuiMenuItem-root {
+        font-size: 18px !important;
+    }
+
+    .menuItem > .MuiSvgIcon-root {
+        font-size: 20px !important;
+    }
+}

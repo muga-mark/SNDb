@@ -75,9 +75,6 @@
 }
 
 
-
-
-
 .page__content_container {
     border-radius: 20px;
     padding: 10px 10px;
@@ -91,15 +88,7 @@
     justify-content: center;
 }
 
-.menuItem {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-.menuItem > .MuiSvgIcon-root {
-    margin-left: 3px;
-}
+
 .MuiMenuItem-root {
     font-weight: 600 !important;
 }
@@ -123,16 +112,6 @@
     }
     .page__title > span {
         font-size: 16px !important;
-    }
-    .MuiInputBase-input {
-        font-size: 10px !important;
-    }
-    
-    .menuItem > .MuiSvgIcon-root {
-        font-size: 12px !important;
-    }
-    .MuiMenuItem-root {
-        font-size: 10px !important;
     }
 
     .page__title {

@@ -1,0 +1,19 @@
+.infoPage__container {
+    margin: 40px 80px;
+}
+
+.infoPage__spinner {
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+.infoPage__details_container {
+    height: 600px;
+}
+
+.infoPage__cast_container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}

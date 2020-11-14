@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { API_KEY } from '../api';
 import CardTV from '../components/CardTV';
-import SpinnerContentCustom from "../components/SpinnerContentCustom";
-import Pagination from '@material-ui/lab/Pagination';
+import SpinnerContentCustom from '../components/SpinnerContentCustom';
+import PaginationCustom from '../components/PaginationCustom';
 import '../pages/z_styles.css';
 
 
 function TVAiringToday() {
     const [page, setPage] = useState(1);
-    const TV_AIRINGTODAY_API = `https://api.themoviedb.org/3/tv/airing_today?api_key=${API_KEY}&language=en-US&page=${page}`;
-
     const [ tvAiringToday, setTVAiringToday ] = useState([]);
     const [ tvAiringTodayLoading, setTVAiringTodayLoading ] = useState(true);
     const [ tvAiringTodayTotalPages, setTVAiringTodayTotalPages ] = useState(0);
-    
-    const handleChange = (event, value) => {
-      setPage(value);
-    //   console.log("NEXT PAGE", page);
-    };
 
+    const TV_AIRINGTODAY_API = `https://api.themoviedb.org/3/tv/airing_today?api_key=${API_KEY}&language=en-US&page=${page}`;
+    
     useEffect(() => {
         fetch(TV_AIRINGTODAY_API)
         .then(res => res.json())
         .then(data => {
-        //   console.log("popular movies", data);
           setTVAiringToday(data.results);
           setTVAiringTodayLoading(false);
           setTVAiringTodayTotalPages(data.total_pages);
@@ -59,21 +53,15 @@ function TVAiringToday() {
                         </div>
 
                         <div className="page__content page__content_pagination">
-                            <Pagination 
-                                count={tvAiringTodayTotalPages} 
-                                color="secondary" 
-                                page={page} 
-                                onChange={handleChange} 
-                                siblingCount={1}
-                                size='small'
+                            <PaginationCustom 
+                                page={page}
+                                totalPages={tvAiringTodayTotalPages}
+                                setPage={setPage}
                             />
                         </div>
                     </div>
                 </>
             }
-            
-            
-
         </div>
     )
 }
