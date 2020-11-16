@@ -9,11 +9,11 @@ import './InfoTVMovie.css';
 
 function InfoMovie({ }) {
     const { movieId } = useParams();
-    const [open, setOpen] = useState(false);
+    const [ open, setOpen] = useState(false);
     const [ crewWriters, setCrewWriters ] = useState([]);
     const [ crewDirector, setCrewDirector ] = useState([]);
-    const [ castFull, setCastFull ] = useState([]);
-    const [ castFiltered, setCastFiltered ] = useState([]);
+    const [ cast, setCast ] = useState([]);
+    // const [ castFiltered, setCastFiltered ] = useState([]);
     const [ trailer, setTrailer] = useState([]);
     const [ certification, setCertification ] = useState("");
     const [ movieDetails, setMovieDetails ] = useState([]);
@@ -44,7 +44,10 @@ function InfoMovie({ }) {
             if(data){
                 setMovieDetails(data);
                 setMovieDetailsLoading(false);
-                setTrailer(data.videos.results[0]?.key);
+            
+                if((data.videos.results).lenth>0){
+                    setTrailer(data.videos.results[0]?.key);
+                }
 
                 if(data.releases.countries){
                     const certificationUS = (data.releases.countries).filter(function(el){
@@ -99,10 +102,10 @@ function InfoMovie({ }) {
                 }
                 
                 if(data.credits.cast){
-                    setCastFull(data.credits.cast);
+                    setCast(data.credits.cast);
                     
-                    const castNew = (data.credits.cast).slice(0,12);
-                    setCastFiltered(castNew);
+                    // const castNew = (data.credits.cast);
+                    // setCastFiltered(castNew);
                 }
             }
           
@@ -112,17 +115,19 @@ function InfoMovie({ }) {
     
 
     return (
-        <div className="infoPage__container">
+        <div className="infopage__container">
             {movieDetailsLoading?
-                <div className="infoPage__spinner">
+                <div className="info_page__spinner">
                     <SpinnerContentCustom loading={movieDetailsLoading} />
                 </div>
             :
                 <>
-                    <div className="infoPage__details_container">
+                    <div className="info_page__details">
                         <Info 
                             IMG_API={IMG_API}
                             info={movieDetails}
+                            title={movieDetails.title}
+                            date={movieDetails.release_date}
                             certification={certification }
                             hours={hours}
                             minutes={minutes}
@@ -130,12 +135,13 @@ function InfoMovie({ }) {
                             trailer={trailer}
                             crewDirector={crewDirector}
                             crewWriters={crewWriters}
+                            trailer_url={trailer_url}
                         />
                     </div>
 
-                    <div className="infoPage__cast_container">
+                    <div className="info_page__cast">
                         <InfoCast 
-                            castFiltered={castFiltered} 
+                            cast={cast.slice(0,6)} 
                             IMG_API={IMG_API}
                         />
                     </div>

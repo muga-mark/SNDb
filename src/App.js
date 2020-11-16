@@ -105,67 +105,87 @@ function App() {
 
           <Route exact path ="/">
             <Header />
-            <Home 
-              moviesPopular={moviesPopular} 
-              moviesPopularLoading={moviesPopularLoading} 
-              moviesUpcoming={moviesUpcoming} 
-              moviesUpcomingLoading={moviesUpcomingLoading} 
-              moviesTopRated={moviesTopRated}
-              moviesTopRatedLoading={moviesTopRatedLoading}
-              tvPopular={tvPopular}
-              tvPopularLoading={tvPopularLoading}
-              tvTopRated={tvTopRated}
-              tvTopRatedLoading={tvTopRatedLoading}
-              tvAiringToday={tvAiringToday}
-              tvAiringTodayLoading={tvAiringTodayLoading}
-              tvOnTheAir={tvOnTheAir}
-              tvOnTheAirLoading={tvOnTheAirLoading}
-            />
+            <div className="main_wrapper">
+              <Home 
+                moviesPopular={moviesPopular} 
+                moviesPopularLoading={moviesPopularLoading} 
+                moviesUpcoming={moviesUpcoming} 
+                moviesUpcomingLoading={moviesUpcomingLoading} 
+                moviesTopRated={moviesTopRated}
+                moviesTopRatedLoading={moviesTopRatedLoading}
+                tvPopular={tvPopular}
+                tvPopularLoading={tvPopularLoading}
+                tvTopRated={tvTopRated}
+                tvTopRatedLoading={tvTopRatedLoading}
+                tvAiringToday={tvAiringToday}
+                tvAiringTodayLoading={tvAiringTodayLoading}
+                tvOnTheAir={tvOnTheAir}
+                tvOnTheAirLoading={tvOnTheAirLoading}
+              />
+            </div>
           </Route>
 
           <Route exact path ="/movie/popular">
             <Header />
-            <MoviesPopular />
+            <div className="main_wrapper">
+              <MoviesPopular />
+            </div>
           </Route>
 
           <Route exact path ="/movie/upcoming">
             <Header />
-            <MoviesUpcoming />
+            <div className="main_wrapper">
+              <MoviesUpcoming />
+            </div>
           </Route>
 
           <Route exact path ="/movie/top-rated">
             <Header />
-            <MoviesTopRated />
+            <div className="main_wrapper">
+              <MoviesTopRated />
+            </div>
           </Route>
 
           <Route exact path ="/tv/popular">
             <Header />
-            <TVPopular />
+            <div className="main_wrapper">
+              <TVPopular />
+            </div>
           </Route>
 
           <Route exact path ="/tv/top-rated">
             <Header />
-            <TVTopRated />
+            <div className="main_wrapper">
+              <TVTopRated />
+            </div>
           </Route>
 
           <Route exact path ="/tv/airing-today">
             <Header />
-            <TVAiringToday />
+            <div className="main_wrapper">
+              <TVAiringToday />
+            </div>
           </Route>
       
           <Route exact path ="/tv/on-the-air-today">
             <Header />
-            <TVOnTheAir />
+            <div className="main_wrapper">
+              <TVOnTheAir />
+            </div>
           </Route>
 
           <Route exact path ="/movie/:movieId">
             <Header />
-            <InfoMovie />
+            <div className="wrapper">
+              <InfoMovie />
+            </div>
           </Route>
 
           <Route exact path ="/tv/:TVId">
             <Header />
-            <InfoTV />
+            <div className="wrapper">
+              <InfoTV />
+            </div>
           </Route>
 
           <Route path="*">
@@ -174,9 +194,6 @@ function App() {
           
         </Switch>
       </Router>
-
-      
-
     </div>
   );
 }

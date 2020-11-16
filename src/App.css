@@ -10,6 +10,14 @@ body {
   height: 100%;
 }
 
+
+.wrapper {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 ::-webkit-scrollbar {
   width: 13px;
 }
@@ -19,4 +27,43 @@ body {
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: #D1312D; 
+}
+
+
+@media screen and (max-width: 380px) {
+
+}
+
+@media screen and (min-width: 380px) and (max-width: 500px) {
+
+
+}
+
+@media screen and (min-width: 500px) and (max-width: 600px) {
+
+
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media screen and (max-width: 600px) {  
+  .main_wrapper {
+    margin: 60px 10px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .main_wrapper {
+    margin: 60px 40px;
+  }
+  /* .wrapper {
+    width: 800px;
+  } */
+}
+
+@media screen and (min-width: 992px) {
+  /* .wrapper {
+    width: 1000px;
+  } */
 }
