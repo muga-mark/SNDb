@@ -5,6 +5,7 @@ import Info from './Info';
 import InfoCast from './InfoCast';
 import ModalCustom from '../components/ModalCustom';
 import SpinnerContentCustom from "../components/SpinnerContentCustom";
+import CarouselCustom from "../components/CarouselCustom";
 import './InfoTVMovie.css';
 
 function InfoMovie({ }) {
@@ -103,7 +104,7 @@ function InfoMovie({ }) {
                 
                 if(data.credits.cast){
                     setCast(data.credits.cast);
-                    
+                    console.log("CAST", data.credits.cast);
                     // const castNew = (data.credits.cast);
                     // setCastFiltered(castNew);
                 }
@@ -139,12 +140,29 @@ function InfoMovie({ }) {
                         />
                     </div>
 
-                    <div className="info_page__cast">
-                        <InfoCast 
-                            cast={cast.slice(0,6)} 
-                            IMG_API={IMG_API}
+                    <div className="infopage__separator">
+                        <span>
+                            Cast and Crew
+                        </span>
+                    </div>
+
+                    <div className="info_page__cast_container">
+                        <CarouselCustom content=
+                            {cast.length>0 && cast.map((result) => (
+                                <div key={result.id}>
+                                    <InfoCast 
+                                        // {...result}
+                                        IMG_API={IMG_API}
+                                        profile_path={result.profile_path}
+                                        original_name={result.original_name}
+                                        character={result.character}
+                                    />
+                                </div>
+                            ))} 
                         />
                     </div>
+
+                    <div className="infopage__separator_footer" />
 
                     <ModalCustom 
                         open={open}

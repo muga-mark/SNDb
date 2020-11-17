@@ -155,7 +155,7 @@ function InfoTV({ }) {
 
                         </div>
                         <InfoCast 
-                            cast={cast.slice(0,6)} 
+                            cast={cast} 
                             IMG_API={IMG_API}
                         />
                     </div>

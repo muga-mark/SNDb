@@ -1,5 +1,5 @@
 /* .page {
-    margin: 60px 10px;
+    margin: 60px 40px;
 } */
 
 .page__spinner {
@@ -46,7 +46,7 @@
 
 .page__filter:hover {
     /* box-shadow: 10px 10px 10px #cbced1, -5px -5px 10px #eceaea; */
-    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fdfdfd;
+    box-shadow: inset 4px 4px 8px #cbced1, inset -4px -4px 8px #ffffff;
 }
 
 .MuiInputBase-input {
@@ -79,7 +79,7 @@
     border-radius: 20px;
     padding: 10px 10px;
     margin: 20px 20px 20px 40px;
-    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px #cbced1, inset -4px -4px 8px #ffffff;
 }
 .page__content {
     display: flex;

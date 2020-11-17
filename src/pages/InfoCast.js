@@ -2,16 +2,42 @@ import React from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import './Info.css';
 
-function InfoCast({ cast, IMG_API }) {
+function InfoCast({ profile_path, original_name, character, IMG_API }) {
+
+    console.log("RESULT >", original_name);
     return (
         <>
-            {cast.map((result) => (
-                <div key={result.cast_id} className="cast__container">
+                {/* {cast.map((result) => (
+                    <div key={result.cast_id} className="cast__container">
+                        <div className="cast__profile">
+                            {result.profile_path?
+                                <img 
+                                    src={IMG_API + result.profile_path} 
+                                    alt={result.original_name} 
+                                    className="cast__image"
+                                />
+                            :
+                                <PersonIcon />
+                            }
+                        </div>
+                        <div className="cast__name">
+                            <span className="info__text info__text--bold info__text--small"> 
+                                {result.original_name} 
+                            </span>
+                            <span className="info__text info__text--x-small info__text--grey"> 
+                                {result.character} 
+                            </span>
+                        </div>
+                        
+                    </div>
+                ))} */}
+                
+                <div className="cast__container">
                     <div className="cast__profile">
-                        {result.profile_path?
+                        {profile_path?
                             <img 
-                                src={IMG_API + result.profile_path} 
-                                alt={result.original_name} 
+                                src={IMG_API + profile_path} 
+                                alt={original_name} 
                                 className="cast__image"
                             />
                         :
@@ -20,15 +46,15 @@ function InfoCast({ cast, IMG_API }) {
                     </div>
                     <div className="cast__name">
                         <span className="info__text info__text--bold info__text--small"> 
-                            {result.original_name} 
+                            {original_name} 
                         </span>
                         <span className="info__text info__text--x-small info__text--grey"> 
-                            {result.character} 
+                            {character} 
                         </span>
                     </div>
                     
                 </div>
-            ))}
+                
         </>
     )
 }

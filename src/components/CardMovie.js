@@ -25,7 +25,7 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
         fetch(MOVIE_TRAILER_API)
         .then(res => res.json())
         .then(data => {
-            console.log("TRAILER", data)
+            // console.log("TRAILER", data)
             if(data.results){
                 setTrailer(data.results[0]?.key);
             }
