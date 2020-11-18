@@ -43,7 +43,7 @@ function App() {
     fetch(MOVIE_POPULAR_API)
     .then(res => res.json())
     .then(data => {
-      console.log("popular movies", data);
+      // console.log("popular movies", data);
       setMoviesPopular(data.results);
       setMoviesPopularLoading(false);
     });
@@ -59,7 +59,7 @@ function App() {
     fetch(MOVIE_TOPRATED_API)
     .then(res => res.json())
     .then(data => {
-      console.log("TOP RATED MOVIES", data);
+      // console.log("TOP RATED MOVIES", data);
       setMoviesTopRated(data.results);
       setMoviesTopRatedLoading(false);
     });
@@ -96,7 +96,7 @@ function App() {
       setTVOnTheAirLoading(false);
     });
 
-  }, [MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_POPULAR_API, TV_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API]);
+  }, []);
 
   return (
     <div className="App">

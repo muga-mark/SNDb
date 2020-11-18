@@ -3,14 +3,15 @@
 }
 .marginRightLeft {
     margin: 0 5px;
-    width: 40vw;
 }
-.width {
-    width: 85px !important;
+.marginRightLeft--big {
+    margin: 0 25px;
 }
+
 .ghost {
     margin: 0 3px;
 }
+
 
 .info {
     display: flex;
@@ -71,7 +72,6 @@
     flex-direction: column;
     margin: 20px 30px;
     width: 100%;
-    
 }
 .description__header {
     text-align: center;
@@ -121,7 +121,7 @@
 }
 
 
-.description__subheader {
+.description__subheader, .description__subheader2 {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -189,33 +189,50 @@
 
 .info__overview {
     margin: 30px 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* justify-content: space-between; */
+    /* vertical-align: middle; */
+    /* vertical-align: bottom; */
+    /* position: relative; */
 }
+/* .info__overview > span {
+    margin-top: 0 auto;
+    height: 100%;
+    position: relative;
+} */
 
-
+.info__overview_image {
+    float: left;
+    /* position: relative; */
+    /* left: 0; */
+    /* display: block; */
+}
+.crewWidth, .detailsWidth {
+    min-width: 120px;
+}
 .info__crew {
     display: flex;
     flex-direction: column;
     /* margin-top: 30px; */
 }
-.director__container {
+.director__container, .writers__container {
     display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 .director {
     display: flex;
     flex-flow: row wrap;
-    width: 80%;
+    /* width: 80%; */
 }
 
-.writers__container {
-    display: flex;
-}
 .writers {
     display: flex;
     flex-flow: row wrap;
-    width: 75%;
+    /* width: 75%; */
 }
 
 .createdBy__container {
@@ -227,6 +244,7 @@
     border-radius: 15px;
     /* margin: 15px 5px 15px 5px; */
     margin: 0 auto;
+    margin-bottom: 5px;
     background-color: #ECF0F3;
     /* box-shadow: 5px 5px 10px #cbced1, -5px -5px 10px #ffffff; */
     box-shadow: 3px 3px 6px #cbced1, -3px -3px 6px #ffffff;
@@ -261,18 +279,108 @@
     display: flex;
 }
 
+.description__link {
+    text-decoration: none;
+}
 
 @media screen and (max-width: 380px) {
+    .marginRightLeft--big {
+        margin: 0 10px !important;
+    }
+
+    .description__title {
+        font-size: 25px;
+    }
+
+    .info__overview {
+        margin: 20px 0 10px 0 !important;
+        /* min-height: 150px; */
+        text-align: justify;
+        vertical-align: middle;
+        /* display: table; */
+        /* text-align: center; */
+    }
+
+    .info__over {
+        padding-top: 10px !important; 
+        /* display: table-cell; */
+        /* min-height: 150px; */
+        /* padding-top: 20px; */
+        /* vertical-align: middle; */
+        /* margin: auto; */
+        /* margin: 0 auto; */
+    }
+    .crewWidth {
+        min-width: 55px !important;
+    }
+
+    .info__text {
+        font-size: 12px !important;
+    }
+    .info__text--small {
+        font-size: 10px !important;
+    }
+
+    .description {
+        margin: 10px 5px !important;
+    }
+
+    .card {
+        padding: 5px !important;
+        margin: 0;
+    }
+
+    .card__image {
+        width: 100px !important; 
+        /* height: 130px; */
+    }
+
+
+    .cast__container {
+        width: 140px;
+        max-height: 322px !important;
+    }
+    
+    .cast__profile {
+        width: 140px !important;
+        height: 200px !important;
+    }
 
 }
 
 @media screen and (min-width: 380px) and (max-width: 500px) {
+    .marginRightLeft--big {
+        margin: 0 10px !important;
+    }
+    .info__overview_image {
+        margin-right: 5px !important; 
+    }
+    .info__text {
+        font-size: 14px !important;
+    }
 
+    .card__image {
+        width: 100px !important; 
+    }
 
+    .cast__container {
+        width: 140px !important;
+        max-height: 314px !important; 
+    }
+    
+    .cast__profile {
+        width: 140px !important;
+        height: 200px !important;
+    }
 }
 
 @media screen and (min-width: 500px) and (max-width: 600px) {
-
+    .info__overview_image {
+        margin-right: 8px !important; 
+    }
+    .info__text {
+        font-size: 14px !important;
+    }
 
 }
 
@@ -280,6 +388,9 @@
 @media screen and (max-width: 600px) {  
     .card__image {
         width: 150px;
+    }
+    .info__overview_image {
+        margin-right: 15px !important; 
     }
 }
 
@@ -295,7 +406,9 @@
     .card__image {
         width: 200px;
     }
-    
+    .info__overview_image {
+        margin-right: 20px;
+    }
 }
 
 @media screen and (min-width: 992px) {

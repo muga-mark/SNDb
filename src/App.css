@@ -31,7 +31,10 @@ body {
 
 
 @media screen and (max-width: 380px) {
-
+  .wrapper {
+    width: 100% !important;
+    transition: 0.5s;
+  }
 }
 
 @media screen and (min-width: 380px) and (max-width: 500px) {
@@ -50,6 +53,9 @@ body {
   .main_wrapper {
     margin: 60px 10px;
   }
+  .wrapper {
+    width: 100% !important;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -58,12 +64,21 @@ body {
     margin: 60px 40px;
   }
   .wrapper {
-    width: 800px;
+    width: 600px;
+    transition: 0.5s;
   }
 }
 
-@media screen and (min-width: 992px) {
+@media only screen and (min-width: 800px) {
+  .wrapper {
+    width: 800px;
+    transition: 0.5s;
+  }
+}
+
+@media screen and (min-width: 1020px) {
   .wrapper {
     width: 1000px;
+    transition: 0.5s;
   }
 }

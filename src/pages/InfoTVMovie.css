@@ -86,7 +86,21 @@
 }
 
 @media screen and (max-width: 380px) {
+    .infopage__separator {
+        line-height: 10px !important;
+        font-size: 25px !important;
+    }
+    .infopage__separator::before{
+        height: 10px !important;
+    
+    }
+    .infopage__separator::after{
+        height: 10px !important;
+    }
 
+    .infopage__separator_footer {
+        border-bottom: 10px solid #AA211F;
+    }
 }
 
 @media screen and (min-width: 380px) and (max-width: 500px) {

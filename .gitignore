@@ -3,7 +3,8 @@ src/firebase.js
 firebase.json
 .firebase
 .firebaserc
-src/api.js
+# src/api.js
+src/API_KEY.js
 
 # dependencies
 /node_modules

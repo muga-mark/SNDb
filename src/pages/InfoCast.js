@@ -2,9 +2,7 @@ import React from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import './Info.css';
 
-function InfoCast({ profile_path, original_name, character, IMG_API }) {
-
-    console.log("RESULT >", original_name);
+function InfoCast({ profile_path, original_name, character, IMG_API, id }) {
     return (
         <>
                 {/* {cast.map((result) => (
@@ -32,7 +30,7 @@ function InfoCast({ profile_path, original_name, character, IMG_API }) {
                     </div>
                 ))} */}
                 
-                <div className="cast__container">
+                <div className="cast__container" key={id} >
                     <div className="cast__profile">
                         {profile_path?
                             <img 

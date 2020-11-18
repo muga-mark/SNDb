@@ -4,11 +4,12 @@ import { API_KEY, IMG_API } from '../api';
 import Info from './Info';
 import InfoCast from './InfoCast';
 import ModalCustom from '../components/ModalCustom';
+import CarouselCustom from "../components/CarouselCustom";
 import SpinnerContentCustom from "../components/SpinnerContentCustom";
 import './InfoTVMovie.css';
 
 
-function InfoTV({ }) {
+function InfoTV() {
     const { TVId } = useParams();
     const [open, setOpen] = useState(false);
     // const [ crewWriters, setCrewWriters ] = useState([]);
@@ -150,15 +151,30 @@ function InfoTV({ }) {
                         />
                     </div>
 
-                    <div className="info_page__cast">
-                        <div class>
+                    <div className="infopage__separator">
+                        <span>
+                            Cast and Crew
+                        </span>
+                    </div>
 
-                        </div>
-                        <InfoCast 
-                            cast={cast} 
-                            IMG_API={IMG_API}
+                    <div className="info_page__cast_container">
+                        <CarouselCustom content=
+                            {cast.length>0 && cast.map((result) => (
+                                <div key={result.id}>
+                                    <InfoCast 
+                                        key={result.id}
+                                        id={result.id}
+                                        IMG_API={IMG_API}
+                                        profile_path={result.profile_path}
+                                        original_name={result.original_name}
+                                        character={result.character}
+                                    />
+                                </div>
+                            ))} 
                         />
                     </div>
+
+                    <div className="infopage__separator_footer" />
 
                     <ModalCustom 
                         open={open}

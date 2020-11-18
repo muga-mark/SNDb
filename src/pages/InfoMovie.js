@@ -8,7 +8,7 @@ import SpinnerContentCustom from "../components/SpinnerContentCustom";
 import CarouselCustom from "../components/CarouselCustom";
 import './InfoTVMovie.css';
 
-function InfoMovie({ }) {
+function InfoMovie() {
     const { movieId } = useParams();
     const [ open, setOpen] = useState(false);
     const [ crewWriters, setCrewWriters ] = useState([]);
@@ -125,6 +125,7 @@ function InfoMovie({ }) {
                 <>
                     <div className="info_page__details">
                         <Info 
+                            id={movieDetails.id}
                             IMG_API={IMG_API}
                             info={movieDetails}
                             title={movieDetails.title}
@@ -151,7 +152,8 @@ function InfoMovie({ }) {
                             {cast.length>0 && cast.map((result) => (
                                 <div key={result.id}>
                                     <InfoCast 
-                                        // {...result}
+                                        key={result.id}
+                                        id={result.id}
                                         IMG_API={IMG_API}
                                         profile_path={result.profile_path}
                                         original_name={result.original_name}

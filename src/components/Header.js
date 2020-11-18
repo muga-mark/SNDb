@@ -6,15 +6,15 @@ import './Header.css';
 
 function Header() {
     return (
-        <Link to='/'>
-            <div className="header">
+        <div className="header">
+            <Link to='/'>
                 <img 
                     src={logo} 
                     alt="logo" 
                     className="logo"
                 />
-            </div>
-        </Link>
+            </Link>
+        </div>
     )
 }
 

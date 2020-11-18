@@ -8,7 +8,7 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                 <>
                     {crewDirector.length>0?
                         <div className="director__container">
-                            <span className="info__text marginRight width">
+                            <span className="info__text info__text--bold info__text--small crewWidth">
                                 {crewDirector.length>1? " Directors: ": "Director: "}
                             </span>
 
@@ -17,21 +17,21 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                                     <>
                                         {crewDirector
                                             .map((result) => (
-                                                <div key={result.crew_id}>
-                                                    <span className="info__text">
+                                                <div key={result.id}>
+                                                    <span key={result.id} className="info__text info__text--small">
                                                         {result.name}
                                                     </span>
                                                 </div>))
                                             .reduce((prev, curr) => [prev, 
-                                                <span className="info__text marginRight"> ,</span>,curr])
+                                                <span className="info__text info__text--small marginRight"> ,</span>,curr])
                                         }
                                     </>
                                 :
                                     <>
                                         {crewDirector
                                             .map((result) => (
-                                            <div key={result.crew_id} >
-                                                <span className="info__text">
+                                            <div key={result.id}>
+                                                <span key={result.id} className="info__text info__text--small">
                                                     {result.name}
                                                 </span>
                                             </div>))
@@ -49,7 +49,7 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                 <>
                 {crewWriters.length>0?
                     <div className="writers__container">
-                        <span className="info__text marginRight width">
+                        <span className="info__text info__text--bold info__text--small crewWidth">
                             {crewWriters.length>1? " Writers:" : "Writer:"}
                         </span>
 
@@ -58,23 +58,23 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                                 <>
                                     {crewWriters
                                         .map((result) => (
-                                            <div key={result.crew_id}>
-                                                <span className="info__text ">
+                                            <div key={result.id}>
+                                                <span key={result.id} className="info__text info__text--small">
                                                     {result.job === "Writer" ?
                                                     <>{result.name}</>
                                                     :<>{result.name} ({result.job})</>}
                                                 </span>
                                             </div>))
                                         .reduce((prev, curr) => [prev, 
-                                            <span className="info__text marginRight"> ,</span>,curr])
+                                            <span className="info__text info__text--small marginRight"> ,</span>,curr])
                                     }
                                 </>
                             :
                                 <>
                                     {crewWriters
                                         .map((result) => (
-                                        <div key={result.crew_id}>
-                                            <span className="info__text ">
+                                        <div key={result.id}>
+                                            <span key={result.id} className="info__text info__text--small ">
                                                 {result.job === "Writer" ?
                                                 <>{result.name}</>
                                                 :<>{result.name} ({result.job})</>}
@@ -92,18 +92,18 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
             {creator? 
                 <>
                     {creator.length>0?
-                        <div className="writers__container">
-                            <span className="info__text marginRight width">
+                        <div className="director__container">
+                            <span className="info__text info__text--bold info__text--small crewWidth">
                                 {creator.length>1? " Creators:" : "Creator:"}
                             </span>
 
-                            <div className="writers">
+                            <div className="directors">
                                 {creator.length>1?
                                     <>
                                         {creator
                                             .map((result) => (
                                                 <div key={result.id}>
-                                                    <span className="info__text ">
+                                                    <span key={result.id} className="info__text info__text--small">
                                                         {result.name}
                                                     </span>
                                                 </div>))
@@ -116,7 +116,7 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                                         {creator
                                             .map((result) => (
                                             <div key={result.id}>
-                                                <span className="info__text ">
+                                                <span key={result.id} className="info__text info__text--small">
                                                     {result.name}
                                                 </span>
                                             </div>))
