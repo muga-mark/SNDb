@@ -12,35 +12,41 @@
 }
 
 .info_page__cast_container {
-    /* height: fit-content; */
-    
     margin: 20px 0;
     width: 100%;
-    /* display: flex; */
-    /* box-shadow: inset 4px 4px 8px #cbced1, inset -4px -4px 8px #ffffff;infopage__separator */
 }
+.info_page__cast_container_scroll {
+    overflow: hidden;
+    display: flex;
+    overflow-x: scroll;
+}
+.info_page__cast {
+    margin: 0 6px;
+}
+.info_page__cast:last-child {
+  border-right: 20px solid transparent;
+}
+.info_page__cast:first-child {
+    border-left: 20px solid transparent;
+  }
+  
+
 .infopage__separator {
     margin-top: 50px;
     font-weight: 700;
-    line-height: 15px;
-    /* width: 100%; */
+    line-height: 5px;
     position: relative;
     overflow: hidden;
     float: initial;
-    /* padding-left: 125px; */
     padding: 10px 15px 10px 25px;
     font-size: 30px;
-    /* display: flex; */
-    /* align-content: center; */
-    /* justify-content: center; */
-    /* vertical-align: middle; */
     color: #AA211F;
 }
 .infopage__separator::before{
     background-color: #AA211F;
     content: ' ';
     min-width: 30px;
-    height: 15px;
+    height: 5px;
     position: absolute;
     left: 0;
 
@@ -48,11 +54,10 @@
 .infopage__separator::after{
     position: absolute;
     content: ' ';
-    /* margin-left: 41px; */
     width: 100%;
     background-color: #AA211F;
     min-width: 30px;
-    height: 15px;
+    height: 5px;
 }
 
 .infopage__separator > span {
@@ -64,21 +69,11 @@
     align-items: center;
     text-align: center;
     flex: 1;
-    border-bottom: 15px solid #AA211F;
-    /* margin-top: 20px; */
+    border-bottom: 5px solid #AA211F;
 }
 
 .info_page__cast {
     display: flex;
-    /* flex-flow: row nowrap; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* float: left; */
-    /* margin: 0 auto; */
-    /* width: fit-content; */
-    /* overflow: hidden; */
-    /* overflow-x: scroll; */
-    
 }
 
 .info_page__cast--left {
@@ -101,6 +96,7 @@
     .infopage__separator_footer {
         border-bottom: 10px solid #AA211F;
     }
+
 }
 
 @media screen and (min-width: 380px) and (max-width: 500px) {
@@ -115,18 +111,13 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 600px) {  
-    /* .infopage__container {
-        margin: 40px !important;
-    } */
+  
 }
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    /* .infopage__container {
-        margin: 40px !important;
-    } */
-    
+  
 }
 
 @media screen and (min-width: 992px) {

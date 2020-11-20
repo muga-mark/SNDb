@@ -18,7 +18,7 @@ function SpinnerContentCustom({ loading }) {
         <div className="spinner">
             <PulseLoader
                 css={override}
-                size={30}
+                size={20}
                 color={"#D1312D"}
                 loading={loading}
             />

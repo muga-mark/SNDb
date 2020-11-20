@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_KEY, IMG_API } from '../api';
-import Info from './Info';
-import InfoCast from './InfoCast';
+import Info from '../components/Info';
+import Info2 from '../components/Info2';
+import InfoCast from '../components/InfoCast';
 import ModalCustom from '../components/ModalCustom';
 import CarouselCustom from "../components/CarouselCustom";
 import SpinnerContentCustom from "../components/SpinnerContentCustom";
+import Hidden from '@material-ui/core/Hidden';
 import './InfoTVMovie.css';
 
 
@@ -79,32 +81,6 @@ function InfoTV() {
                         setCertification(certificationUS[0]?.rating);
                         console.log("certificationUS Result", certificationUS[0]?.rating);
                     }
-
-
-                    // const filterCountriesByDate = (data.releases.countries).filter(function(el){
-                    //     var date = data.release_date;
-                    //     return el.release_date === date;
-                    // });
-                    // console.log("filterCountriesByDate",filterCountriesByDate);
-
-                    // if(!(certificationUS[0]?.certification) && filterCountriesByDate[0]?.certification){
-                    //     setCertification(filterCountriesByDate[0]?.certification);
-                    //     console.log("filterCountriesByDate Result",filterCountriesByDate[0]?.certification);
-                    // }
-
-                    
-                    // const filterCountriesByCountry = filterCountriesByDate.filter(function (o1) {
-                    //     return (data.production_countries).some(function (o2) {
-                    //         return o1.iso_3166_1 === o2.iso_3166_1; 
-                    //     });
-                    // });
-                    // console.log("filterCountriesByCountry", filterCountriesByCountry);
-
-                    // if(!(certificationUS[0]?.certification) && !(filterCountriesByDate[0]?.certification) && filterCountriesByCountry[0]?.certification){
-                    //     setCertification(filterCountriesByCountry[0]?.certification);
-                    //     console.log("filterCountriesByCountry Result",filterCountriesByCountry[0]?.certification);
-
-                    // }
                 }
 
                 if(data.created_by){
@@ -114,10 +90,6 @@ function InfoTV() {
 
                 if(data.credits.cast){
                     setCast(data.credits.cast);
-                    
-                    // const castNew = (data.credits.cast).slice(0,6);
-                    // setCastFiltered(castNew);
-                    // console.log("CAST >", data.credits.cast);
                 }
             }
           
@@ -129,7 +101,7 @@ function InfoTV() {
     return (
         <div className="infopage__container">
             {TVDetailsLoading?
-                <div className="infopage__spinner">
+                <div className="info_page__spinner">
                     <SpinnerContentCustom loading={TVDetailsLoading} />
                 </div>
             :
@@ -140,7 +112,7 @@ function InfoTV() {
                             info={TVDetails}
                             title={TVDetails.name}
                             date={TVDetails.first_air_date}
-                            certification={certification }
+                            certification={certification}
                             hours={hours}
                             minutes={minutes}
                             onlyMinutes={onlyMinutes}
@@ -153,14 +125,58 @@ function InfoTV() {
 
                     <div className="infopage__separator">
                         <span>
+                            TV Info
+                        </span>
+                    </div>
+
+                    <div className="infopage__details2">
+                        <Info2 
+                            info={TVDetails}
+                            date={TVDetails.first_air_date}
+                            hours={hours}
+                            minutes={minutes}
+                            onlyMinutes={onlyMinutes}
+                            homepage={TVDetails.homepage}
+                            certification={certification}
+                        />
+                    </div>
+
+                    <div className="infopage__separator_footer" />
+
+                    <div className="infopage__separator">
+                        <span>
                             Cast and Crew
                         </span>
                     </div>
 
-                    <div className="info_page__cast_container">
-                        <CarouselCustom content=
+                    <Hidden xsDown>
+                        <div className="info_page__cast_container">
+                            <CarouselCustom 
+                                desktop={5}
+                                small_desktop={5}
+                                tablet={4}
+                                small_tablet={3}
+                                mobile={2} 
+                                content={cast.length>0 && cast.map((result) => (
+                                            <div key={result.id}>
+                                                <InfoCast 
+                                                    key={result.id}
+                                                    id={result.id}
+                                                    IMG_API={IMG_API}
+                                                    profile_path={result.profile_path}
+                                                    original_name={result.original_name}
+                                                    character={result.character}
+                                                />
+                                            </div>
+                                        ))} 
+                            />
+                        </div>
+                    </Hidden>
+                        
+                    <Hidden smUp>
+                        <div className="info_page__cast_container info_page__cast_container_scroll">
                             {cast.length>0 && cast.map((result) => (
-                                <div key={result.id}>
+                                <div key={result.id} className="info_page__cast">
                                     <InfoCast 
                                         key={result.id}
                                         id={result.id}
@@ -171,8 +187,8 @@ function InfoTV() {
                                     />
                                 </div>
                             ))} 
-                        />
-                    </div>
+                        </div>
+                    </Hidden>
 
                     <div className="infopage__separator_footer" />
 

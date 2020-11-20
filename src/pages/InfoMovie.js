@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_KEY, IMG_API } from '../api';
-import Info from './Info';
-import InfoCast from './InfoCast';
+import Info from '../components/Info';
+import Info2 from '../components/Info2';
+import InfoCast from '../components/InfoCast';
 import ModalCustom from '../components/ModalCustom';
 import SpinnerContentCustom from "../components/SpinnerContentCustom";
 import CarouselCustom from "../components/CarouselCustom";
+import Hidden from '@material-ui/core/Hidden';
 import './InfoTVMovie.css';
 
 function InfoMovie() {
@@ -130,7 +132,7 @@ function InfoMovie() {
                             info={movieDetails}
                             title={movieDetails.title}
                             date={movieDetails.release_date}
-                            certification={certification }
+                            certification={certification}
                             hours={hours}
                             minutes={minutes}
                             handleOpen={handleOpen}
@@ -141,16 +143,61 @@ function InfoMovie() {
                         />
                     </div>
 
+
+                    <div className="infopage__separator">
+                        <span>
+                            Movie Info
+                        </span>
+                    </div>
+
+                    <div className="infopage__details2">
+                        <Info2 
+                             info={movieDetails}
+                             date={movieDetails.release_date}
+                             hours={hours}
+                             minutes={minutes}
+                             homepage={movieDetails.homepage}
+                             certification={certification}
+                        />
+                    </div>
+
+                    <div className="infopage__separator_footer" />
+
+
                     <div className="infopage__separator">
                         <span>
                             Cast and Crew
                         </span>
                     </div>
 
-                    <div className="info_page__cast_container">
-                        <CarouselCustom content=
+                    <Hidden xsDown>
+                        <div className="info_page__cast_container">
+                            <CarouselCustom 
+                                desktop={5}
+                                small_desktop={5}
+                                tablet={4}
+                                small_tablet={3}
+                                mobile={2} 
+                                content={cast.length>0 && cast.map((result) => (
+                                            <div key={result.id}>
+                                                <InfoCast 
+                                                    key={result.id}
+                                                    id={result.id}
+                                                    IMG_API={IMG_API}
+                                                    profile_path={result.profile_path}
+                                                    original_name={result.original_name}
+                                                    character={result.character}
+                                                />
+                                            </div>
+                                        ))} 
+                            />
+                        </div>
+                    </Hidden>
+                        
+                    <Hidden smUp>
+                        <div className="info_page__cast_container info_page__cast_container_scroll">
                             {cast.length>0 && cast.map((result) => (
-                                <div key={result.id}>
+                                <div key={result.id} className="info_page__cast">
                                     <InfoCast 
                                         key={result.id}
                                         id={result.id}
@@ -161,8 +208,8 @@ function InfoMovie() {
                                     />
                                 </div>
                             ))} 
-                        />
-                    </div>
+                        </div>
+                    </Hidden>
 
                     <div className="infopage__separator_footer" />
 

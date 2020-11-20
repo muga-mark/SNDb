@@ -66,6 +66,18 @@
   margin: 20px 40px;
   box-shadow: inset 4px 4px 8px #cbced1, inset -4px -4px 8px #ffffff;
 }
+.content__container_scroll {
+  overflow: hidden;
+  display: flex;
+  overflow-x: scroll;
+}
+.content__card {
+  margin: 0 6px;
+}
+.content__card:last-child {
+  border-right: 15px solid transparent;
+}
+
 
 .react-multiple-carousel__arrow {
   border-radius: 10px !important;

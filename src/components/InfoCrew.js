@@ -8,9 +8,11 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                 <>
                     {crewDirector.length>0?
                         <div className="director__container">
-                            <span className="info__text info__text--bold info__text--small crewWidth">
-                                {crewDirector.length>1? " Directors: ": "Director: "}
-                            </span>
+                            <div className="crewWidth">
+                                <span className="info__text info__text--bold info__text--small">
+                                    {crewDirector.length>1? " Directors: ": "Director: "}
+                                </span>
+                            </div>
 
                             <div className="director">
                                 {crewDirector.length>1?
@@ -49,9 +51,11 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                 <>
                 {crewWriters.length>0?
                     <div className="writers__container">
-                        <span className="info__text info__text--bold info__text--small crewWidth">
-                            {crewWriters.length>1? " Writers:" : "Writer:"}
-                        </span>
+                        <div className="crewWidth">
+                            <span className="info__text info__text--bold info__text--small">
+                                {crewWriters.length>1? " Writers:" : "Writer:"}
+                            </span>
+                        </div>
 
                         <div className="writers">
                             {crewWriters.length>1?
@@ -93,11 +97,13 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                 <>
                     {creator.length>0?
                         <div className="director__container">
-                            <span className="info__text info__text--bold info__text--small crewWidth">
-                                {creator.length>1? " Creators:" : "Creator:"}
-                            </span>
+                            <div className="crewWidth">
+                                <span className="info__text info__text--bold info__text--small">
+                                    {creator.length>1? " Creators:" : "Creator:"}
+                                </span>
+                            </div>
 
-                            <div className="directors">
+                            <div className="director">
                                 {creator.length>1?
                                     <>
                                         {creator
