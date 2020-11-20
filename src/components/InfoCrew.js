@@ -25,7 +25,8 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                                                     </span>
                                                 </div>))
                                             .reduce((prev, curr) => [prev, 
-                                                <span className="info__text info__text--small marginRight"> ,</span>,curr])
+                                                <span className="info__text marginRight">,</span>
+                                                ,curr])
                                         }
                                     </>
                                 :
@@ -70,7 +71,8 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                                                 </span>
                                             </div>))
                                         .reduce((prev, curr) => [prev, 
-                                            <span className="info__text info__text--small marginRight"> ,</span>,curr])
+                                            <span className="info__text marginRight">,</span>
+                                            ,curr])
                                     }
                                 </>
                             :
@@ -114,7 +116,8 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                                                     </span>
                                                 </div>))
                                             .reduce((prev, curr) => [prev, 
-                                                <span className="info__text marginRight"> ,</span>,curr])
+                                                <span className="info__text marginRight">,</span>
+                                                ,curr])
                                         }
                                     </>
                                 :

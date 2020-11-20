@@ -398,6 +398,13 @@
     .infopage__details2 {
         padding: 20px;
     }
+
+    .crewWidth {
+        min-width: 55px !important;
+    }
+    .infoWidth {
+        min-width: 110px;
+    }
 }
 
 @media screen and (min-width: 500px) and (max-width: 600px) {
