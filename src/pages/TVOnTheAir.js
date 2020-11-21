@@ -19,7 +19,7 @@ function TVOnTheAir() {
 
     useEffect(() => {
         if(pageTVOnTheAir){
-            history.push(`/tv/top-rated/${pageTVOnTheAir}`);
+            history.push(`/tv/on-the-air-today/${pageTVOnTheAir}`);
         }
 
         fetch(TV_ONTHEAIR_API)

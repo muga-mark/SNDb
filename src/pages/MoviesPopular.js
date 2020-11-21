@@ -56,9 +56,8 @@ function MoviesPopular() {
     const [ moviesPopularTotalPages, setMoviesPopularTotalPages ] = useState(0);
     
     const MOVIE_POPULAR_API = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${pageMoviesPopular}&vote_count.gte=250`;
-
+   
     useEffect(() => {
-        
         if(pageMoviesPopular){
             history.push(`/movie/popular/${pageMoviesPopular}`);
         }
@@ -75,7 +74,7 @@ function MoviesPopular() {
             left: 0,
             behavior: "smooth"
           });
-    }, [MOVIE_POPULAR_API]);
+    }, [MOVIE_POPULAR_API, pageMoviesPopular]);
 
     return (
         <div className="page">

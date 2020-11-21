@@ -20,7 +20,7 @@ function TVAiringToday() {
     
     useEffect(() => {
         if(pageTVAiringToday){
-            history.push(`/tv/top-rated/${pageTVAiringToday}`);
+            history.push(`/tv/airing-today/${pageTVAiringToday}`);
         }
 
         fetch(TV_AIRINGTODAY_API)

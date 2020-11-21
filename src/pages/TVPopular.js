@@ -56,7 +56,7 @@ function TVPopular() {
 
     useEffect(() => {
         if(pageTVPopular){
-            history.push(`/tv/top-rated/${pageTVPopular}`);
+            history.push(`/tv/popular/${pageTVPopular}`);
         }
 
         fetch(TV_POPULAR_API)
