@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useStateValue } from '../StateProvider';
+import { useHistory } from 'react-router-dom';
+import { SET_PAGE_MOVIES_POPULAR } from '../action';
 import { API_KEY } from '../api';
 import CardMovie from '../components/CardMovie';
 import SpinnerContentCustom from '../components/SpinnerContentCustom';
@@ -42,15 +45,24 @@ const menuItems = [
 ]
 
 function MoviesPopular() {
-    const [page, setPage] = useState(1);
+    // const { pageNo } = useParams();
+    const history = useHistory();
+    const [{ pageMoviesPopular }] = useStateValue();
+    // const [ page, setPage] = useState(1);
+    console.log("PAGE NO>",pageMoviesPopular);
     const [ sortBy, setSortBy ] = useState("popularity.desc");
     const [ moviesPopular, setMoviesPopular ] = useState([]);
     const [ moviesPopularLoading, setMoviesPopularLoading ] = useState(true);
     const [ moviesPopularTotalPages, setMoviesPopularTotalPages ] = useState(0);
     
-    const MOVIE_POPULAR_API = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${page}&vote_count.gte=250`;
+    const MOVIE_POPULAR_API = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${pageMoviesPopular}&vote_count.gte=250`;
 
     useEffect(() => {
+        
+        if(pageMoviesPopular){
+            history.push(`/movie/popular/${pageMoviesPopular}`);
+        }
+
         fetch(MOVIE_POPULAR_API)
         .then(res => res.json())
         .then(data => {
@@ -80,7 +92,8 @@ function MoviesPopular() {
                         <div className="page__filter">
                             <PageFilter
                                 setSortBy={setSortBy}
-                                setPage={setPage}
+                                setPage={SET_PAGE_MOVIES_POPULAR}
+                                // setPage={setPageNo}
                                 sortBy={sortBy}
                                 menuItems={menuItems}
                             />
@@ -98,9 +111,9 @@ function MoviesPopular() {
 
                         <div className="page__content page__content_pagination">
                             <PaginationCustom 
-                                page={page}
                                 totalPages={moviesPopularTotalPages}
-                                setPage={setPage}
+                                setPage={SET_PAGE_MOVIES_POPULAR}
+                                page={pageMoviesPopular}
                             />
                         </div>
                     </div>

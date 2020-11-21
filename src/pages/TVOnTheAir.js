@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useStateValue } from '../StateProvider';
+import { SET_PAGE_TV_ONTHEAIR } from '../action';
 import { API_KEY } from '../api';
 import CardTV from '../components/CardTV';
 import SpinnerContentCustom from "../components/SpinnerContentCustom";
@@ -6,14 +9,19 @@ import PaginationCustom from '../components/PaginationCustom';
 import '../pages/z_styles.css';
 
 function TVOnTheAir() {
-    const [page, setPage] = useState(1);
+    const history = useHistory();
+    const [{ pageTVOnTheAir }] = useStateValue();
     const [ tvOnTheAir, setTVOnTheAir ] = useState([]);
     const [ tvOnTheAirLoading, setTVOnTheAirLoading ] = useState(true);
     const [ tvOnTheAirTotalPages, setTVOnTheAirTotalPages ] = useState(0);
 
-    const TV_ONTHEAIR_API = `https://api.themoviedb.org/3/tv/on_the_air?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const TV_ONTHEAIR_API = `https://api.themoviedb.org/3/tv/on_the_air?api_key=${API_KEY}&language=en-US&page=${pageTVOnTheAir}`;
 
     useEffect(() => {
+        if(pageTVOnTheAir){
+            history.push(`/tv/top-rated/${pageTVOnTheAir}`);
+        }
+
         fetch(TV_ONTHEAIR_API)
         .then(res => res.json())
         .then(data => {
@@ -53,9 +61,9 @@ function TVOnTheAir() {
 
                         <div className="page__content page__content_pagination">
                              <PaginationCustom 
-                                page={page}
+                                page={pageTVOnTheAir}
                                 totalPages={tvOnTheAirTotalPages}
-                                setPage={setPage}
+                                setPage={SET_PAGE_TV_ONTHEAIR}
                             />
                         </div>
                     </div>

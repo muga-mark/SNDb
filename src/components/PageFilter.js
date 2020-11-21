@@ -1,4 +1,6 @@
 import React from 'react';
+import { useStateValue } from '../StateProvider';
+import { SET_PAGE_MOVIES_POPULAR } from '../action';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -15,12 +17,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function PageFilter({ setSortBy, setPage, sortBy, menuItems }) {
+function PageFilter({ setSortBy, sortBy, menuItems, setPage }) {
+    const [{},  dispatch] = useStateValue();
     const classes = useStyles();
 
     const sortHandleChange = (event) => {
         setSortBy(event.target.value);
-        setPage(1);
+        // setPage(1);
+        dispatch(setPage(1));
     };
 
     return (

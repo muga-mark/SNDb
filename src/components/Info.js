@@ -46,7 +46,7 @@ function Info({ id, IMG_API, info, title, trailer_url, date, certification, hour
 
                 <div className="description__content">
                     <div className="description__subheader">
-                        {info.genres.length>0?
+                        {(info.genres)?.length>0?
                             <div className="description__genres">
                                 {info.genres
                                     .map((result) => (

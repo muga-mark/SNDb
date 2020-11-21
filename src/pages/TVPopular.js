@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useStateValue } from '../StateProvider';
+import { SET_PAGE_TV_POPULAR } from '../action';
 import { API_KEY } from '../api';
 import CardTV from '../components/CardTV';
 import SpinnerContentCustom from '../components/SpinnerContentCustom';
@@ -42,15 +45,20 @@ const menuItems = [
 ]
 
 function TVPopular() {
-    const [page, setPage] = useState(1);
+    const history = useHistory();
+    const [{ pageTVPopular }] = useStateValue();
     const [ sortBy, setSortBy ] = useState("popularity.desc");
     const [ tvPopular, setTVPopular ] = useState([]);
     const [ tvPopularLoading, setTVPopularLoading ] = useState(true);
     const [ tvPopularTotalPages, setTVPopularTotalPages ] = useState(0);
     
-    const TV_POPULAR_API = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${page}&vote_count.gte=250`;
+    const TV_POPULAR_API = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${pageTVPopular}&vote_count.gte=250`;
 
     useEffect(() => {
+        if(pageTVPopular){
+            history.push(`/tv/top-rated/${pageTVPopular}`);
+        }
+
         fetch(TV_POPULAR_API)
         .then(res => res.json())
         .then(data => {
@@ -81,7 +89,7 @@ function TVPopular() {
                         <div className="page__filter">
                             <PageFilter
                                 setSortBy={setSortBy}
-                                setPage={setPage}
+                                setPage={SET_PAGE_TV_POPULAR}
                                 sortBy={sortBy}
                                 menuItems={menuItems}
                             />
@@ -99,9 +107,9 @@ function TVPopular() {
 
                         <div className="page__content page__content_pagination">
                             <PaginationCustom 
-                                page={page}
+                                page={pageTVPopular}
                                 totalPages={tvPopularTotalPages}
-                                setPage={setPage}
+                                setPage={SET_PAGE_TV_POPULAR}
                             />
                         </div>
                     </div>

@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useStateValue } from '../StateProvider';
+import { SET_PAGE_TV_AIRINGTODAY } from '../action';
 import { API_KEY } from '../api';
 import CardTV from '../components/CardTV';
 import SpinnerContentCustom from '../components/SpinnerContentCustom';
@@ -7,14 +10,19 @@ import '../pages/z_styles.css';
 
 
 function TVAiringToday() {
-    const [page, setPage] = useState(1);
+    const history = useHistory();
+    const [{ pageTVAiringToday }] = useStateValue();
     const [ tvAiringToday, setTVAiringToday ] = useState([]);
     const [ tvAiringTodayLoading, setTVAiringTodayLoading ] = useState(true);
     const [ tvAiringTodayTotalPages, setTVAiringTodayTotalPages ] = useState(0);
 
-    const TV_AIRINGTODAY_API = `https://api.themoviedb.org/3/tv/airing_today?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const TV_AIRINGTODAY_API = `https://api.themoviedb.org/3/tv/airing_today?api_key=${API_KEY}&language=en-US&page=${pageTVAiringToday}`;
     
     useEffect(() => {
+        if(pageTVAiringToday){
+            history.push(`/tv/top-rated/${pageTVAiringToday}`);
+        }
+
         fetch(TV_AIRINGTODAY_API)
         .then(res => res.json())
         .then(data => {
@@ -54,9 +62,9 @@ function TVAiringToday() {
 
                         <div className="page__content page__content_pagination">
                             <PaginationCustom 
-                                page={page}
+                                page={pageTVAiringToday}
                                 totalPages={tvAiringTodayTotalPages}
-                                setPage={setPage}
+                                setPage={SET_PAGE_TV_AIRINGTODAY}
                             />
                         </div>
                     </div>

@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useStateValue } from '../StateProvider';
+import { SET_PAGE_TV_TOPRATED } from '../action';
 import { API_KEY } from '../api';
 import CardTV from '../components/CardTV';
 import SpinnerContentCustom from '../components/SpinnerContentCustom';
@@ -42,15 +45,20 @@ const menuItems = [
 ]
 
 function TVTopRated() {
-    const [page, setPage] = useState(1);
+    const history = useHistory();
+    const [{ pageTVTopRated }] = useStateValue();
     const [ sortBy, setSortBy ] = useState("vote_average.desc");
     const [ tvTopRated, setTVTopRated ] = useState([]);
     const [ tvTopRatedLoading, setTVTopRatedLoading ] = useState(true);
     const [ tvTopRatedTotalPages, setTVTopRatedTotalPages ] = useState(0);
     
-    const TV_TOPRATED_API = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&page=${page}&timezone=America%2FNew_York&vote_average.gte=3&vote_count.gte=500&include_null_first_air_dates=false&with_original_language=en`;
+    const TV_TOPRATED_API = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&page=${pageTVTopRated}&timezone=America%2FNew_York&vote_average.gte=3&vote_count.gte=500&include_null_first_air_dates=false&with_original_language=en`;
 
     useEffect(() => {
+        if(pageTVTopRated){
+            history.push(`/tv/top-rated/${pageTVTopRated}`);
+        }
+
         fetch(TV_TOPRATED_API)
         .then(res => res.json())
         .then(data => {
@@ -81,7 +89,7 @@ function TVTopRated() {
                         <div className="page__filter">
                             <PageFilter
                                 setSortBy={setSortBy}
-                                setPage={setPage}
+                                setPage={SET_PAGE_TV_TOPRATED}
                                 sortBy={sortBy}
                                 menuItems={menuItems}
                             />
@@ -99,9 +107,9 @@ function TVTopRated() {
 
                         <div className="page__content page__content_pagination">
                             <PaginationCustom 
-                                page={page}
+                                page={pageTVTopRated}
                                 totalPages={tvTopRatedTotalPages}
-                                setPage={setPage}
+                                setPage={SET_PAGE_TV_TOPRATED}
                             />
                         </div>
                     </div>

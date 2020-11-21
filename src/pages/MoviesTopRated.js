@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useStateValue } from '../StateProvider';
+import { useHistory } from 'react-router-dom';
+import { SET_PAGE_MOVIES_TOPRATED } from '../action';
 import { API_KEY } from '../api';
 import CardMovie from '../components/CardMovie';
 import SpinnerContentCustom from '../components/SpinnerContentCustom';
@@ -42,15 +45,20 @@ const menuItems = [
 ]
 
 function MoviesTopRated() {
-    const [page, setPage] = useState(1);
+    const history = useHistory();
+    const [{ pageMoviesTopRated }] = useStateValue();
     const [ sortBy, setSortBy ] = useState("vote_average.desc");
     const [ moviesTopRated, setMoviesTopRated ] = useState([]);
     const [ moviesTopRatedLoading, setMoviesTopRatedLoading ] = useState(true);
     const [ moviesTopRatedTotalPages, setMoviesTopRatedTotalPages ] = useState(0);
 
-    const MOVIE_TOPRATED_API = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${page}&vote_count.gte=500&`;
+    const MOVIE_TOPRATED_API = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${pageMoviesTopRated}&vote_count.gte=500&`;
 
     useEffect(() => {
+        if(pageMoviesTopRated){
+            history.push(`/movie/top-rated/${pageMoviesTopRated}`);
+        }
+
         fetch(MOVIE_TOPRATED_API)
         .then(res => res.json())
         .then(data => {
@@ -82,7 +90,7 @@ function MoviesTopRated() {
                         <div className="page__filter">
                             <PageFilter
                                 setSortBy={setSortBy}
-                                setPage={setPage}
+                                setPage={SET_PAGE_MOVIES_TOPRATED}
                                 sortBy={sortBy}
                                 menuItems={menuItems}
                             />
@@ -100,9 +108,9 @@ function MoviesTopRated() {
 
                         <div className="page__content page__content_pagination">
                             <PaginationCustom 
-                                page={page}
                                 totalPages={moviesTopRatedTotalPages}
-                                setPage={setPage}
+                                setPage={SET_PAGE_MOVIES_TOPRATED}
+                                page={pageMoviesTopRated}
                             />
                         </div>
                     </div>

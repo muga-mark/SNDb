@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { SET_PAGE_MOVIES_POPULAR, SET_PAGE_MOVIES_UPCOMING, SET_PAGE_MOVIES_TOPRATED, SET_PAGE_TV_POPULAR, SET_PAGE_TV_UPCOMING, SET_PAGE_TV_AIRINGTODAY, SET_PAGE_TV_ONTHEAIR, SET_PAGE_TV_TOPRATED } from './action';
+import { useStateValue } from './StateProvider';
 import { Link } from 'react-router-dom';
 import CardMovie from './components/CardMovie';
 import CardTV from './components/CardTV';
@@ -9,13 +11,53 @@ import SpinnerContentCustom from "./components/SpinnerContentCustom";
 import CarouselCustom from "./components/CarouselCustom";
 import './Home.css';
 
-function Home({ moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcomingLoading, moviesTopRated, moviesTopRatedLoading, tvPopular, tvPopularLoading, tvTopRated, tvTopRatedLoading, tvAiringToday, tvAiringTodayLoading, tvOnTheAir, tvOnTheAirLoading }) {
-  
-  return (
+function Home({ pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, pageTVPopular, pageTVUpcoming, pageTVAiringToday, pageTVOnTheAir, pageTVTopRated, moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcomingLoading, moviesTopRated, moviesTopRatedLoading, tvPopular, tvPopularLoading, tvTopRated, tvTopRatedLoading, tvAiringToday, tvAiringTodayLoading, tvOnTheAir, tvOnTheAirLoading }) {
+
+    const [{},  dispatch] = useStateValue();
+    
+
+    useEffect(() => {
+
+        if(pageMoviesPopular != 1){
+            dispatch(SET_PAGE_MOVIES_POPULAR(1));
+        }
+
+        if(pageMoviesUpcoming != 1){
+            dispatch(SET_PAGE_MOVIES_UPCOMING(1));
+        }
+
+        if(pageMoviesTopRated != 1){
+            dispatch(SET_PAGE_MOVIES_TOPRATED(1));
+        }
+
+        if(pageTVPopular != 1){
+            dispatch(SET_PAGE_TV_POPULAR(1));
+        }
+
+        if(pageTVUpcoming != 1){
+            dispatch(SET_PAGE_TV_UPCOMING(1));
+        }
+
+        if(pageTVAiringToday != 1){
+            dispatch(SET_PAGE_TV_AIRINGTODAY(1));
+        }
+
+        if(pageTVOnTheAir != 1){
+            dispatch(SET_PAGE_TV_ONTHEAIR(1));
+        }
+
+        if(pageTVTopRated != 1){
+            dispatch(SET_PAGE_TV_TOPRATED(1));
+        }
+
+    }, [ pageMoviesPopular ]);
+
+    // console.log("PAGE NEXT NO>",pageMoviesPopular);
+    return (
       <div className="content">
           {/* <ToastContainer /> */}
         
-        <Link to='/movie/popular' className="content__link">
+        <Link to={`/movie/popular/${pageMoviesPopular}`} className="content__link">
             <div className="content__title">
                 <span>Popular Movies</span>
             </div>
@@ -57,7 +99,7 @@ function Home({ moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcom
         </Hidden>             
 
 
-        <Link to='/movie/upcoming' className="content__link">
+        <Link to={`/movie/upcoming/${pageMoviesUpcoming}`} className="content__link">
             <div className="content__title">
                 <span>Upcoming Movies</span>
             </div>
@@ -99,7 +141,7 @@ function Home({ moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcom
         </Hidden>      
 
 
-        <Link to='/movie/top-rated' className="content__link">
+        <Link to={`/movie/top-rated/${pageMoviesTopRated}`} className="content__link">
             <div className="content__title">
                 <span>Top Rated Movies</span>
             </div>
@@ -141,7 +183,7 @@ function Home({ moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcom
         </Hidden>     
 
 
-        <Link to='/tv/popular' className="content__link">
+        <Link to={`/tv/popular/${pageTVPopular}`} className="content__link">
             <div className="content__title">
                 <span>Popular TV Shows</span>
             </div>
@@ -183,7 +225,7 @@ function Home({ moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcom
         </Hidden>   
 
 
-        <Link to='/tv/top-rated' className="content__link">
+        <Link to={`/tv/top-rated/${pageTVTopRated}`} className="content__link">
             <div className="content__title">
                 <span>Top Rated TV Shows</span>
             </div>
@@ -225,7 +267,7 @@ function Home({ moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcom
         </Hidden>   
 
 
-        <Link to='/tv/airing-today' className="content__link">
+        <Link to={`/tv/airing-today/${pageTVAiringToday}`} className="content__link">
             <div className="content__title">
                 <span>Airing Today TV Shows</span>
             </div>
@@ -267,7 +309,7 @@ function Home({ moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcom
         </Hidden>  
 
 
-        <Link to='/tv/on-the-air-today' className="content__link">
+        <Link to={`/tv/on-the-air-today/${pageTVOnTheAir}`} className="content__link">
             <div className="content__title">
                 <span>On The Air Today TV Shows</span>
             </div>

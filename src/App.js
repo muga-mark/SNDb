@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useStateValue } from './StateProvider';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_POPULAR_API, TV_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API } from './api';
-
 import Header from './components/Header';
 import Home from './Home';
 import MoviesPopular from './pages/MoviesPopular';
@@ -18,6 +18,8 @@ import "react-multi-carousel/lib/styles.css";
 import './App.css';
 
 function App() {
+  const [{ pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, pageTVPopular, pageTVUpcoming, pageTVAiringToday, pageTVOnTheAir, pageTVTopRated },  dispatch] = useStateValue();
+
   const [ moviesPopular, setMoviesPopular ] = useState([]);
   const [ moviesPopularLoading, setMoviesPopularLoading ] = useState(true);
   
@@ -96,7 +98,7 @@ function App() {
       setTVOnTheAirLoading(false);
     });
 
-  }, []);
+  }, [ ]);
 
   return (
     <div className="App">
@@ -106,7 +108,15 @@ function App() {
           <Route exact path ="/">
             <Header />
             <div className="main_wrapper">
-              <Home 
+              <Home
+                pageMoviesPopular={pageMoviesPopular}
+                pageMoviesUpcoming={pageMoviesUpcoming}
+                pageMoviesTopRated={pageMoviesTopRated}
+                pageTVPopular={pageTVPopular}
+                pageTVUpcoming={pageTVUpcoming}
+                pageTVAiringToday={pageTVAiringToday}
+                pageTVOnTheAir={pageTVOnTheAir}
+                pageTVTopRated={pageTVTopRated}
                 moviesPopular={moviesPopular} 
                 moviesPopularLoading={moviesPopularLoading} 
                 moviesUpcoming={moviesUpcoming} 
@@ -125,49 +135,49 @@ function App() {
             </div>
           </Route>
 
-          <Route exact path ="/movie/popular">
+          <Route exact path ="/movie/popular/:pageNo">
             <Header />
             <div className="main_wrapper">
               <MoviesPopular />
             </div>
           </Route>
 
-          <Route exact path ="/movie/upcoming">
+          <Route exact path ="/movie/upcoming/:pageNo">
             <Header />
             <div className="main_wrapper">
               <MoviesUpcoming />
             </div>
           </Route>
 
-          <Route exact path ="/movie/top-rated">
+          <Route exact path ="/movie/top-rated/:pageNo">
             <Header />
             <div className="main_wrapper">
               <MoviesTopRated />
             </div>
           </Route>
 
-          <Route exact path ="/tv/popular">
+          <Route exact path ="/tv/popular/:pageNo">
             <Header />
             <div className="main_wrapper">
               <TVPopular />
             </div>
           </Route>
 
-          <Route exact path ="/tv/top-rated">
+          <Route exact path ="/tv/top-rated/:pageNo">
             <Header />
             <div className="main_wrapper">
               <TVTopRated />
             </div>
           </Route>
 
-          <Route exact path ="/tv/airing-today">
+          <Route exact path ="/tv/airing-today/:pageNo">
             <Header />
             <div className="main_wrapper">
               <TVAiringToday />
             </div>
           </Route>
       
-          <Route exact path ="/tv/on-the-air-today">
+          <Route exact path ="/tv/on-the-air-today/:pageNo">
             <Header />
             <div className="main_wrapper">
               <TVOnTheAir />
@@ -188,9 +198,9 @@ function App() {
             </div>
           </Route>
 
-          <Route path="*">
+          {/* <Route path="*">
             <Redirect to="/" />
-          </Route>
+          </Route> */}
           
         </Switch>
       </Router>
