@@ -35,7 +35,7 @@ function InfoTV() {
         //   console.log("trailer key", data.videos.results[0]?.key);
             if(data){
                 setTVDetails(data);
-                setTVDetailsLoading(true);
+                setTVDetailsLoading(false);
             
                 if((data.videos.results).length>0){
                     setTrailer(data.videos.results);
@@ -140,20 +140,20 @@ function InfoTV() {
                                     small_tablet={1}
                                     mobile={1} 
                                     content={trailer.map((result)=>(
-                                                <div className="infopage__video_player" key={result.id}>
-                                                    <div className='player-wrapper'>
-                                                        <ReactPlayer
-                                                            className='react-player'
-                                                            url={`https://www.youtube.com/watch?v=${result.key}`}
-                                                            width='100%'
-                                                            height='100%'
-                                                            controls={true}
-                                                            playing
-                                                            light={`https://img.youtube.com/vi/${result.key}/sddefault.jpg`} 
-                                                        />
-                                                    </div>
-                                                </div>
-                                            ))}
+                                        <div className="infopage__video_player" key={result.id}>
+                                            <div className='player-wrapper'>
+                                                <ReactPlayer
+                                                    className='react-player'
+                                                    url={`https://www.youtube.com/watch?v=${result.key}`}
+                                                    width='100%'
+                                                    height='100%'
+                                                    controls={true}
+                                                    playing
+                                                    light={`https://img.youtube.com/vi/${result.key}/sddefault.jpg`} 
+                                                />
+                                            </div>
+                                        </div>
+                                    ))}
                                     />
                             </div>
                             <div className="infopage__separator_footer" />
