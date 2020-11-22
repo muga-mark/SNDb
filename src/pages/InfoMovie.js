@@ -165,7 +165,7 @@ function InfoMovie() {
                                                     width='100%'
                                                     height='80%'
                                                     controls={true}
-                                                    playing={playing}
+                                                    playing
                                                     light={`https://img.youtube.com/vi/${result.key}/sddefault.jpg`} 
                                                 />
                                             </div>
