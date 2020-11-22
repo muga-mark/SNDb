@@ -163,7 +163,7 @@ function InfoMovie() {
                                                     className='react-player'
                                                     url={`https://www.youtube.com/watch?v=${result.key}`}
                                                     width='100%'
-                                                    height='80%'
+                                                    height='100%'
                                                     controls={true}
                                                     playing
                                                     light={`https://img.youtube.com/vi/${result.key}/sddefault.jpg`} 

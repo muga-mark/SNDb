@@ -101,10 +101,9 @@
 
 @media screen and (max-width: 380px) {
     .movie_info_title {
-        height: 35px !important;
+        height: 45px !important;
     }
-    .movie_info_title > p {
-        height: 35px !important;
+    .poster__link {
         font-size: 14px !important;
         font-weight: 600 !important;
     }
@@ -150,10 +149,10 @@
 
 @media screen and (min-width: 380px) and (max-width: 500px) {
     .movie_info_title {
-        height: 35px !important;
+        height: 45px !important;
     }
-    .movie_info_title > p {
-        height: 35px !important;
+    .poster__link {
+        /* height: 35px !important; */
         font-size: 14px !important;
         font-weight: 600 !important;
     }
@@ -199,10 +198,10 @@
 
 @media screen and (min-width: 500px) and (max-width: 600px) {
     .movie_info_title {
-        height: 35px !important;
+        height: 45px !important;
     }
-    .movie_info_title > p {
-        height: 35px !important;
+    .poster__link {
+        /* height: 35px !important; */
         font-size: 14px !important;
         font-weight: 600 !important;
     }
