@@ -31,7 +31,7 @@
 .content__title {
     text-align: center;
     cursor: pointer;
-    color: rgb(170,33,31);
+    
     width: fit-content;
     border-radius: 20px;
     padding: 10px 25px;
@@ -52,9 +52,10 @@
 .content__link {
   text-decoration: none;
   display: block;
+  color: rgb(170,33,31);
 }
 
-.content__title > span {
+.content__link > span {
   font-size: 26px;
   font-weight: 700;
 }
@@ -179,11 +180,11 @@
     min-width: 30px !important;
   }
   .react-multiple-carousel__arrow--left {
-    left: 10px !important;
+    left: 0px !important;
     top: 25%;
   }
   .react-multiple-carousel__arrow--right {
-    right: 5px !important;
+    right: 0px !important;
     top: 25%;
   }
 }

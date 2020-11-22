@@ -1,23 +1,29 @@
 import React from 'react';
 import InfoCrew from './InfoCrew';
-import TrailerButton from '../components/TrailerButton';
+// import TrailerButton from '../components/TrailerButton';
 import StarIcon from '@material-ui/icons/Star';
 import Hidden from '@material-ui/core/Hidden';
+import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 // import ReactPlayer from 'react-player';
 import './Info.css';
 
-function Info({ id, IMG_API, info, title, trailer_url, date, certification, hours, minutes, onlyMinutes, handleOpen, trailer, crewDirector, crewWriters, creator }) {
+function Info({ id, IMG_API, info, title,  certification, hours, minutes, onlyMinutes, crewDirector, crewWriters, creator }) {
 
-    
     return (
         <div className="info">
             <Hidden smDown>
                 <div className="card">
-                    <img 
-                        src={IMG_API + info.poster_path} 
-                        alt={info.title} 
-                        className="card__image"
-                    />
+                    {info.poster_path?
+                        <img 
+                            src={IMG_API + info.poster_path} 
+                            alt={info.title} 
+                            className="card__image"
+                        />
+                    :
+                        <div className="card__image image__broken">
+                            <BrokenImageIcon/>
+                        </div>
+                    }
                     <div className="description__certfication_container">
                         {certification?
                             <div className="description__certification">

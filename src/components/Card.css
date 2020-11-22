@@ -23,11 +23,22 @@
     height: 100%;
     border-radius: 15px 15px 0 0;
 }
+.movie_poster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .poster__link {
     text-decoration: none;
+    color: #555555;
+    font-size: 18px;
+    font-weight: 600;
+    overflow: hidden;
 }
-
+.poster__link:hover {
+    color: #AA211F;
+}
 .movie_info {
     display: flex;
     flex-direction: column;
@@ -36,13 +47,6 @@
 
 .movie_info_title {
     height: 50px;
-}
-
-.movie_info_title > p {
-    height: 50px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #555555;
     overflow: hidden;
 }
 

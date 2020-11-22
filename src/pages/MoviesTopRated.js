@@ -67,18 +67,23 @@ function MoviesTopRated() {
           setMoviesTopRatedLoading(false);
           setMoviesTopRatedTotalPages(data.total_pages);
         });
+
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "smooth"
-          });
-    }, [MOVIE_TOPRATED_API]);
+        });
+        
+    }, [ MOVIE_TOPRATED_API, pageMoviesTopRated, history ]);
 
     return (
         <div className="page">
             {moviesTopRatedLoading?
                 <div className="page__spinner">
-                    <SpinnerContentCustom loading={moviesTopRatedLoading} />
+                    <SpinnerContentCustom 
+                        loading={moviesTopRatedLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
                 </div>
             :
                 <>

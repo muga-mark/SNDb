@@ -198,9 +198,9 @@ function App() {
             </div>
           </Route>
 
-          {/* <Route path="*">
+          <Route path="*">
             <Redirect to="/" />
-          </Route> */}
+          </Route>
           
         </Switch>
       </Router>

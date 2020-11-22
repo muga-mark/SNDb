@@ -66,18 +66,23 @@ function TVPopular() {
           setTVPopularLoading(false);
           setTVPopularTotalPages(data.total_pages);
         });
+
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "smooth"
-          });
-    }, [TV_POPULAR_API]);
+        });
+        
+    }, [ TV_POPULAR_API, pageTVPopular, history]);
 
     return (
         <div className="page">
             {tvPopularLoading?
                 <div className="page__spinner">
-                    <SpinnerContentCustom loading={tvPopularLoading} />
+                    <SpinnerContentCustom 
+                        loading={tvPopularLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
                 </div>
             :
                 <>

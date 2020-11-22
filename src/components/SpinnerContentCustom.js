@@ -13,13 +13,13 @@ const override = css`
     width: 100%;    
 `;
 
-function SpinnerContentCustom({ loading }) {
+function SpinnerContentCustom({ loading, size, color }) {
     return (
         <div className="spinner">
             <PulseLoader
                 css={override}
-                size={20}
-                color={"#D1312D"}
+                size={size}
+                color={color}
                 loading={loading}
             />
         </div>

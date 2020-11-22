@@ -4,15 +4,17 @@ import ModalCustom from './ModalCustom';
 import StarIcon from '@material-ui/icons/Star';
 import TrailerButton from '../components/TrailerButton';
 import { API_KEY, IMG_API } from '../api';
+import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 import './Card.css';
 
 function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
     const [open, setOpen] = useState(false);
-    const [trailer, setTrailer] = useState([]);
+    const [trailer, setTrailer] = useState("");
+    const [ trailerLoading, setTrailerLoading ] = useState(true);
     
     const MOVIE_TRAILER_API = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
     const trailer_url = `https://www.youtube.com/watch?v=${trailer}`;
-    
+
     const handleOpen = () => {
         setOpen(true);
     };
@@ -20,14 +22,15 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
     const handleClose = () => {
         setOpen(false);
     };
-
+    // console.log("TRAILER", trailer);
     useEffect(() => {
         fetch(MOVIE_TRAILER_API)
         .then(res => res.json())
         .then(data => {
-            // console.log("TRAILER", data)
+            
             if(data.results){
                 setTrailer(data.results[0]?.key);
+                setTrailerLoading(false);
             }
         });
     }, [ MOVIE_TRAILER_API ]);
@@ -37,23 +40,33 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
             
             <div className="movie_poster">
                 <Link to={`/movie/${id}`} className="poster__link">
-                    <img 
-                        src={IMG_API + poster_path} 
-                        alt={title} 
-                        className="poster"
-                    />
+                    {poster_path?
+                        <img 
+                            src={IMG_API + poster_path} 
+                            alt={title} 
+                            className="poster"
+                        />
+                    :
+                        <div className="image__broken">
+                            <BrokenImageIcon/>
+                        </div>
+                    }
                 </Link>
             </div>
 
             <div className="movie_info">
                 <div className="movie_info_title">
-                    <p>{title}</p>
+                    <Link to={`/movie/${id}`} className="poster__link">
+                        {title}
+                    </Link>
                 </div>
+               
                 
                 <div className="movie_info_trailer">
                     <TrailerButton
                         handleOpen={handleOpen}
                         trailer={trailer}
+                        trailerLoading={trailerLoading}
                     />
                 </div>
                 

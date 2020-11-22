@@ -30,18 +30,23 @@ function TVAiringToday() {
           setTVAiringTodayLoading(false);
           setTVAiringTodayTotalPages(data.total_pages);
         });
+
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "smooth"
-          });
-    }, [TV_AIRINGTODAY_API]);
+        });
+        
+    }, [TV_AIRINGTODAY_API, pageTVAiringToday, history ]);
 
     return (
         <div className="page">
             {tvAiringTodayLoading?
                 <div className="page__spinner">
-                    <SpinnerContentCustom loading={tvAiringTodayLoading} />
+                    <SpinnerContentCustom 
+                        loading={tvAiringTodayLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
                 </div>
             :
                 <>

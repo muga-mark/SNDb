@@ -30,18 +30,23 @@ function MoviesUpcoming() {
           setMoviesUpcomingLoading(false);
           setMoviesUpcomingTotalPages(data.total_pages);
         });
+
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "smooth"
-          });
-    }, [MOVIE_UPCOMING_API]);
+        });
+        
+    }, [ MOVIE_UPCOMING_API, pageMoviesUpcoming, history ]);
 
     return (
         <div className="page">
             {moviesUpcomingLoading?
                 <div className="page__spinner">
-                    <SpinnerContentCustom loading={moviesUpcomingLoading} />
+                    <SpinnerContentCustom 
+                        loading={moviesUpcomingLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
                 </div>
             :
                 <>

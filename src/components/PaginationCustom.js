@@ -10,22 +10,17 @@ function PaginationCustom({ totalPages, setPage, page }) {
    
     const handleChange = (event, value) => {
         dispatch(setPage(value));
-
-        console.log("VALUE>",value);
-        if(pageNo != page){
+        
+        if(parseInt(pageNo) !== page){
             dispatch(setPage(parseInt(pageNo)));
         }
     };
 
     useEffect(() => {
-        
-        if(pageNo != page){
+        if(parseInt(pageNo) !== page){
             dispatch(setPage(parseInt(pageNo)));
         }
-
-    }, [ pageNo ]);
-
-    // console.log("PARAM PAGE NO", pageNo);
+    }, [ pageNo, dispatch ]);
 
 
     return (

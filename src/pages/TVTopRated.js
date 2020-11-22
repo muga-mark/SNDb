@@ -66,18 +66,23 @@ function TVTopRated() {
           setTVTopRatedLoading(false);
           setTVTopRatedTotalPages(data.total_pages);
         });
+
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "smooth"
-          });
-    }, [TV_TOPRATED_API]);
+        });
+        
+    }, [ TV_TOPRATED_API, pageTVTopRated, history ]);
 
     return (
         <div className="page">
             {tvTopRatedLoading?
                 <div className="page__spinner">
-                    <SpinnerContentCustom loading={tvTopRatedLoading} />
+                    <SpinnerContentCustom 
+                        loading={tvTopRatedLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
                 </div>
             :
                 <>

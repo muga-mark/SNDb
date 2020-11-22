@@ -29,18 +29,23 @@ function TVOnTheAir() {
           setTVOnTheAirLoading(false);
           setTVOnTheAirTotalPages(data.total_pages);
         });
+
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "smooth"
-          });
-    }, [TV_ONTHEAIR_API]);
+        });
+        
+    }, [TV_ONTHEAIR_API, pageTVOnTheAir, history ]);
 
     return (
         <div className="page">
             {tvOnTheAirLoading?
                 <div className="page__spinner">
-                    <SpinnerContentCustom loading={tvOnTheAirLoading} />
+                    <SpinnerContentCustom 
+                        loading={tvOnTheAirLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
                 </div>
             :
                 <>

@@ -52,8 +52,15 @@
     border-radius: 15px;
 }
 
-
-
+.image__broken {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image__broken > .MuiSvgIcon-root {
+    font-size: 80px;
+    color: #c7c7c9;
+}
 
 
 .description {
@@ -233,9 +240,7 @@
     display: flex;
 }
 
-.infopage__details2 {
-    padding: 30px;
-}
+
 .info2 {
     display: flex;
     align-items: center;
@@ -274,7 +279,6 @@
 .cast__profile > .MuiSvgIcon-root {
     font-size: 80px;
     color: #c7c7c9;
-    
 }
 .cast__image {
     border-radius: 15px 15px 0 0;
@@ -297,7 +301,7 @@
     }
 
     .description__title {
-        font-size: 20px;
+        font-size: 20px !important;
     }
 
     .info__overview {
@@ -311,7 +315,7 @@
         min-width: 55px !important;
     }
     .infoWidth {
-        min-width: 110px;
+        min-width: 110px !important;
     }
 
     .description__link {
@@ -342,7 +346,7 @@
 
     .card__image {
         width: 100px !important; 
-        /* height: 130px; */
+        height: 150px !important;
     }
 
 
@@ -364,9 +368,7 @@
         font-size: 25px;
     }
 
-    .infopage__details2 {
-        padding: 20px;
-    }
+    
 
 }
 
@@ -383,7 +385,8 @@
 
     .card__image {
         width: 100px !important; 
-    }
+        height: 150px !important;
+    } 
 
     .cast__container {
         width: 140px !important;
@@ -395,15 +398,11 @@
         height: 200px !important;
     }
 
-    .infopage__details2 {
-        padding: 20px;
-    }
-
     .crewWidth {
         min-width: 55px !important;
     }
     .infoWidth {
-        min-width: 110px;
+        min-width: 110px !important;
     }
 }
 
@@ -421,6 +420,7 @@
 @media screen and (max-width: 600px) {  
     .card__image {
         width: 150px;
+        height: 225px;
     }
     .description__ratings {
         right: -15px;
@@ -449,6 +449,7 @@
 @media screen and (max-width: 800px) {  
     .card__image {
         width: 150px;
+        height: 225px;
     }
 }
 
@@ -456,7 +457,8 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .card__image {
-        width: 200px;
+        width: 200px !important;
+        height: 300px !important;
     }
     .info__overview_image {
         margin-right: 20px;
@@ -496,7 +498,8 @@
 
 @media screen and (min-width: 992px) {
     .card__image {
-        width: 250px;
+        width: 250px !important;
+        height: 375px !important;
     }
 }
 

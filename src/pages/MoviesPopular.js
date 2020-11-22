@@ -49,7 +49,7 @@ function MoviesPopular() {
     const history = useHistory();
     const [{ pageMoviesPopular }] = useStateValue();
     // const [ page, setPage] = useState(1);
-    console.log("PAGE NO>",pageMoviesPopular);
+    // console.log("PAGE NO>",pageMoviesPopular);
     const [ sortBy, setSortBy ] = useState("popularity.desc");
     const [ moviesPopular, setMoviesPopular ] = useState([]);
     const [ moviesPopularLoading, setMoviesPopularLoading ] = useState(true);
@@ -69,18 +69,25 @@ function MoviesPopular() {
           setMoviesPopularLoading(false);
           setMoviesPopularTotalPages(data.total_pages);
         });
+
+        
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "smooth"
-          });
-    }, [MOVIE_POPULAR_API, pageMoviesPopular]);
+        });
+        
+        
+    }, [ MOVIE_POPULAR_API, pageMoviesPopular, history ]);
 
     return (
         <div className="page">
             {moviesPopularLoading?
                 <div className="page__spinner">
-                    <SpinnerContentCustom loading={moviesPopularLoading} />
+                    <SpinnerContentCustom 
+                        loading={moviesPopularLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
                 </div>
             :
                 <>

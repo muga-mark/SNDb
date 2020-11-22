@@ -1,66 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_KEY, IMG_API } from '../api';
 import Info from '../components/Info';
 import Info2 from '../components/Info2';
 import InfoCast from '../components/InfoCast';
-import ModalCustom from '../components/ModalCustom';
 import SpinnerContentCustom from "../components/SpinnerContentCustom";
 import CarouselCustom from "../components/CarouselCustom";
 import Hidden from '@material-ui/core/Hidden';
+import ReactPlayer from 'react-player';
 import './InfoTVMovie.css';
 
 function InfoMovie() {
     const { movieId } = useParams();
-    const [ open, setOpen] = useState(false);
     const [ crewWriters, setCrewWriters ] = useState([]);
     const [ crewDirector, setCrewDirector ] = useState([]);
     const [ cast, setCast ] = useState([]);
-    // const [ castFiltered, setCastFiltered ] = useState([]);
     const [ trailer, setTrailer] = useState([]);
     const [ certification, setCertification ] = useState("");
     const [ movieDetails, setMovieDetails ] = useState([]);
     const [ movieDetailsLoading, setMovieDetailsLoading ] = useState(true);
     
     const GET_MOVIE_DETAILS = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US&append_to_response=releases%2Cvideos%2Ccredits`;
-    // const MOVIE_TRAILER_API = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
-    const trailer_url = `https://www.youtube.com/watch?v=${trailer}`;
 
     const totalMinutes = movieDetails.runtime;
     const hours = Math.floor(totalMinutes / 60);          
     const minutes = totalMinutes % 60;
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     useEffect(() => {
         fetch(GET_MOVIE_DETAILS)
         .then(res => res.json())
         .then(data => {
-          console.log("movieDetails",data);
-        //   console.log("trailer key", data.videos.results[0]?.key);
+        //   console.log("movieDetails",data);
+        //   console.log("trailer key", data.videos.results);
             if(data){
                 setMovieDetails(data);
                 setMovieDetailsLoading(false);
             
-                if((data.videos.results).lenth>0){
-                    setTrailer(data.videos.results[0]?.key);
+                if((data.videos.results).length>0){
+                    setTrailer(data.videos.results);
                 }
 
                 if(data.releases.countries){
                     const certificationUS = (data.releases.countries).filter(function(el){
                         return  el.iso_3166_1 === "US";
                     });
-                    console.log("certificationUS", certificationUS);
+                    // console.log("certificationUS", certificationUS);
 
                     if(certificationUS[0]?.certification){
                         setCertification(certificationUS[0]?.certification);
-                        console.log("certificationUS Result", certificationUS[0]?.certification);
+                        // console.log("certificationUS Result", certificationUS[0]?.certification);
                     }
 
 
@@ -68,11 +56,11 @@ function InfoMovie() {
                         var date = data.release_date;
                         return el.release_date === date;
                     });
-                    console.log("filterCountriesByDate",filterCountriesByDate);
+                    // console.log("filterCountriesByDate",filterCountriesByDate);
 
                     if(!(certificationUS[0]?.certification) && filterCountriesByDate[0]?.certification){
                         setCertification(filterCountriesByDate[0]?.certification);
-                        console.log("filterCountriesByDate Result",filterCountriesByDate[0]?.certification);
+                        // console.log("filterCountriesByDate Result",filterCountriesByDate[0]?.certification);
                     }
 
                     
@@ -81,11 +69,11 @@ function InfoMovie() {
                             return o1.iso_3166_1 === o2.iso_3166_1; 
                         });
                     });
-                    console.log("filterCountriesByCountry", filterCountriesByCountry);
+                    // console.log("filterCountriesByCountry", filterCountriesByCountry);
 
                     if(!(certificationUS[0]?.certification) && !(filterCountriesByDate[0]?.certification) && filterCountriesByCountry[0]?.certification){
                         setCertification(filterCountriesByCountry[0]?.certification);
-                        console.log("filterCountriesByCountry Result",filterCountriesByCountry[0]?.certification);
+                        // console.log("filterCountriesByCountry Result",filterCountriesByCountry[0]?.certification);
 
                     }
                 }
@@ -106,9 +94,7 @@ function InfoMovie() {
                 
                 if(data.credits.cast){
                     setCast(data.credits.cast);
-                    console.log("CAST", data.credits.cast);
-                    // const castNew = (data.credits.cast);
-                    // setCastFiltered(castNew);
+                    // console.log("CAST", data.credits.cast);
                 }
             }
           
@@ -116,12 +102,15 @@ function InfoMovie() {
 
     }, [ GET_MOVIE_DETAILS ]);
     
-
     return (
         <div className="infopage__container">
             {movieDetailsLoading?
                 <div className="info_page__spinner">
-                    <SpinnerContentCustom loading={movieDetailsLoading} />
+                    <SpinnerContentCustom 
+                        loading={movieDetailsLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
                 </div>
             :
                 <>
@@ -135,21 +124,14 @@ function InfoMovie() {
                             certification={certification}
                             hours={hours}
                             minutes={minutes}
-                            handleOpen={handleOpen}
-                            trailer={trailer}
                             crewDirector={crewDirector}
                             crewWriters={crewWriters}
-                            trailer_url={trailer_url}
                         />
                     </div>
 
-
                     <div className="infopage__separator">
-                        <span>
-                            Movie Info
-                        </span>
+                        <span>Movie Info</span>
                     </div>
-
                     <div className="infopage__details2">
                         <Info2 
                              info={movieDetails}
@@ -160,64 +142,90 @@ function InfoMovie() {
                              certification={certification}
                         />
                     </div>
-
                     <div className="infopage__separator_footer" />
 
-
-                    <div className="infopage__separator">
-                        <span>
-                            Cast and Crew
-                        </span>
-                    </div>
-
-                    <Hidden xsDown>
-                        <div className="info_page__cast_container">
-                            <CarouselCustom 
-                                desktop={5}
-                                small_desktop={5}
-                                tablet={4}
-                                small_tablet={3}
-                                mobile={2} 
-                                content={cast.length>0 && cast.map((result) => (
-                                            <div key={result.id}>
-                                                <InfoCast 
-                                                    key={result.id}
-                                                    id={result.id}
-                                                    IMG_API={IMG_API}
-                                                    profile_path={result.profile_path}
-                                                    original_name={result.original_name}
-                                                    character={result.character}
+                    {trailer.length>0?
+                        <>
+                            <div className="infopage__separator">
+                                <span>Videos</span>
+                            </div>
+                            <div className="infopage__video_container">
+                                <CarouselCustom 
+                                    desktop={2}
+                                    small_desktop={2}
+                                    tablet={2}
+                                    small_tablet={1}
+                                    mobile={1} 
+                                    content={trailer.map((result)=>(
+                                        <div className="infopage__video_player" key={result.id}>
+                                            <div className='player-wrapper'>
+                                                <ReactPlayer
+                                                    className='react-player'
+                                                    url={`https://www.youtube.com/watch?v=${result.key}`}
+                                                    width='100%'
+                                                    height='80%'
+                                                    controls={true}
+                                                    playing={playing}
+                                                    light={`https://img.youtube.com/vi/${result.key}/sddefault.jpg`} 
                                                 />
                                             </div>
-                                        ))} 
-                            />
-                        </div>
-                    </Hidden>
-                        
-                    <Hidden smUp>
-                        <div className="info_page__cast_container info_page__cast_container_scroll">
-                            {cast.length>0 && cast.map((result) => (
-                                <div key={result.id} className="info_page__cast">
-                                    <InfoCast 
-                                        key={result.id}
-                                        id={result.id}
-                                        IMG_API={IMG_API}
-                                        profile_path={result.profile_path}
-                                        original_name={result.original_name}
-                                        character={result.character}
+                                        </div>
+                                    ))}
+                                    />
+                            </div>
+                            <div className="infopage__separator_footer" />
+                        </>
+                    :null}
+
+                    {cast.length>0?
+                        <>
+                            <div className="infopage__separator">
+                                <span>Cast and Crew</span>
+                            </div>
+                            <Hidden xsDown>
+                                <div className="info_page__cast_container">
+                                    <CarouselCustom 
+                                        desktop={5}
+                                        small_desktop={5}
+                                        tablet={4}
+                                        small_tablet={3}
+                                        mobile={2} 
+                                        content={cast.length>0 && cast.map((result) => (
+                                                    <div key={result.id}>
+                                                        <InfoCast 
+                                                            key={result.id}
+                                                            id={result.id}
+                                                            IMG_API={IMG_API}
+                                                            profile_path={result.profile_path}
+                                                            original_name={result.original_name}
+                                                            character={result.character}
+                                                        />
+                                                    </div>
+                                                ))} 
                                     />
                                 </div>
-                            ))} 
-                        </div>
-                    </Hidden>
+                            </Hidden>
+                                
+                            <Hidden smUp>
+                                <div className="info_page__cast_container info_page__cast_container_scroll">
+                                    {cast.length>0 && cast.map((result) => (
+                                        <div key={result.id} className="info_page__cast">
+                                            <InfoCast 
+                                                key={result.id}
+                                                id={result.id}
+                                                IMG_API={IMG_API}
+                                                profile_path={result.profile_path}
+                                                original_name={result.original_name}
+                                                character={result.character}
+                                            />
+                                        </div>
+                                    ))} 
+                                </div>
+                            </Hidden>
+                            <div className="infopage__separator_footer" />
+                        </>
+                    :null}
 
-                    <div className="infopage__separator_footer" />
-
-                    <ModalCustom 
-                        open={open}
-                        handleClose={handleClose}
-                        trailer_url={trailer_url}
-                    />
                 </>
             } 
             
