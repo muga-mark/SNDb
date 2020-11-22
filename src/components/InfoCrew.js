@@ -1,58 +1,14 @@
 import React from 'react';
 import './Info.css';
 
-function InfoCrew({ crewDirector, crewWriters, creator }) {
+function InfoCrew({ crewWriters, creator }) {
     return (
         <>
-            {crewDirector?
-                <>
-                    {crewDirector.length>0?
-                        <div className="director__container">
-                            <div className="crewWidth">
-                                <span className="info__text info__text--bold info__text--small">
-                                    {crewDirector.length>1? " Directors: ": "Director: "}
-                                </span>
-                            </div>
-
-                            <div className="director">
-                                {crewDirector.length>1?
-                                    <>
-                                        {crewDirector
-                                            .map((result) => (
-                                                <div key={result.id}>
-                                                    <span key={result.id} className="info__text info__text--small">
-                                                        {result.name}
-                                                    </span>
-                                                </div>))
-                                            .reduce((prev, curr) => [prev, 
-                                                <span className="info__text marginRight">,</span>
-                                                ,curr])
-                                        }
-                                    </>
-                                :
-                                    <>
-                                        {crewDirector
-                                            .map((result) => (
-                                            <div key={result.id}>
-                                                <span key={result.id} className="info__text info__text--small">
-                                                    {result.name}
-                                                </span>
-                                            </div>))
-                                        }
-                                    </>
-                                }
-                            </div>
-                            
-                        </div>
-                    :null}
-                </>
-            :null}
-
             {crewWriters?
                 <>
                 {crewWriters.length>0?
                     <div className="writers__container">
-                        <div className="crewWidth">
+                        <div className="infoWidth">
                             <span className="info__text info__text--bold info__text--small">
                                 {crewWriters.length>1? " Writers:" : "Writer:"}
                             </span>
@@ -99,7 +55,7 @@ function InfoCrew({ crewDirector, crewWriters, creator }) {
                 <>
                     {creator.length>0?
                         <div className="director__container">
-                            <div className="crewWidth">
+                            <div className="infoWidth">
                                 <span className="info__text info__text--bold info__text--small">
                                     {creator.length>1? " Creators:" : "Creator:"}
                                 </span>

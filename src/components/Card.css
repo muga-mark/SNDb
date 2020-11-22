@@ -101,7 +101,7 @@
 
 @media screen and (max-width: 380px) {
     .movie_info_title {
-        height: 45px !important;
+        height: 40px !important;
     }
     .poster__link {
         font-size: 14px !important;

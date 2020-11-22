@@ -125,7 +125,6 @@ function InfoMovie() {
                             hours={hours}
                             minutes={minutes}
                             crewDirector={crewDirector}
-                            crewWriters={crewWriters}
                         />
                     </div>
 
@@ -134,12 +133,14 @@ function InfoMovie() {
                     </div>
                     <div className="infopage__details2">
                         <Info2 
-                             info={movieDetails}
-                             date={movieDetails.release_date}
-                             hours={hours}
-                             minutes={minutes}
-                             homepage={movieDetails.homepage}
-                             certification={certification}
+                            info={movieDetails}
+                            date={movieDetails.release_date}
+                            hours={hours}
+                            minutes={minutes}
+                            homepage={movieDetails.homepage}
+                            certification={certification}
+                            crewDirector={crewDirector}
+                            crewWriters={crewWriters}
                         />
                     </div>
                     <div className="infopage__separator_footer" />

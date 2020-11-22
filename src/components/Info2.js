@@ -1,9 +1,18 @@
 import React from 'react';
+import InfoCrew from './InfoCrew';
 import './Info.css';
 
-function Info2({ info, date, hours, minutes, onlyMinutes, homepage, certification }) {
+function Info2({ info, date, hours, minutes, onlyMinutes, homepage, certification, crewDirector, crewWriters, creator }) {
     return (
         <div>
+            
+            <div className="info__crew">
+                <InfoCrew 
+                    crewDirector={crewDirector}
+                    crewWriters={crewWriters}
+                    creator={creator}
+                />
+            </div>
             
             <div className="info2"> 
                 <div className="infoWidth">
@@ -23,7 +32,6 @@ function Info2({ info, date, hours, minutes, onlyMinutes, homepage, certificatio
                     </span>
                 </div>
             </div>
-            
 
             {hours && minutes?
                 <div className="info2"> 
