@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../StateProvider';
-import { SET_PAGE_MOVIES_UPCOMING } from '../action';
+import { SET_PAGE_MOVIES_UPCOMING } from '../actions/setPageNo';
 import { API_KEY } from '../api';
+
 import CardMovie from '../components/CardMovie';
-import SpinnerContentCustom from '../components/SpinnerContentCustom';
 import PaginationCustom from '../components/PaginationCustom';
+import SpinnerContentCustom from '../components/SpinnerContentCustom';
+
 import '../pages/z_styles.css';
 
 

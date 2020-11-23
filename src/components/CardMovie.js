@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ModalCustom from './ModalCustom';
-import StarIcon from '@material-ui/icons/Star';
-import TrailerButton from '../components/TrailerButton';
 import { API_KEY, IMG_API } from '../api';
+
+import ModalCustom from './ModalCustom';
+import TrailerButton from './TrailerButton';
+
+import StarIcon from '@material-ui/icons/Star';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
+
 import './Card.css';
 
 function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
-    const [open, setOpen] = useState(false);
-    const [trailer, setTrailer] = useState("");
+    const [ open, setOpen ] = useState(false);
+    const [ trailer, setTrailer ] = useState("");
     const [ trailerLoading, setTrailerLoading ] = useState(true);
     
     const MOVIE_TRAILER_API = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
@@ -22,12 +25,11 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
     const handleClose = () => {
         setOpen(false);
     };
-    // console.log("TRAILER", trailer);
+ 
     useEffect(() => {
         fetch(MOVIE_TRAILER_API)
         .then(res => res.json())
         .then(data => {
-            
             if(data.results){
                 setTrailer(data.results[0]?.key);
                 setTrailerLoading(false);
@@ -47,7 +49,7 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
                             className="poster"
                         />
                     :
-                        <div className="image__broken">
+                        <div className="poster image__broken">
                             <BrokenImageIcon/>
                         </div>
                     }

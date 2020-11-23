@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_KEY, IMG_API } from '../api';
+
 import Info from '../components/Info';
 import Info2 from '../components/Info2';
 import InfoCast from '../components/InfoCast';
-import SpinnerContentCustom from "../components/SpinnerContentCustom";
 import CarouselCustom from "../components/CarouselCustom";
-import Hidden from '@material-ui/core/Hidden';
+import SpinnerContentCustom from "../components/SpinnerContentCustom";
+
 import ReactPlayer from 'react-player';
+import Hidden from '@material-ui/core/Hidden';
 import './InfoTVMovie.css';
 
 function InfoMovie() {

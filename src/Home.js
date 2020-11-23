@@ -1,38 +1,31 @@
-import React, { useEffect } from 'react';
-import { SET_PAGE_MOVIES_POPULAR, SET_PAGE_MOVIES_UPCOMING, SET_PAGE_MOVIES_TOPRATED, SET_PAGE_TV_POPULAR, SET_PAGE_TV_UPCOMING, SET_PAGE_TV_AIRINGTODAY, SET_PAGE_TV_ONTHEAIR, SET_PAGE_TV_TOPRATED } from './action';
-import { useStateValue } from './StateProvider';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useStateValue } from './StateProvider';
+import { SET_PAGE_MOVIES_POPULAR, SET_PAGE_MOVIES_UPCOMING, SET_PAGE_MOVIES_TOPRATED,  SET_PAGE_TV_AIRINGTODAY, SET_PAGE_TV_ONTHEAIR, SET_PAGE_TV_POPULAR, SET_PAGE_TV_TOPRATED } from './actions/setPageNo';
+
 import CardMovie from './components/CardMovie';
 import CardTV from './components/CardTV';
-// import { ToastContainer } from 'react-toastify';
-import Hidden from '@material-ui/core/Hidden';
-
 import SpinnerContentCustom from "./components/SpinnerContentCustom";
 import CarouselCustom from "./components/CarouselCustom";
+
+import Hidden from '@material-ui/core/Hidden';
 import './Home.css';
 
-function Home({ pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, pageTVPopular, pageTVUpcoming, pageTVAiringToday, pageTVOnTheAir, pageTVTopRated, moviesPopular, moviesPopularLoading, moviesUpcoming, moviesUpcomingLoading, moviesTopRated, moviesTopRatedLoading, tvPopular, tvPopularLoading, tvTopRated, tvTopRatedLoading, tvAiringToday, tvAiringTodayLoading, tvOnTheAir, tvOnTheAirLoading }) {
-    const [{},  dispatch] = useStateValue();
+function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoading, tvAiringTodayLoading, tvOnTheAirLoading, tvPopularLoading, tvTopRatedLoading }) {
+    
+    const [{  pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, pageTVAiringToday, pageTVOnTheAir, pageTVPopular, pageTVTopRated, moviesPopular, moviesUpcoming, moviesTopRated, tvAiringToday, tvOnTheAir, tvTopRated, tvPopular },  dispatch] = useStateValue();
     
     useEffect(() => {
         if(pageMoviesPopular !== 1){
             dispatch(SET_PAGE_MOVIES_POPULAR(1));
         }
 
-        if(pageMoviesUpcoming !== 1){
-            dispatch(SET_PAGE_MOVIES_UPCOMING(1));
-        }
-
         if(pageMoviesTopRated !== 1){
             dispatch(SET_PAGE_MOVIES_TOPRATED(1));
         }
 
-        if(pageTVPopular !== 1){
-            dispatch(SET_PAGE_TV_POPULAR(1));
-        }
-
-        if(pageTVUpcoming !== 1){
-            dispatch(SET_PAGE_TV_UPCOMING(1));
+        if(pageMoviesUpcoming !== 1){
+            dispatch(SET_PAGE_MOVIES_UPCOMING(1));
         }
 
         if(pageTVAiringToday !== 1){
@@ -43,17 +36,20 @@ function Home({ pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, pageT
             dispatch(SET_PAGE_TV_ONTHEAIR(1));
         }
 
+        if(pageTVPopular !== 1){
+            dispatch(SET_PAGE_TV_POPULAR(1));
+        }
+
         if(pageTVTopRated !== 1){
             dispatch(SET_PAGE_TV_TOPRATED(1));
         }
 
-    }, [ pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, pageTVPopular, pageTVUpcoming, pageTVAiringToday, pageTVOnTheAir, pageTVTopRated, dispatch ]);
+    }, [ pageMoviesPopular, pageMoviesTopRated, pageMoviesUpcoming, pageTVAiringToday, pageTVOnTheAir, pageTVPopular, pageTVTopRated, dispatch ]);
 
     // console.log("PAGE NEXT NO>",pageMoviesPopular);
     return (
       <div className="content">
           {/* <ToastContainer /> */}
-        
         
         <div className="content__title">
             <Link to={`/movie/popular/${pageMoviesPopular}`} className="content__link">
@@ -105,58 +101,6 @@ function Home({ pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, pageT
         </Hidden>             
 
 
-        
-        <div className="content__title">
-            <Link to={`/movie/upcoming/${pageMoviesUpcoming}`} className="content__link">
-                <span>Upcoming Movies</span>
-            </Link>
-        </div>
-        <Hidden xsDown>
-            <div className="content__container">
-                {moviesUpcomingLoading?
-                    <SpinnerContentCustom 
-                        loading={moviesUpcomingLoading} 
-                        size={20}
-                        color={"#D1312D"}
-                    />
-                :
-                    <CarouselCustom 
-                        desktop={5}
-                        small_desktop={4}
-                        tablet={3}
-                        small_tablet={2}
-                        mobile={2}
-                        content={moviesUpcoming.length>0 && moviesUpcoming.map((result)=> (
-                                    <div key={result.id}>
-                                        <CardMovie key={result.id} {...result} />
-                                    </div>
-                                ))}
-                    />
-                }
-            </div>
-        </Hidden>
-        <Hidden smUp>
-            <div className="content__container content__container_scroll">
-                {moviesUpcomingLoading?
-                    <SpinnerContentCustom 
-                        loading={moviesUpcomingLoading} 
-                        size={20}
-                        color={"#D1312D"}
-                    />
-                :
-                    <>
-                    {moviesUpcoming.length>0 && moviesUpcoming.map((result)=> (
-                        <div key={result.id} className="content__card">
-                            <CardMovie key={result.id} {...result} />
-                        </div>
-                    ))}
-                    </>
-                }
-            </div>
-        </Hidden>      
-
-
-        
         <div className="content__title">
             <Link to={`/movie/top-rated/${pageMoviesTopRated}`} className="content__link">
                 <span>Top Rated Movies</span>
@@ -207,7 +151,56 @@ function Home({ pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, pageT
         </Hidden>     
 
 
-        
+        <div className="content__title">
+            <Link to={`/movie/upcoming/${pageMoviesUpcoming}`} className="content__link">
+                <span>Upcoming Movies</span>
+            </Link>
+        </div>
+        <Hidden xsDown>
+            <div className="content__container">
+                {moviesUpcomingLoading?
+                    <SpinnerContentCustom 
+                        loading={moviesUpcomingLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
+                :
+                    <CarouselCustom 
+                        desktop={5}
+                        small_desktop={4}
+                        tablet={3}
+                        small_tablet={2}
+                        mobile={2}
+                        content={moviesUpcoming.length>0 && moviesUpcoming.map((result)=> (
+                                    <div key={result.id}>
+                                        <CardMovie key={result.id} {...result} />
+                                    </div>
+                                ))}
+                    />
+                }
+            </div>
+        </Hidden>
+        <Hidden smUp>
+            <div className="content__container content__container_scroll">
+                {moviesUpcomingLoading?
+                    <SpinnerContentCustom 
+                        loading={moviesUpcomingLoading} 
+                        size={20}
+                        color={"#D1312D"}
+                    />
+                :
+                    <>
+                    {moviesUpcoming.length>0 && moviesUpcoming.map((result)=> (
+                        <div key={result.id} className="content__card">
+                            <CardMovie key={result.id} {...result} />
+                        </div>
+                    ))}
+                    </>
+                }
+            </div>
+        </Hidden>  
+
+
         <div className="content__title">
             <Link to={`/tv/popular/${pageTVPopular}`} className="content__link">
                 <span>Popular TV Shows</span>

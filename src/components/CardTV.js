@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ModalCustom from './ModalCustom';
-import StarIcon from '@material-ui/icons/Star';
 import { API_KEY, IMG_API } from '../api';
+
+import ModalCustom from './ModalCustom';
 import TrailerButton from './TrailerButton';
+
+import StarIcon from '@material-ui/icons/Star';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
+
 import './Card.css';
 
 function CardTV ({ name, poster_path, vote_average, first_air_date, id }) {
-    const [open, setOpen] = useState(false);
-    const [trailer, setTrailer] = useState("");
+    const [ open, setOpen ] = useState(false);
+    const [ trailer, setTrailer ] = useState("");
     const [ trailerLoading, setTrailerLoading ] = useState(true);
     
     const TV_TRAILER_API = `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=en-US`;
@@ -46,7 +49,7 @@ function CardTV ({ name, poster_path, vote_average, first_air_date, id }) {
                             className="poster"
                         />
                     :
-                        <div className="image__broken">
+                        <div className="poster image__broken">
                             <BrokenImageIcon/>
                         </div>
                     }
