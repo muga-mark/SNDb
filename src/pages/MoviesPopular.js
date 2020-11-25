@@ -101,7 +101,6 @@ function MoviesPopular() {
                             <PageFilter
                                 setSortBy={setSortBy}
                                 setPage={SET_PAGE_MOVIES_POPULAR}
-                                // setPage={setPageNo}
                                 sortBy={sortBy}
                                 menuItems={menuItems}
                             />

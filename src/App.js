@@ -21,34 +21,18 @@ import './App.css';
 
 function App() {
   const [{ },  dispatch] = useStateValue();
-
-  // const [ moviesPopular, setMoviesPopular ] = useState([]);
   const [ moviesPopularLoading, setMoviesPopularLoading ] = useState(true);
-  
-  // const [ moviesUpcoming, setMoviesUpcoming ] = useState([]);
   const [ moviesUpcomingLoading, setMoviesUpcomingLoading ] = useState(true);
-
-  // const [ moviesTopRated, setMoviesTopRated ] = useState([]);
   const [ moviesTopRatedLoading, setMoviesTopRatedLoading ] = useState(true);
-
-  // const [ tvAiringToday, setTVAiringToday ] = useState([]);
   const [ tvAiringTodayLoading, setTVAiringTodayLoading ] = useState(true);
-
-  // const [ tvOnTheAir, setTVOnTheAir ] = useState([]);
   const [ tvOnTheAirLoading, setTVOnTheAirLoading ] = useState(true);
-
-  // const [ tvPopular, setTVPopular ] = useState([]);
   const [ tvPopularLoading, setTVPopularLoading ] = useState(true);
-
-  // const [ tvTopRated, setTVTopRated ] = useState([]);
   const [ tvTopRatedLoading, setTVTopRatedLoading ] = useState(true);
   
   useEffect(() => {
     fetch(MOVIE_POPULAR_API)
     .then(res => res.json())
     .then(data => {
-      // console.log("popular movies", data);
-      // setMoviesPopular(data.results);
       dispatch(SET_MOVIES_POPULAR(data.results));
       setMoviesPopularLoading(false);
     });
@@ -56,8 +40,6 @@ function App() {
     fetch(MOVIE_TOPRATED_API)
     .then(res => res.json())
     .then(data => {
-      // console.log("TOP RATED MOVIES", data);
-      // setMoviesTopRated(data.results);
       dispatch(SET_MOVIES_TOPRATED(data.results));
       setMoviesTopRatedLoading(false);
     });
@@ -65,8 +47,6 @@ function App() {
     fetch(MOVIE_UPCOMING_API)
     .then(res => res.json())
     .then(data => {
-    //   console.log(data);
-      // setMoviesUpcoming(data.results);
       dispatch(SET_MOVIES_UPCOMING(data.results));
       setMoviesUpcomingLoading(false);
     });
@@ -74,8 +54,6 @@ function App() {
     fetch(TV_AIRINGTODAY_API)
     .then(res => res.json())
     .then(data => {
-    //   console.log("AIRING TODAY", data);
-      // setTVAiringToday(data.results);
       dispatch(SET_TV_AIRINGTODAY(data.results));   
       setTVAiringTodayLoading(false);
     });
@@ -83,8 +61,6 @@ function App() {
     fetch(TV_ONTHEAIR_API)
     .then(res => res.json())
     .then(data => {
-    //   console.log(data);
-      // setTVOnTheAir(data.results);
       dispatch(SET_TV_ONTHEAIR(data.results));  
       setTVOnTheAirLoading(false);
     });
@@ -92,8 +68,6 @@ function App() {
     fetch(TV_POPULAR_API)
     .then(res => res.json())
     .then(data => {
-    //   console.log("TV POPULAR RESULT", data);
-      // setTVPopular(data.results);
       dispatch(SET_TV_POPULAR(data.results));      
       setTVPopularLoading(false);
     });
@@ -101,9 +75,7 @@ function App() {
     fetch(TV_TOPRATED_API)
     .then(res => res.json())
     .then(data => {
-    //   console.log(data);
       dispatch(SET_TV_TOPRATED(data.results));   
-      // setTVTopRated(data.results);
       setTVTopRatedLoading(false);
     });
 

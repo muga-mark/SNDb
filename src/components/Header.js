@@ -14,6 +14,7 @@ function Header() {
                     className="logo"
                 />
             </Link>
+            <input className="search" type="search" placeholder="Search..." />
         </div>
     )
 }
