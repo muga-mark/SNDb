@@ -21,8 +21,9 @@ function PageFilter({ setSortBy, sortBy, menuItems, setPage }) {
     const classes = useStyles();
 
     const sortHandleChange = (event) => {
-        setSortBy(event.target.value);
+        // setSortBy(event.target.value);
         // setPage(1);
+        dispatch(setSortBy(event.target.value));
         dispatch(setPage(1));
     };
 

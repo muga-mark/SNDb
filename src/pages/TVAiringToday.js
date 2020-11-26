@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../StateProvider';
 import { SET_PAGE_TV_AIRINGTODAY } from '../actions/setPageNo';
-import { API_KEY } from '../api';
 
 import CardTV from '../components/CardTV';
 import PaginationCustom from '../components/PaginationCustom';
@@ -11,34 +10,21 @@ import SpinnerContentCustom from '../components/SpinnerContentCustom';
 import '../pages/z_styles.css';
 
 
-function TVAiringToday() {
+function TVAiringToday({ tvAiringTodayLoading }) {
     const history = useHistory();
-    const [{ pageTVAiringToday }] = useStateValue();
-    const [ tvAiringToday, setTVAiringToday ] = useState([]);
-    const [ tvAiringTodayLoading, setTVAiringTodayLoading ] = useState(true);
-    const [ tvAiringTodayTotalPages, setTVAiringTodayTotalPages ] = useState(0);
-
-    const TV_AIRINGTODAY_API = `https://api.themoviedb.org/3/tv/airing_today?api_key=${API_KEY}&language=en-US&page=${pageTVAiringToday}`;
+    const [ { tvAiringToday, pageTVAiringToday } ] = useStateValue();
     
     useEffect(() => {
         if(pageTVAiringToday){
             history.push(`/tv/airing-today/${pageTVAiringToday}`);
         }
 
-        fetch(TV_AIRINGTODAY_API)
-        .then(res => res.json())
-        .then(data => {
-          setTVAiringToday(data.results);
-          setTVAiringTodayLoading(false);
-          setTVAiringTodayTotalPages(data.total_pages);
-        });
-
         window.scrollTo({
             top: 0,
             left: 0,
         });
         
-    }, [TV_AIRINGTODAY_API, pageTVAiringToday, history ]);
+    }, [ pageTVAiringToday, history ]);
 
     return (
         <div className="page">
@@ -60,7 +46,7 @@ function TVAiringToday() {
                 
                     <div className="page__content_container">
                         <div className="page__content">
-                            {tvAiringToday.length>0 && tvAiringToday.map((result)=> (
+                            {tvAiringToday.results.length>0 && tvAiringToday.results.map((result)=> (
                                 <div key={result.id} className="movie_content">
                                     <CardTV key={result.id} {...result} />
                                 </div>
@@ -70,7 +56,7 @@ function TVAiringToday() {
                         <div className="page__content page__content_pagination">
                             <PaginationCustom 
                                 page={pageTVAiringToday}
-                                totalPages={tvAiringTodayTotalPages}
+                                totalPages={tvAiringToday.total_pages}
                                 setPage={SET_PAGE_TV_AIRINGTODAY}
                             />
                         </div>

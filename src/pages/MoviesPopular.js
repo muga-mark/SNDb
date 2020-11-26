@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useStateValue } from '../StateProvider';
 import { useHistory } from 'react-router-dom';
 import { SET_PAGE_MOVIES_POPULAR } from '../actions/setPageNo';
-import { API_KEY } from '../api';
+import { SET_SORTEDBY_MOVIES_POPULAR } from '../actions/setSortBy';
 
 import CardMovie from '../components/CardMovie';
 import PageFilter from '../components/PageFilter';
@@ -25,12 +25,12 @@ const menuItems = [
         icon: <ArrowUpwardIcon/>
     },
     {
-        value: "release_date.desc",
+        value: "primary_release_date.desc",
         item: "Date",
         icon: <ArrowDownwardIcon/>
     },
     {
-        value: "release_date.asc",
+        value: "primary_release_date.asc",
         item: "Date",
         icon: <ArrowUpwardIcon/>
     },
@@ -46,32 +46,14 @@ const menuItems = [
     },
 ]
 
-function MoviesPopular() {
-    // const { pageNo } = useParams();
+function MoviesPopular({ moviesPopularLoading }) {
     const history = useHistory();
-    const [{ pageMoviesPopular }] = useStateValue();
-    // const [ page, setPage] = useState(1);
-    // console.log("PAGE NO>",pageMoviesPopular);
-    const [ sortBy, setSortBy ] = useState("popularity.desc");
-    const [ moviesPopular, setMoviesPopular ] = useState([]);
-    const [ moviesPopularLoading, setMoviesPopularLoading ] = useState(true);
-    const [ moviesPopularTotalPages, setMoviesPopularTotalPages ] = useState(0);
-    
-    const MOVIE_POPULAR_API = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${pageMoviesPopular}&vote_count.gte=250`;
+    const [ { moviesPopular, pageMoviesPopular, sortedByMoviesPopular } ] = useStateValue();
    
     useEffect(() => {
         if(pageMoviesPopular){
             history.push(`/movie/popular/${pageMoviesPopular}`);
         }
-
-        fetch(MOVIE_POPULAR_API)
-        .then(res => res.json())
-        .then(data => {
-          setMoviesPopular(data.results);
-          setMoviesPopularLoading(false);
-          setMoviesPopularTotalPages(data.total_pages);
-        });
-
         
         window.scrollTo({
             top: 0,
@@ -79,7 +61,7 @@ function MoviesPopular() {
         });
         
         
-    }, [ MOVIE_POPULAR_API, pageMoviesPopular, history ]);
+    }, [ pageMoviesPopular, history ]);
 
     return (
         <div className="page">
@@ -99,9 +81,9 @@ function MoviesPopular() {
                         </div>
                         <div className="page__filter">
                             <PageFilter
-                                setSortBy={setSortBy}
+                                setSortBy={SET_SORTEDBY_MOVIES_POPULAR}
                                 setPage={SET_PAGE_MOVIES_POPULAR}
-                                sortBy={sortBy}
+                                sortBy={sortedByMoviesPopular}
                                 menuItems={menuItems}
                             />
                         </div>
@@ -109,7 +91,7 @@ function MoviesPopular() {
                     
                     <div className="page__content_container">
                         <div className="page__content">
-                            {moviesPopular.length>0 && moviesPopular.map((result)=> (
+                            {moviesPopular.results.length>0 && moviesPopular.results.map((result)=> (
                                 <div key={result.id} className="movie_content">
                                     <CardMovie key={result.id} {...result} />
                                 </div>
@@ -118,7 +100,7 @@ function MoviesPopular() {
 
                         <div className="page__content page__content_pagination">
                             <PaginationCustom 
-                                totalPages={moviesPopularTotalPages}
+                                totalPages={moviesPopular.total_pages}
                                 setPage={SET_PAGE_MOVIES_POPULAR}
                                 page={pageMoviesPopular}
                             />

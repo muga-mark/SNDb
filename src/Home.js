@@ -1,43 +1,117 @@
 import React, { useEffect } from 'react';
 import { useStateValue } from './StateProvider';
 import { SET_PAGE_MOVIES_POPULAR, SET_PAGE_MOVIES_UPCOMING, SET_PAGE_MOVIES_TOPRATED,  SET_PAGE_TV_AIRINGTODAY, SET_PAGE_TV_ONTHEAIR, SET_PAGE_TV_POPULAR, SET_PAGE_TV_TOPRATED } from './actions/setPageNo';
+import { SET_SORTEDBY_MOVIES_POPULAR, SET_SORTEDBY_MOVIES_TOPRATED,  SET_SORTEDBY_TV_POPULAR, SET_SORTEDBY_TV_TOPRATED } from './actions/setSortBy';
 
 import Row from './components/Row';
 
-function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoading, tvAiringTodayLoading, tvOnTheAirLoading, tvPopularLoading, tvTopRatedLoading }) {
+function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoading, tvAiringTodayLoading, tvOnTheAirLoading, tvPopularLoading, tvTopRatedLoading, setMoviesPopularLoading,  setMoviesUpcomingLoading, setMoviesTopRatedLoading, setTVAiringTodayLoading, setTVOnTheAirLoading, setTVPopularLoading, setTVTopRatedLoading }) {
     
-    const [{  pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, pageTVAiringToday, pageTVOnTheAir, pageTVPopular, pageTVTopRated, moviesPopular, moviesUpcoming, moviesTopRated, tvAiringToday, tvOnTheAir, tvTopRated, tvPopular },  dispatch] = useStateValue();
+    const [{  moviesPopular, pageMoviesPopular, sortedByMoviesPopular, moviesUpcoming, pageMoviesUpcoming, moviesTopRated, pageMoviesTopRated, sortedByMoviesTopRated, tvAiringToday, pageTVAiringToday, tvOnTheAir, pageTVOnTheAir, tvPopular, pageTVPopular, sortedByTVPopular, pageTVTopRated, tvTopRated, sortedByTVTopRated },  dispatch] = useStateValue();
     
     useEffect(() => {
         if(pageMoviesPopular !== 1){
             dispatch(SET_PAGE_MOVIES_POPULAR(1));
+            setMoviesPopularLoading(true);
+            
+            if(pageMoviesPopular === 1){
+                setMoviesPopularLoading(false);
+            }
+        }
+        if(sortedByMoviesPopular !== "popularity.desc"){
+            dispatch(SET_SORTEDBY_MOVIES_POPULAR("popularity.desc"));
+            setMoviesPopularLoading(true);
+            
+            if(sortedByMoviesPopular === "popularity.desc"){
+                setMoviesPopularLoading(false);
+            }
         }
 
-        if(pageMoviesTopRated !== 1){
-            dispatch(SET_PAGE_MOVIES_TOPRATED(1));
-        }
 
         if(pageMoviesUpcoming !== 1){
             dispatch(SET_PAGE_MOVIES_UPCOMING(1));
+            setMoviesUpcomingLoading(true);
+
+            if(pageMoviesUpcoming === 1){
+                setMoviesUpcomingLoading(false);
+            }
         }
+
+
+        if(pageMoviesTopRated !== 1){
+            dispatch(SET_PAGE_MOVIES_TOPRATED(1));
+            setMoviesTopRatedLoading(true);
+
+            if(pageMoviesTopRated === 1){
+                setMoviesTopRatedLoading(false);
+            }
+        }
+        if(sortedByMoviesTopRated !== "vote_average.desc"){
+            dispatch(SET_SORTEDBY_MOVIES_TOPRATED("vote_average.desc"));
+            setMoviesTopRatedLoading(true);
+
+            if(sortedByMoviesTopRated === "vote_average.desc"){
+                setMoviesTopRatedLoading(false);
+            }
+        }
+
 
         if(pageTVAiringToday !== 1){
             dispatch(SET_PAGE_TV_AIRINGTODAY(1));
+            setTVAiringTodayLoading(true);
+
+            if(pageTVAiringToday === 1){    
+                setTVAiringTodayLoading(false);
+            }
         }
+
 
         if(pageTVOnTheAir !== 1){
             dispatch(SET_PAGE_TV_ONTHEAIR(1));
+            setTVOnTheAirLoading(true);
+
+            if(pageTVOnTheAir === 1){
+                setTVOnTheAirLoading(false);
+            }
         }
+
 
         if(pageTVPopular !== 1){
             dispatch(SET_PAGE_TV_POPULAR(1));
+            setTVPopularLoading(true);
+
+            if(pageTVPopular === 1){
+                setTVPopularLoading(false);
+            }
         }
+        if(sortedByTVPopular !== "popularity.desc"){
+            dispatch(SET_SORTEDBY_TV_POPULAR("popularity.desc"));
+            setTVPopularLoading(true);
+
+            if(sortedByTVPopular === "popularity.desc"){
+                setTVPopularLoading(false);
+            }
+        }
+
 
         if(pageTVTopRated !== 1){
             dispatch(SET_PAGE_TV_TOPRATED(1));
+            setTVTopRatedLoading(true);
+
+            if(pageTVTopRated === 1){
+                setTVTopRatedLoading(false);
+            }
+        }
+        if(sortedByTVTopRated !== "vote_average.desc"){
+            dispatch(SET_SORTEDBY_TV_TOPRATED("vote_average.desc"));
+            setTVTopRatedLoading(true);
+
+            if(sortedByTVTopRated === "vote_average.desc"){
+                setTVTopRatedLoading(false);
+            }
         }
 
-    }, [ pageMoviesPopular, pageMoviesTopRated, pageMoviesUpcoming, pageTVAiringToday, pageTVOnTheAir, pageTVPopular, pageTVTopRated, dispatch ]);
+    }, [ pageMoviesPopular, sortedByMoviesPopular, pageMoviesTopRated, sortedByMoviesTopRated, pageMoviesUpcoming, pageTVAiringToday, pageTVOnTheAir, pageTVPopular, sortedByTVPopular, pageTVTopRated, sortedByTVTopRated, dispatch ]);
 
     return (
         <div>
@@ -46,7 +120,7 @@ function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoadi
                 title={"Popular Movies"}
                 type={"movie"}
                 chartLink={"popular"}
-                chartResult={moviesPopular}
+                chartResult={moviesPopular.results}
                 page={pageMoviesPopular}
                 loading={moviesPopularLoading}
             />
@@ -55,16 +129,16 @@ function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoadi
                 title={"Top Rated Movies"}
                 type={"movie"}
                 chartLink={"top-rated"}
-                chartResult={moviesTopRated}
+                chartResult={moviesTopRated.results}
                 page={pageMoviesTopRated}
                 loading={moviesTopRatedLoading}
             />
 
             <Row 
-                title={"Top Rated Movies"}
+                title={"Upcoming Movies"}
                 type={"movie"}
                 chartLink={"upcoming"}
-                chartResult={moviesUpcoming}
+                chartResult={moviesUpcoming.results}
                 page={pageMoviesUpcoming}
                 loading={moviesUpcomingLoading}
             />
@@ -73,7 +147,7 @@ function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoadi
                 title={"Popular TV Shows"}
                 type={"tv"}
                 chartLink={"popular"}
-                chartResult={tvPopular}
+                chartResult={tvPopular.results}
                 page={pageTVPopular}
                 loading={tvPopularLoading}
             />
@@ -82,7 +156,7 @@ function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoadi
                 title={"Top Rated TV Shows"}
                 type={"tv"}
                 chartLink={"top-rated"}
-                chartResult={tvTopRated}
+                chartResult={tvTopRated.results}
                 page={pageTVTopRated}
                 loading={tvTopRatedLoading}
             />
@@ -91,7 +165,7 @@ function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoadi
                 title={"Airing Today TV Shows"}
                 type={"tv"}
                 chartLink={"airing-today"}
-                chartResult={tvAiringToday}
+                chartResult={tvAiringToday.results}
                 page={pageTVAiringToday}
                 loading={tvAiringTodayLoading}
             />
@@ -100,7 +174,7 @@ function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoadi
                 title={"On The Air Today TV Shows"}
                 type={"tv"}
                 chartLink={"on-the-air-today"}
-                chartResult={tvOnTheAir}
+                chartResult={tvOnTheAir.results}
                 page={pageTVOnTheAir}
                 loading={tvOnTheAirLoading}
             />

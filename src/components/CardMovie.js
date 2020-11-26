@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { API_KEY, IMG_API } from '../api';
+import { API_KEY, IMG_API } from '../actions/setAPI';
 
 import ModalCustom from './ModalCustom';
 import TrailerButton from './TrailerButton';

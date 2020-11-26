@@ -36,8 +36,8 @@ function CarouselCustom({ content, desktop, small_desktop, tablet, small_tablet,
         <div>
             <Carousel
                 responsive={responsive}
-                draggable
-                swipeable
+                draggable={false}
+                swipeable={false}
                 ssr
                 infinite={false}
                 arrows

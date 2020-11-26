@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../StateProvider';
 import { SET_PAGE_TV_TOPRATED } from '../actions/setPageNo';
-import { API_KEY } from '../api';
+import { SET_SORTEDBY_TV_POPULAR } from '../actions/setSortBy';
 
 import CardTV from '../components/CardTV';
 import PageFilter from '../components/PageFilter';
@@ -25,12 +25,12 @@ const menuItems = [
         icon: <ArrowUpwardIcon/>
     },
     {
-        value: "release_date.desc",
+        value: "primary_release_date.desc",
         item: "Date",
         icon: <ArrowDownwardIcon/>
     },
     {
-        value: "release_date.asc",
+        value: "primary_release_date.asc",
         item: "Date",
         icon: <ArrowUpwardIcon/>
     },
@@ -46,35 +46,21 @@ const menuItems = [
     },
 ]
 
-function TVTopRated() {
+function TVTopRated({ tvTopRatedLoading }) {
     const history = useHistory();
-    const [{ pageTVTopRated }] = useStateValue();
-    const [ sortBy, setSortBy ] = useState("vote_average.desc");
-    const [ tvTopRated, setTVTopRated ] = useState([]);
-    const [ tvTopRatedLoading, setTVTopRatedLoading ] = useState(true);
-    const [ tvTopRatedTotalPages, setTVTopRatedTotalPages ] = useState(0);
-    
-    const TV_TOPRATED_API = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&page=${pageTVTopRated}&timezone=America%2FNew_York&vote_average.gte=3&vote_count.gte=500&include_null_first_air_dates=false&with_original_language=en`;
+    const [ { tvTopRated, pageTVTopRated, sortedByTVTopRated } ] = useStateValue();
 
     useEffect(() => {
         if(pageTVTopRated){
             history.push(`/tv/top-rated/${pageTVTopRated}`);
         }
 
-        fetch(TV_TOPRATED_API)
-        .then(res => res.json())
-        .then(data => {
-          setTVTopRated(data.results);
-          setTVTopRatedLoading(false);
-          setTVTopRatedTotalPages(data.total_pages);
-        });
-
         window.scrollTo({
             top: 0,
             left: 0,
         });
         
-    }, [ TV_TOPRATED_API, pageTVTopRated, history ]);
+    }, [  pageTVTopRated, history ]);
 
     return (
         <div className="page">
@@ -95,9 +81,9 @@ function TVTopRated() {
 
                         <div className="page__filter">
                             <PageFilter
-                                setSortBy={setSortBy}
+                                setSortBy={SET_SORTEDBY_TV_POPULAR}
                                 setPage={SET_PAGE_TV_TOPRATED}
-                                sortBy={sortBy}
+                                sortBy={sortedByTVTopRated}
                                 menuItems={menuItems}
                             />
                         </div>
@@ -105,7 +91,7 @@ function TVTopRated() {
                 
                     <div className="page__content_container">
                         <div className="page__content">
-                            {tvTopRated.length>0 && tvTopRated.map((result)=> (
+                            {tvTopRated.results.length>0 && tvTopRated.results.map((result)=> (
                                 <div key={result.id} className="movie_content">
                                     <CardTV key={result.id} {...result} />
                                 </div>
@@ -115,7 +101,7 @@ function TVTopRated() {
                         <div className="page__content page__content_pagination">
                             <PaginationCustom 
                                 page={pageTVTopRated}
-                                totalPages={tvTopRatedTotalPages}
+                                totalPages={tvTopRated.total_pages}
                                 setPage={SET_PAGE_TV_TOPRATED}
                             />
                         </div>

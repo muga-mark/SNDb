@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../StateProvider';
 import { SET_PAGE_TV_POPULAR } from '../actions/setPageNo';
-import { API_KEY } from '../api';
+import { SET_SORTEDBY_TV_POPULAR } from '../actions/setSortBy';
 
 import CardTV from '../components/CardTV';
 import PageFilter from '../components/PageFilter';
@@ -25,12 +25,12 @@ const menuItems = [
         icon: <ArrowUpwardIcon/>
     },
     {
-        value: "release_date.desc",
+        value: "primary_release_date.desc",
         item: "Date",
         icon: <ArrowDownwardIcon/>
     },
     {
-        value: "release_date.asc",
+        value: "primary_release_date.asc",
         item: "Date",
         icon: <ArrowUpwardIcon/>
     },
@@ -46,35 +46,21 @@ const menuItems = [
     },
 ]
 
-function TVPopular() {
+function TVPopular({ tvPopularLoading }) {
     const history = useHistory();
-    const [{ pageTVPopular }] = useStateValue();
-    const [ sortBy, setSortBy ] = useState("popularity.desc");
-    const [ tvPopular, setTVPopular ] = useState([]);
-    const [ tvPopularLoading, setTVPopularLoading ] = useState(true);
-    const [ tvPopularTotalPages, setTVPopularTotalPages ] = useState(0);
+    const [ { tvPopular, pageTVPopular, sortedByTVPopular } ] = useStateValue();
     
-    const TV_POPULAR_API = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${pageTVPopular}&vote_count.gte=250`;
-
     useEffect(() => {
         if(pageTVPopular){
             history.push(`/tv/popular/${pageTVPopular}`);
         }
-
-        fetch(TV_POPULAR_API)
-        .then(res => res.json())
-        .then(data => {
-          setTVPopular(data.results);
-          setTVPopularLoading(false);
-          setTVPopularTotalPages(data.total_pages);
-        });
 
         window.scrollTo({
             top: 0,
             left: 0,
         });
         
-    }, [ TV_POPULAR_API, pageTVPopular, history]);
+    }, [ pageTVPopular, history]);
 
     return (
         <div className="page">
@@ -95,9 +81,9 @@ function TVPopular() {
 
                         <div className="page__filter">
                             <PageFilter
-                                setSortBy={setSortBy}
+                                setSortBy={SET_SORTEDBY_TV_POPULAR}
                                 setPage={SET_PAGE_TV_POPULAR}
-                                sortBy={sortBy}
+                                sortBy={sortedByTVPopular}
                                 menuItems={menuItems}
                             />
                         </div>
@@ -105,7 +91,7 @@ function TVPopular() {
                 
                     <div className="page__content_container">
                         <div className="page__content">
-                            {tvPopular.length>0 && tvPopular.map((result)=> (
+                            {tvPopular.results.length>0 && tvPopular.results.map((result)=> (
                                 <div key={result.id} className="movie_content">
                                     <CardTV key={result.id} {...result} />
                                 </div>
@@ -115,7 +101,7 @@ function TVPopular() {
                         <div className="page__content page__content_pagination">
                             <PaginationCustom 
                                 page={pageTVPopular}
-                                totalPages={tvPopularTotalPages}
+                                totalPages={tvPopular.total_pages}
                                 setPage={SET_PAGE_TV_POPULAR}
                             />
                         </div>

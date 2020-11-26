@@ -39,8 +39,14 @@
     display: flex;
     overflow-x: scroll;
 }
+
+.info_page__cast--left {
+    justify-content: left;
+}
 .info_page__cast {
+    display: flex;
     margin: 0 6px;
+    max-height: 314px;
 }
 .info_page__cast:last-child {
   border-right: 20px solid transparent;
@@ -91,13 +97,7 @@
     border-bottom: 5px solid #AA211F;
 }
 
-.info_page__cast {
-    display: flex;
-}
 
-.info_page__cast--left {
-    justify-content: left;
-}
 
 @media screen and (max-width: 380px) {
     .infopage__separator {
