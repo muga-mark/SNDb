@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { API_KEY, IMG_API } from '../actions/setAPI';
+import { API_KEY, IMG_API } from '../api/setAPI';
 
 import ModalCustom from './ModalCustom';
 import TrailerButton from './TrailerButton';
@@ -10,14 +10,14 @@ import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
 import './Card.css';
 
-function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
+function Card ({ type, title, name, poster_path, vote_average, release_date, first_air_date, id }) {
     const [ open, setOpen ] = useState(false);
     const [ trailer, setTrailer ] = useState("");
     const [ trailerLoading, setTrailerLoading ] = useState(true);
     
-    const MOVIE_TRAILER_API = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
+    const TRAILER_API = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}&language=en-US`;
     const trailer_url = `https://www.youtube.com/watch?v=${trailer}`;
-
+    
     const handleOpen = () => {
         setOpen(true);
     };
@@ -27,7 +27,7 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
     };
  
     useEffect(() => {
-        fetch(MOVIE_TRAILER_API)
+        fetch(TRAILER_API)
         .then(res => res.json())
         .then(data => {
             if(data.results){
@@ -35,17 +35,17 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
                 setTrailerLoading(false);
             }
         });
-    }, [ MOVIE_TRAILER_API ]);
+    }, [ TRAILER_API ]);
 
     return (
         <div className="movie">
             
             <div className="movie_poster">
-                <Link to={`/movie/${id}`} className="poster__link">
+                <Link to={`/${type}/${id}`} className="poster__link">
                     {poster_path?
                         <img 
                             src={IMG_API + poster_path} 
-                            alt={title} 
+                            alt={title||name} 
                             className="poster"
                         />
                     :
@@ -58,8 +58,8 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
 
             <div className="movie_info">
                 <div className="movie_info_title">
-                    <Link to={`/movie/${id}`} className="poster__link">
-                        {title}
+                    <Link to={`/${type}/${id}`} className="poster__link">
+                        {title||name}
                     </Link>
                 </div>
                
@@ -74,7 +74,7 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
                 
                 <div className="movie_info_more">
                     <span>
-                        {release_date}
+                        {release_date||first_air_date}
                     </span>
                     <div className="movie_info_more_rating">
                         <StarIcon />
@@ -95,4 +95,4 @@ function CardMovie ({ title, poster_path, vote_average, release_date, id }) {
     );
 }
 
-export default CardMovie;
+export default Card;

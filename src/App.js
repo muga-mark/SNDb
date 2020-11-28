@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useStateValue } from './StateProvider';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API, TV_POPULAR_API, TV_TOPRATED_API } from './actions/setAPI';
+import { MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API, TV_POPULAR_API, TV_TOPRATED_API } from './api/setAPI';
 import { SET_MOVIES_POPULAR, SET_MOVIES_UPCOMING, SET_MOVIES_TOPRATED, SET_TV_AIRINGTODAY, SET_TV_ONTHEAIR, SET_TV_POPULAR, SET_TV_TOPRATED } from './actions/setResult';
 
 import Home from './Home';
@@ -113,49 +113,49 @@ function App() {
           <Route exact path ="/movie/popular/:pageNo">
             <Header />
             <div className="main_wrapper">
-              <MoviesPopular moviesPopularLoading={moviesPopularLoading} />
+              <MoviesPopular moviesPopularLoading={moviesPopularLoading} type={"movie"} />
             </div>
           </Route>
 
           <Route exact path ="/movie/upcoming/:pageNo">
             <Header />
             <div className="main_wrapper">
-              <MoviesUpcoming moviesUpcomingLoading={moviesUpcomingLoading} />
+              <MoviesUpcoming moviesUpcomingLoading={moviesUpcomingLoading} type={"movie"} />
             </div>
           </Route>
 
           <Route exact path ="/movie/top-rated/:pageNo">
             <Header />
             <div className="main_wrapper">
-              <MoviesTopRated moviesTopRatedLoading={moviesTopRatedLoading} />
+              <MoviesTopRated moviesTopRatedLoading={moviesTopRatedLoading} type={"movie"} />
             </div>
           </Route>
 
           <Route exact path ="/tv/popular/:pageNo">
             <Header />
             <div className="main_wrapper">
-              <TVPopular tvPopularLoading={tvPopularLoading} />
+              <TVPopular tvPopularLoading={tvPopularLoading} type={"tv"} />
             </div>
           </Route>
 
           <Route exact path ="/tv/top-rated/:pageNo">
             <Header />
             <div className="main_wrapper">
-              <TVTopRated tvTopRatedLoading={tvTopRatedLoading} />
+              <TVTopRated tvTopRatedLoading={tvTopRatedLoading} type={"tv"} />
             </div>
           </Route>
 
           <Route exact path ="/tv/airing-today/:pageNo">
             <Header />
             <div className="main_wrapper">
-              <TVAiringToday tvAiringTodayLoading={tvAiringTodayLoading} />
+              <TVAiringToday tvAiringTodayLoading={tvAiringTodayLoading} type={"tv"} />
             </div>
           </Route>
       
           <Route exact path ="/tv/on-the-air-today/:pageNo">
             <Header />
             <div className="main_wrapper">
-              <TVOnTheAir tvOnTheAirLoading={tvOnTheAirLoading} />
+              <TVOnTheAir tvOnTheAirLoading={tvOnTheAirLoading} type={"tv"} />
             </div>
           </Route>
 

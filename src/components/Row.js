@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import CardMovie from './CardMovie';
-import CardTV from './CardTV';
+import Card from './Card';
 import SpinnerContentCustom from "./SpinnerContentCustom";
 import CarouselCustom from "./CarouselCustom";
 
@@ -22,8 +21,8 @@ function Row({ type, chartLink, chartResult, page, title, loading,  }) {
                     {loading?
                         <SpinnerContentCustom 
                             loading={loading} 
-                            size={20}
-                            color={"#D1312D"}
+                            size={20} 
+                            color={"#D1312D"} 
                         />
                     :
                         <CarouselCustom 
@@ -34,11 +33,7 @@ function Row({ type, chartLink, chartResult, page, title, loading,  }) {
                             mobile={2}
                             content={chartResult.length>0 && chartResult.map((result)=> (
                                             <div key={result.id}>
-                                                {type==="movie"?
-                                                    <CardMovie key={result.id} {...result} />
-                                                :
-                                                    <CardTV key={result.id} {...result} />
-                                                }
+                                                <Card key={result.id} {...result} type={type} />
                                             </div>
                                         ))}
                         />
@@ -50,18 +45,14 @@ function Row({ type, chartLink, chartResult, page, title, loading,  }) {
                     {loading?
                         <SpinnerContentCustom 
                             loading={loading} 
-                            size={20}
-                            color={"#D1312D"}
+                            size={20} 
+                            color={"#D1312D"} 
                         />
                     :
                         <>
                         {chartResult.length>0 && chartResult.map((result)=> (
                             <div key={result.id} className="content__card">
-                                {type==="movie"?
-                                    <CardMovie key={result.id} {...result} />
-                                :
-                                    <CardTV key={result.id} {...result} />
-                                }
+                                <Card key={result.id} {...result} type={type} />
                             </div>
                         ))}
                         </>

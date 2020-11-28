@@ -1,9 +1,7 @@
 import React from 'react';
-// import TrailerButton from '../components/TrailerButton';
 import StarIcon from '@material-ui/icons/Star';
 import Hidden from '@material-ui/core/Hidden';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
-// import ReactPlayer from 'react-player';
 import './Info.css';
 
 function Info({ id, IMG_API, info, title,  certification, crewDirector }) {

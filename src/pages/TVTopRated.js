@@ -1,18 +1,14 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../StateProvider';
-import { SET_PAGE_TV_TOPRATED } from '../actions/setPageNo';
-import { SET_SORTEDBY_TV_POPULAR } from '../actions/setSortBy';
 
-import CardTV from '../components/CardTV';
-import PageFilter from '../components/PageFilter';
-import PaginationCustom from '../components/PaginationCustom';
-import SpinnerContentCustom from '../components/SpinnerContentCustom';
+import { SET_PAGE_TV_TOPRATED } from '../actions/setPageNo';
+import { SET_SORTEDBY_TV_TOPRATED } from '../actions/setSortBy';
+
+import PageContent from '../components/PageContent';
 
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import '../pages/z_styles.css';
-
 const menuItems = [
     {
         value: "vote_average.desc",
@@ -46,7 +42,7 @@ const menuItems = [
     },
 ]
 
-function TVTopRated({ tvTopRatedLoading }) {
+function TVTopRated({ tvTopRatedLoading, type }) {
     const history = useHistory();
     const [ { tvTopRated, pageTVTopRated, sortedByTVTopRated } ] = useStateValue();
 
@@ -63,54 +59,18 @@ function TVTopRated({ tvTopRatedLoading }) {
     }, [  pageTVTopRated, history ]);
 
     return (
-        <div className="page">
-            {tvTopRatedLoading?
-                <div className="page__spinner">
-                    <SpinnerContentCustom 
-                        loading={tvTopRatedLoading} 
-                        size={20}
-                        color={"#D1312D"}
-                    />
-                </div>
-            :
-                <>
-                    <div className="page__content_header">
-                        <div className="page__title">
-                            <span>Top Rated TV Shows</span>
-                        </div>
-
-                        <div className="page__filter">
-                            <PageFilter
-                                setSortBy={SET_SORTEDBY_TV_POPULAR}
-                                setPage={SET_PAGE_TV_TOPRATED}
-                                sortBy={sortedByTVTopRated}
-                                menuItems={menuItems}
-                            />
-                        </div>
-                    </div>
-                
-                    <div className="page__content_container">
-                        <div className="page__content">
-                            {tvTopRated.results.length>0 && tvTopRated.results.map((result)=> (
-                                <div key={result.id} className="movie_content">
-                                    <CardTV key={result.id} {...result} />
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="page__content page__content_pagination">
-                            <PaginationCustom 
-                                page={pageTVTopRated}
-                                totalPages={tvTopRated.total_pages}
-                                setPage={SET_PAGE_TV_TOPRATED}
-                            />
-                        </div>
-                    </div>
-                </>
-            }
-            
-            
-
+        <div>
+            <PageContent 
+                type={type} 
+                chartResult={tvTopRated}
+                loading={tvTopRatedLoading}
+                title={"Popular TV Shows"} 
+                menuItems={menuItems}
+                sortBy={sortedByTVTopRated} 
+                setSortBy={SET_SORTEDBY_TV_TOPRATED} 
+                page={pageTVTopRated}
+                setPage={SET_PAGE_TV_TOPRATED} 
+            />
         </div>
     )
 }

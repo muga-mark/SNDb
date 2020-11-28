@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { API_KEY, IMG_API } from '../actions/setAPI';
+import { API_KEY, IMG_API } from '../api/setAPI';
 
 import Info from '../components/Info';
 import Info2 from '../components/Info2';
@@ -151,7 +151,7 @@ function InfoTV() {
                                                     height='100%'
                                                     controls={true}
                                                     playing
-                                                    light={`https://img.youtube.com/vi/${result.key}/sddefault.jpg`} 
+                                                    light={`https://img.youtube.com/vi/${result.key}/0.jpg`} 
                                                 />
                                             </div>
                                         </div>

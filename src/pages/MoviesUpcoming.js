@@ -1,16 +1,12 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../StateProvider';
+
 import { SET_PAGE_MOVIES_UPCOMING } from '../actions/setPageNo';
 
-import CardMovie from '../components/CardMovie';
-import PaginationCustom from '../components/PaginationCustom';
-import SpinnerContentCustom from '../components/SpinnerContentCustom';
+import PageContent from '../components/PageContent';
 
-import '../pages/z_styles.css';
-
-
-function MoviesUpcoming({ moviesUpcomingLoading }) {
+function MoviesUpcoming({ moviesUpcomingLoading, type }) {
     const history = useHistory();
     const [ { moviesUpcoming, pageMoviesUpcoming } ] = useStateValue();
 
@@ -30,41 +26,14 @@ function MoviesUpcoming({ moviesUpcomingLoading }) {
 
     return (
         <div className="page">
-            {moviesUpcomingLoading?
-                <div className="page__spinner">
-                    <SpinnerContentCustom 
-                        loading={moviesUpcomingLoading} 
-                        size={20}
-                        color={"#D1312D"}
-                    />
-                </div>
-            :
-                <>
-                    <div className="page__content_header">
-                        <div className="page__title">
-                            <span>Upcoming Movies</span>
-                        </div>
-                    </div>
-                    
-                    <div className="page__content_container">
-                        <div className="page__content">
-                            {moviesUpcoming.results.length>0 && moviesUpcoming.results.map((result)=> (
-                                <div key={result.id} className="movie_content">
-                                    <CardMovie key={result.id} {...result} />
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="page__content page__content_pagination">
-                            <PaginationCustom 
-                                totalPages={moviesUpcoming.total_pages}
-                                setPage={SET_PAGE_MOVIES_UPCOMING}
-                                page={pageMoviesUpcoming}
-                            />
-                        </div>
-                    </div>
-                </>
-            }
+            <PageContent 
+                type={type} 
+                loading={moviesUpcomingLoading}
+                chartResult={moviesUpcoming}
+                title={"Upcoming Movies"} 
+                page={pageMoviesUpcoming}
+                setPage={SET_PAGE_MOVIES_UPCOMING} 
+            />
         </div>
     )
 }
