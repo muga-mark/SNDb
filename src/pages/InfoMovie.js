@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { API_KEY, IMG_API } from '../api/setAPI';
+import { API_KEY, IMG_API, GET_LANGUAGE_API } from '../api/setAPI';
 
 import Info from '../components/Info';
 import Info2 from '../components/Info2';
@@ -21,6 +21,7 @@ function InfoMovie() {
     const [ certification, setCertification ] = useState("");
     const [ movieDetails, setMovieDetails ] = useState([]);
     const [ movieDetailsLoading, setMovieDetailsLoading ] = useState(true);
+    const [ language, setLanguage ] = useState("");
     
     const GET_MOVIE_DETAILS = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US&append_to_response=releases%2Cvideos%2Ccredits`;
 
@@ -32,8 +33,6 @@ function InfoMovie() {
         fetch(GET_MOVIE_DETAILS)
         .then(res => res.json())
         .then(data => {
-        //   console.log("movieDetails",data);
-        //   console.log("trailer key", data.videos.results);
             if(data){
                 setMovieDetails(data);
                 setMovieDetailsLoading(false);
@@ -46,11 +45,9 @@ function InfoMovie() {
                     const certificationUS = (data.releases.countries).filter(function(el){
                         return  el.iso_3166_1 === "US";
                     });
-                    // console.log("certificationUS", certificationUS);
 
                     if(certificationUS[0]?.certification){
                         setCertification(certificationUS[0]?.certification);
-                        // console.log("certificationUS Result", certificationUS[0]?.certification);
                     }
 
 
@@ -58,11 +55,9 @@ function InfoMovie() {
                         var date = data.release_date;
                         return el.release_date === date;
                     });
-                    // console.log("filterCountriesByDate",filterCountriesByDate);
 
                     if(!(certificationUS[0]?.certification) && filterCountriesByDate[0]?.certification){
                         setCertification(filterCountriesByDate[0]?.certification);
-                        // console.log("filterCountriesByDate Result",filterCountriesByDate[0]?.certification);
                     }
 
                     
@@ -71,11 +66,9 @@ function InfoMovie() {
                             return o1.iso_3166_1 === o2.iso_3166_1; 
                         });
                     });
-                    // console.log("filterCountriesByCountry", filterCountriesByCountry);
 
                     if(!(certificationUS[0]?.certification) && !(filterCountriesByDate[0]?.certification) && filterCountriesByCountry[0]?.certification){
                         setCertification(filterCountriesByCountry[0]?.certification);
-                        // console.log("filterCountriesByCountry Result",filterCountriesByCountry[0]?.certification);
 
                     }
                 }
@@ -96,13 +89,28 @@ function InfoMovie() {
                 
                 if(data.credits.cast){
                     setCast(data.credits.cast);
-                    // console.log("CAST", data.credits.cast);
+                }
+
+                if(data.original_language){
+                    fetch(GET_LANGUAGE_API)
+                    .then(res => res.json())
+                    .then(languageResult => {
+                        const langauge = languageResult.filter(function(el){
+                            return  el.iso_639_1 === data.original_language;
+                        });
+                        if(langauge[0]?.name){
+                            setLanguage(langauge[0].english_name);
+                            console.log(langauge[0].english_name);
+                        }
+                    });
+
                 }
             }
-          
         });
 
-    }, [ GET_MOVIE_DETAILS ]);
+       
+
+    }, [ GET_MOVIE_DETAILS, GET_LANGUAGE_API ]);
     
     return (
         <div className="infopage__container">
@@ -143,6 +151,7 @@ function InfoMovie() {
                             certification={certification}
                             crewDirector={crewDirector}
                             crewWriters={crewWriters}
+                            language={language}
                         />
                     </div>
                     <div className="infopage__separator_footer" />

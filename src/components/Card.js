@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { API_KEY, IMG_API } from '../api/setAPI';
 
@@ -10,57 +10,89 @@ import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 
 import './Card.css';
 
-function Card ({ type, title, name, poster_path, vote_average, release_date, first_air_date, id }) {
+function Card ({ media_type, type, title, name, poster_path, vote_average, release_date, first_air_date, id }) {
     const [ open, setOpen ] = useState(false);
     const [ trailer, setTrailer ] = useState("");
     const [ trailerLoading, setTrailerLoading ] = useState(true);
+    const [ isFetchTrailer, setIsFetchTrailer ] = useState(true);
     
     const TRAILER_API = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}&language=en-US`;
-    const trailer_url = `https://www.youtube.com/watch?v=${trailer}`;
+    const trailer_url = `https://www.youtube.com/watch?v=${trailer}`;   
+
+
+    const fetchTrailer = () => {
+        fetch(TRAILER_API)
+        .then(res => res.json())
+        .then(data => {
+            if(data.results){
+                if(data.results[0]?.key){
+                    setTrailer(data.results[0]?.key);
+                    setOpen(true);
+                }else{
+                    setIsFetchTrailer(false);
+                    setTimeout(() => {
+                        setTrailerLoading(false);
+                    }, 500);
+                }
+            }
+        });
+    }
     
     const handleOpen = () => {
-        setOpen(true);
+        fetchTrailer();
     };
     
     const handleClose = () => {
         setOpen(false);
     };
- 
-    useEffect(() => {
-        fetch(TRAILER_API)
-        .then(res => res.json())
-        .then(data => {
-            if(data.results){
-                setTrailer(data.results[0]?.key);
-                setTrailerLoading(false);
-            }
-        });
-    }, [ TRAILER_API ]);
 
     return (
         <div className="movie">
             
             <div className="movie_poster">
-                <Link to={`/${type}/${id}`} className="poster__link">
-                    {poster_path?
-                        <img 
-                            src={IMG_API + poster_path} 
-                            alt={title||name} 
-                            className="poster"
-                        />
-                    :
-                        <div className="poster image__broken">
-                            <BrokenImageIcon/>
-                        </div>
-                    }
-                </Link>
+                {media_type?
+                    <Link to={`/${media_type}/${id}`} className="poster__link">
+                        {poster_path?
+                            <img 
+                                src={IMG_API + poster_path} 
+                                alt={title||name} 
+                                className="poster"
+                            />
+                        :
+                            <div className="poster image__broken">
+                                <BrokenImageIcon/>
+                            </div>
+                        }
+                    </Link>
+                :
+                    <Link to={`/${type}/${id}`} className="poster__link">
+                        {poster_path?
+                            <img 
+                                src={IMG_API + poster_path} 
+                                alt={title||name} 
+                                className="poster"
+                            />
+                        :
+                            <div className="poster image__broken">
+                                <BrokenImageIcon/>
+                            </div>
+                        }
+                    </Link>
+                }
+                
             </div>
 
             <div className="movie_info">
                 <div className="movie_info_title">
-                    <Link to={`/${type}/${id}`} className="poster__link">
-                        {title||name}
-                    </Link>
+                    {media_type?    
+                        <Link to={`/${media_type}/${id}`} className="poster__link">
+                            {title||name}
+                        </Link>
+                    :
+                        <Link to={`/${type}/${id}`} className="poster__link">
+                            {title||name}
+                        </Link>
+                    }
                 </div>
                
                 
@@ -69,6 +101,8 @@ function Card ({ type, title, name, poster_path, vote_average, release_date, fir
                         handleOpen={handleOpen}
                         trailer={trailer}
                         trailerLoading={trailerLoading}
+                        isFetchTrailer={isFetchTrailer}
+                        setTrailerLoading={setTrailerLoading}
                     />
                 </div>
                 

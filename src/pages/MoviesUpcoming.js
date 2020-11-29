@@ -15,8 +15,7 @@ function MoviesUpcoming({ moviesUpcomingLoading, type }) {
         if(pageMoviesUpcoming){
             history.push(`/movie/upcoming/${pageMoviesUpcoming}`);
         }
-
-
+        
         window.scrollTo({
             top: 0,
             left: 0,

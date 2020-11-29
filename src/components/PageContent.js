@@ -1,4 +1,5 @@
 import React from 'react';
+import { useStateValue } from '../StateProvider';
 
 import Card from './Card';
 import PageFilter from './PageFilter';
@@ -8,6 +9,8 @@ import SpinnerContentCustom from './SpinnerContentCustom';
 import './PageContent.css';
 
 function PageContent({ type, chartResult, loading, title, sortBy, setSortBy, setPage, menuItems, page }) {
+    const [ { search },  dispatch] = useStateValue();
+
     return (
         <>
             {loading?
@@ -40,17 +43,28 @@ function PageContent({ type, chartResult, loading, title, sortBy, setSortBy, set
                         <div className="page__content">
                             {chartResult.results.length>0 && chartResult.results.map((result)=> (
                                 <div key={result.id} className="movie_content">
-                                    <Card key={result.id} {...result} type={type} />
+                                    {type?
+                                        <Card key={result.id} {...result} type={type} />
+                                    :
+                                        <Card key={result.id} {...result} />
+                                    }
                                 </div>
                             ))}
+                            {chartResult.results.length===0 && search? 
+                                <div>
+                                    No Search Found
+                                </div>
+                            :null}
                         </div>
 
                         <div className="page__content page__content_pagination">
-                            <PaginationCustom 
-                                totalPages={chartResult.total_pages}
-                                setPage={setPage}
-                                page={page}
-                            />
+                            {chartResult.results.length>0?
+                                <PaginationCustom 
+                                    totalPages={chartResult.total_pages}
+                                    setPage={setPage}
+                                    page={page}
+                                />
+                            :null}
                         </div>
                     </div>
                 </>

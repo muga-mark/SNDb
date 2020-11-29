@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { API_KEY, IMG_API } from '../api/setAPI';
+import { API_KEY, IMG_API, GET_LANGUAGE_API } from '../api/setAPI';
 
 import Info from '../components/Info';
 import Info2 from '../components/Info2';
@@ -15,7 +15,7 @@ import './InfoTVMovie.css';
 
 function InfoTV() {
     const { TVId } = useParams();
-    const [ createdBy, setCreatedBy ] = useState("");
+    const [ createdBy, setCreatedBy ] = useState([]);
     const [ totalMinutes, setTotalMinutes ] = useState("");
     const [ onlyMinutes, setOnlyMinutes ] = useState("");
     const [ cast, setCast ] = useState([]);
@@ -23,6 +23,7 @@ function InfoTV() {
     const [ certification, setCertification ] = useState("");
     const [ TVDetails, setTVDetails ] = useState([]);
     const [ TVDetailsLoading, setTVDetailsLoading ] = useState(true);
+    const [ language, setLanguage ] = useState("");
     
     const GET_TV_DETAILS = `https://api.themoviedb.org/3/tv/${TVId}?api_key=${API_KEY}&language=en-US&append_to_response=content_ratings%2Cvideos%2Ccredits`;
 
@@ -33,54 +34,61 @@ function InfoTV() {
         fetch(GET_TV_DETAILS)
         .then(res => res.json())
         .then(data => {
-        //   console.log("GET_TV_DETAILS",data);
-        //   console.log("trailer key", data.videos.results[0]?.key);
             if(data){
                 setTVDetails(data);
                 setTVDetailsLoading(false);
             
                 if((data.videos.results).length>0){
                     setTrailer(data.videos.results);
-                    // console.log("Trailer", data.videos.results[0]?.key);
                 }
 
                 if((data.episode_run_time).length>0){
                     if(data.episode_run_time[0]>60){
-                        // console.log("more than 60");
                         setTotalMinutes(data.episode_run_time[0]);
                     }
                     if(data.episode_run_time[0]<60){
-                        // console.log("less than 60");
                         setOnlyMinutes(data.episode_run_time[0]);
                     }
-                    // console.log(data.episode_run_time[0]);
                 }
 
                 if(data.content_ratings.results){
                     const certificationUS = (data.content_ratings.results).filter(function(el){
                         return  el.iso_3166_1 === "US";
                     });
-                    // console.log("content_ratings.results", certificationUS);
 
                     if(certificationUS[0]?.rating){
                         setCertification(certificationUS[0]?.rating);
-                        // console.log("certificationUS Result", certificationUS[0]?.rating);
                     }
                 }
 
                 if(data.created_by){
                     setCreatedBy(data.created_by);
-                    // console.log("CREATED BY", data.created_by);
                 }
 
                 if(data.credits.cast){
                     setCast(data.credits.cast);
                 }
+                
+                if(data.original_language){
+                    fetch(GET_LANGUAGE_API)
+                    .then(res => res.json())
+                    .then(languageResult => {
+                        const langauge = languageResult.filter(function(el){
+                            return  el.iso_639_1 === data.original_language;
+                        });
+                        if(langauge[0]?.name){
+                            setLanguage(langauge[0].english_name);
+                        }
+                    });
+
+                }
             }
           
         });
 
-    }, [ GET_TV_DETAILS ]);
+        
+
+    }, [ GET_TV_DETAILS, GET_LANGUAGE_API ]);
 
     
     return (
@@ -100,12 +108,11 @@ function InfoTV() {
                             IMG_API={IMG_API}
                             info={TVDetails}
                             title={TVDetails.name}
-                            date={TVDetails.first_air_date}
                             certification={certification}
                             hours={hours}
                             minutes={minutes}
                             onlyMinutes={onlyMinutes}
-                            creator={createdBy}
+                            createdBy={createdBy}
                         />
                     </div>
 
@@ -115,12 +122,12 @@ function InfoTV() {
                     <div className="infopage__details2">
                         <Info2 
                             info={TVDetails}
-                            date={TVDetails.first_air_date}
                             hours={hours}
                             minutes={minutes}
                             onlyMinutes={onlyMinutes}
                             homepage={TVDetails.homepage}
                             certification={certification}
+                            language={language}
                         />
                     </div>
                     <div className="infopage__separator_footer" />

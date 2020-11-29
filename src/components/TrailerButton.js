@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SpinnerContentCustom from "./SpinnerContentCustom";
 
-function TrailerButton({ trailer, handleOpen, trailerLoading }) {
+function TrailerButton({ trailer, handleOpen, isFetchTrailer, trailerLoading }) {
+
     return (
-        <button type="button" onClick={handleOpen} disabled={!trailer} > 
-            {trailerLoading?
-                <SpinnerContentCustom 
-                    loading={trailerLoading} 
-                    size={10}
-                    color={"#ECF0F3"}
-                />
-            :
+        <button type="button" onClick={handleOpen} > 
+            
                 <>
-                    <PlayArrowIcon />
-                    {trailer?
-                        <span>Trailer</span>
+                    
+                    {/* <span>Trailer</span> */}
+                    {isFetchTrailer?
+                        <>
+                            <PlayArrowIcon />
+                            <span>Trailer</span>
+                        </>
                     :
-                        <span>No Trailer</span>
+                        <>
+                            {trailerLoading?
+                                <SpinnerContentCustom 
+                                    loading={trailerLoading} 
+                                    size={10}
+                                    color={"#ECF0F3"}
+                                />
+                            :
+                                <>
+                                    <PlayArrowIcon />
+                                    <span>No Trailer</span>
+                                </>
+                            }
+                        </>    
                     }
                 </>
-            }
         </button>
     )
 }

@@ -1,4 +1,8 @@
 export const initialState = {
+    search:"",
+    searchPage:1,
+    searchResult:[],
+
     moviesPopular: [],
     pageMoviesPopular: 1,
     sortedByMoviesPopular:"popularity.desc",
@@ -27,6 +31,11 @@ export const initialState = {
 }
 
 export const actionTypes = {
+    SET_SEARCH: "SET_SEARCH",
+    SET_PAGE_SEARCH: "SET_PAGE_SEARCH",
+    SET_SEARCH_RESULT: "SET_SEARCH_RESULT",
+    
+
     SET_MOVIES_POPULAR: "SET_MOVIES_POPULAR",
     SET_PAGE_MOVIES_POPULAR: "SET_PAGE_MOVIES_POPULAR",
     SET_SORTEDBY_MOVIES_POPULAR: "SET_SORTEDBY_MOVIES_POPULAR",
@@ -56,6 +65,23 @@ export const actionTypes = {
 const reducer = (state, action) => {
     // console.log(action);
     switch (action.type) {
+        case actionTypes.SET_SEARCH:
+            return {
+                ...state,
+                search: action.search,
+            }; 
+        case actionTypes.SET_PAGE_SEARCH:
+            return {
+                ...state,
+                searchPage: action.searchPage,
+            }; 
+        case actionTypes.SET_SEARCH_RESULT:
+            return {
+                ...state,
+                searchResult: action.searchResult,
+            }; 
+
+
         case actionTypes.SET_MOVIES_POPULAR:
             return {
                 ...state,

@@ -4,7 +4,7 @@ import Hidden from '@material-ui/core/Hidden';
 import BrokenImageIcon from '@material-ui/icons/BrokenImage';
 import './Info.css';
 
-function Info({ id, IMG_API, info, title,  certification, crewDirector }) {
+function Info({ id, IMG_API, info, title,  certification, crewDirector, createdBy }) {
 
     return (
         <div className="info">
@@ -99,39 +99,6 @@ function Info({ id, IMG_API, info, title,  certification, crewDirector }) {
                         
                     </div>
 
-                    <div className="description__subheader2">
-                        {/* {info.vote_average && info.vote_count?
-                            <>
-                                <div className="description__ratings">
-                                    <span className="marginRightLeft">
-                                        <StarIcon /> 
-                                    </span>
-
-                                    <div>
-                                        <div>    
-                                            <span className="info__text info__text--big info__text--bold">
-                                                {info.vote_average}
-                                            </span>
-                                            <span className="info__text info__text--x-small info__text--bold">
-                                                /10
-                                            </span>
-                                        </div>   
-
-                                        <div>
-                                            <span className="info__text info__text--x-small marginRightLeft">
-                                                ({info.vote_count})
-                                            </span>
-                                        </div> 
-                                    </div>
-                                </div>
-                                <span className="ghost">|</span>
-                            </>
-                        :null} */}
-
-                    </div>
-
-
-                    
                     <div className="info__overview info__text info__text--regular">
                         <Hidden mdUp>
                             <img 
@@ -183,6 +150,49 @@ function Info({ id, IMG_API, info, title,  certification, crewDirector }) {
                                                 }
                                             </div>
                                             
+                                        </div>
+                                    :null}
+                                </>
+                            :null}
+
+                            {createdBy? 
+                                <>
+                                    {createdBy.length>0?
+                                        <div className="director__container">
+                                            <div className="crewWidth">
+                                                <span className="info__text info__text--bold info__text--small">
+                                                    {createdBy.length>1? " Creators:" : "Creator:"}
+                                                </span>
+                                            </div>
+
+                                            <div className="director">
+                                                {createdBy.length>1?
+                                                    <>
+                                                        {createdBy
+                                                            .map((result) => (
+                                                                <div key={result.id}>
+                                                                    <span key={result.id} className="info__text info__text--small">
+                                                                        {result.name}
+                                                                    </span>
+                                                                </div>))
+                                                            .reduce((prev, curr) => [prev, 
+                                                                <span className="info__text marginRight">,</span>
+                                                                ,curr])
+                                                        }
+                                                    </>
+                                                :
+                                                    <>
+                                                        {createdBy
+                                                            .map((result) => (
+                                                            <div key={result.id}>
+                                                                <span key={result.id} className="info__text info__text--small">
+                                                                    {result.name}
+                                                                </span>
+                                                            </div>))
+                                                        }
+                                                    </>
+                                                }
+                                            </div>
                                         </div>
                                     :null}
                                 </>

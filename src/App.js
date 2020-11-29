@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useStateValue } from './StateProvider';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API, TV_POPULAR_API, TV_TOPRATED_API } from './api/setAPI';
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { MOVIE_POPULAR_API, MOVIE_UPCOMING_API, MOVIE_TOPRATED_API, TV_AIRINGTODAY_API, TV_ONTHEAIR_API, TV_POPULAR_API, TV_TOPRATED_API, SEARCH_API } from './api/setAPI';
 import { SET_MOVIES_POPULAR, SET_MOVIES_UPCOMING, SET_MOVIES_TOPRATED, SET_TV_AIRINGTODAY, SET_TV_ONTHEAIR, SET_TV_POPULAR, SET_TV_TOPRATED } from './actions/setResult';
+import { SET_SEARCH, SET_PAGE_SEARCH, SET_SEARCH_RESULT } from './actions/setSearch';
 
 import Home from './Home';
 import Header from './components/Header';
@@ -15,12 +16,18 @@ import TVAiringToday from './pages/TVAiringToday';
 import TVOnTheAir from './pages/TVOnTheAir';
 import TVPopular from './pages/TVPopular';
 import TVTopRated from './pages/TVTopRated';
+import SearchResult from './pages/SearchResult';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import "react-multi-carousel/lib/styles.css";
 import './App.css';
 
 function App() {
-  const [ { sortedByMoviesPopular, pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, sortedByMoviesTopRated, pageTVPopular, sortedByTVPopular, pageTVAiringToday, pageTVOnTheAir, pageTVTopRated, sortedByTVTopRated },  dispatch] = useStateValue();
+  const history = useHistory();
+  const [ { sortedByMoviesPopular, pageMoviesPopular, pageMoviesUpcoming, pageMoviesTopRated, sortedByMoviesTopRated, pageTVPopular, sortedByTVPopular, pageTVAiringToday, pageTVOnTheAir, pageTVTopRated, sortedByTVTopRated, search, searchPage, searchResult },  dispatch] = useStateValue();
+  const [ searchLoading, setSearchLoading ] = useState(true);
   const [ moviesPopularLoading, setMoviesPopularLoading ] = useState(true);
   const [ moviesUpcomingLoading, setMoviesUpcomingLoading ] = useState(true);
   const [ moviesTopRatedLoading, setMoviesTopRatedLoading ] = useState(true);
@@ -81,15 +88,20 @@ function App() {
       setTVTopRatedLoading(false);
     });
 
-  }, [ sortedByMoviesPopular, pageMoviesPopular, pageMoviesUpcoming, sortedByMoviesTopRated, pageMoviesTopRated, pageTVAiringToday, pageTVOnTheAir, sortedByTVPopular, pageTVPopular, sortedByTVTopRated, pageTVTopRated ]);
+  }, [ dispatch, sortedByMoviesPopular, pageMoviesPopular, pageMoviesUpcoming, sortedByMoviesTopRated, pageMoviesTopRated, pageTVAiringToday, pageTVOnTheAir, sortedByTVPopular, pageTVPopular, sortedByTVTopRated, pageTVTopRated ]);
+
+
+  
 
   return (
     <div className="App">
       <Router>
+        <Header setSearchLoading={setSearchLoading} />
+        <ToastContainer />
+
         <Switch>
 
           <Route exact path ="/">
-            <Header />
             <div className="main_wrapper">
               <Home
                 moviesPopularLoading={moviesPopularLoading} 
@@ -106,76 +118,77 @@ function App() {
                 setTVOnTheAirLoading={setTVOnTheAirLoading}
                 setTVPopularLoading={setTVPopularLoading}
                 setTVTopRatedLoading={setTVTopRatedLoading}
+                setSearchLoading={setSearchLoading}
+              />
+            </div>
+          </Route>
+
+          <Route exact path ="/search/:search/:pageNo">
+            <div className="main_wrapper">
+              <SearchResult 
+                searchLoading={searchLoading}
+                // setSearchLoading={setSearchLoading}
               />
             </div>
           </Route>
 
           <Route exact path ="/movie/popular/:pageNo">
-            <Header />
             <div className="main_wrapper">
               <MoviesPopular moviesPopularLoading={moviesPopularLoading} type={"movie"} />
             </div>
           </Route>
 
           <Route exact path ="/movie/upcoming/:pageNo">
-            <Header />
             <div className="main_wrapper">
               <MoviesUpcoming moviesUpcomingLoading={moviesUpcomingLoading} type={"movie"} />
             </div>
           </Route>
 
           <Route exact path ="/movie/top-rated/:pageNo">
-            <Header />
             <div className="main_wrapper">
               <MoviesTopRated moviesTopRatedLoading={moviesTopRatedLoading} type={"movie"} />
             </div>
           </Route>
 
           <Route exact path ="/tv/popular/:pageNo">
-            <Header />
             <div className="main_wrapper">
               <TVPopular tvPopularLoading={tvPopularLoading} type={"tv"} />
             </div>
           </Route>
 
           <Route exact path ="/tv/top-rated/:pageNo">
-            <Header />
             <div className="main_wrapper">
               <TVTopRated tvTopRatedLoading={tvTopRatedLoading} type={"tv"} />
             </div>
           </Route>
 
           <Route exact path ="/tv/airing-today/:pageNo">
-            <Header />
             <div className="main_wrapper">
               <TVAiringToday tvAiringTodayLoading={tvAiringTodayLoading} type={"tv"} />
             </div>
           </Route>
       
           <Route exact path ="/tv/on-the-air-today/:pageNo">
-            <Header />
             <div className="main_wrapper">
               <TVOnTheAir tvOnTheAirLoading={tvOnTheAirLoading} type={"tv"} />
             </div>
           </Route>
 
           <Route exact path ="/movie/:movieId">
-            <Header />
             <div className="wrapper">
               <InfoMovie />
             </div>
           </Route>
 
           <Route exact path ="/tv/:TVId">
-            <Header />
             <div className="wrapper">
               <InfoTV />
             </div>
           </Route>
 
-          <Route path="*">
+          {/* <Route path="*">
             <Redirect to="/" />
-          </Route>
+          </Route> */}
           
         </Switch>
       </Router>

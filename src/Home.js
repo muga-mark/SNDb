@@ -1,15 +1,37 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
+
 import { SET_PAGE_MOVIES_POPULAR, SET_PAGE_MOVIES_UPCOMING, SET_PAGE_MOVIES_TOPRATED,  SET_PAGE_TV_AIRINGTODAY, SET_PAGE_TV_ONTHEAIR, SET_PAGE_TV_POPULAR, SET_PAGE_TV_TOPRATED } from './actions/setPageNo';
 import { SET_SORTEDBY_MOVIES_POPULAR, SET_SORTEDBY_MOVIES_TOPRATED,  SET_SORTEDBY_TV_POPULAR, SET_SORTEDBY_TV_TOPRATED } from './actions/setSortBy';
+import { SET_SEARCH, SET_PAGE_SEARCH, SET_SEARCH_RESULT } from './actions/setSearch';
 
 import Row from './components/Row';
 
-function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoading, tvAiringTodayLoading, tvOnTheAirLoading, tvPopularLoading, tvTopRatedLoading, setMoviesPopularLoading,  setMoviesUpcomingLoading, setMoviesTopRatedLoading, setTVAiringTodayLoading, setTVOnTheAirLoading, setTVPopularLoading, setTVTopRatedLoading }) {
+function Home({ moviesPopularLoading, moviesTopRatedLoading, moviesUpcomingLoading, tvAiringTodayLoading, tvOnTheAirLoading, tvPopularLoading, tvTopRatedLoading, setMoviesPopularLoading,  setMoviesUpcomingLoading, setMoviesTopRatedLoading, setTVAiringTodayLoading, setTVOnTheAirLoading, setTVPopularLoading, setTVTopRatedLoading, setSearchLoading }) {
     
-    const [{  moviesPopular, pageMoviesPopular, sortedByMoviesPopular, moviesUpcoming, pageMoviesUpcoming, moviesTopRated, pageMoviesTopRated, sortedByMoviesTopRated, tvAiringToday, pageTVAiringToday, tvOnTheAir, pageTVOnTheAir, tvPopular, pageTVPopular, sortedByTVPopular, pageTVTopRated, tvTopRated, sortedByTVTopRated },  dispatch] = useStateValue();
+    const history = useHistory(); 
+    const [{  moviesPopular, pageMoviesPopular, sortedByMoviesPopular, moviesUpcoming, pageMoviesUpcoming, moviesTopRated, pageMoviesTopRated, sortedByMoviesTopRated, tvAiringToday, pageTVAiringToday, tvOnTheAir, pageTVOnTheAir, tvPopular, pageTVPopular, sortedByTVPopular, pageTVTopRated, tvTopRated, sortedByTVTopRated, searchPage, search },  dispatch] = useStateValue();
     
     useEffect(() => {
+        if(searchPage !== 1){
+            dispatch(SET_PAGE_SEARCH(1));
+            setSearchLoading(true);
+            
+            if(searchPage === 1){
+                setSearchLoading(false);
+            }
+        }
+        if(search !== ""){
+            dispatch(SET_SEARCH(""));
+            dispatch(SET_SEARCH_RESULT([]));
+            setSearchLoading(true);
+            
+            if(search === ""){
+                setSearchLoading(false);
+            }
+        }
+
         if(pageMoviesPopular !== 1){
             dispatch(SET_PAGE_MOVIES_POPULAR(1));
             setMoviesPopularLoading(true);
