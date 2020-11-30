@@ -7,6 +7,7 @@ import { SET_SEARCH, SET_PAGE_SEARCH, SET_SEARCH_RESULT } from './actions/setSea
 
 import Home from './Home';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import InfoMovie from './pages/InfoMovie';
 import InfoTV from './pages/InfoTV';
 import MoviesPopular from './pages/MoviesPopular';
@@ -191,6 +192,8 @@ function App() {
           </Route>
           
         </Switch>
+        
+        <Footer />
       </Router>
     </div>
   );
