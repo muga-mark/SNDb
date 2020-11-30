@@ -22,9 +22,21 @@ function Header({ setSearchLoading }) {
             fetch(SEARCH_API(search, searchPage))
             .then(res => res.json())
             .then(data => {
-              dispatch(SET_SEARCH_RESULT(data));
-              setSearchLoading(false);
-              history.push(`/search/${search}/${searchPage}`);
+                console.log("Data Result", data);
+                if(data.results){
+                    const searchResult = data.results.filter(function(el){
+                        return  (el.media_type === "tv" || el.media_type === "movie") &&
+                                el.vote_average !== 0;
+                    });
+                    const filterResult = data.results = searchResult;
+                    
+                    if(filterResult){
+                        dispatch(SET_SEARCH_RESULT(data));
+                        setSearchLoading(false);
+                        history.push(`/search/${search}/${searchPage}`);
+                    }
+                    
+                }
             });
         }
     } 
@@ -40,8 +52,21 @@ function Header({ setSearchLoading }) {
             fetch(SEARCH_API(search, searchPage))
             .then(res => res.json())
             .then(data => {
-              dispatch(SET_SEARCH_RESULT(data));
-              setSearchLoading(false);
+                if(data.results){
+                    const searchResult = data.results.filter(function(el){
+                        return  (el.media_type === "tv" || el.media_type === "movie") &&
+                        el.vote_average !== 0;
+                    });
+    
+                    const filterResult = data.results = searchResult;
+                    
+                    if(filterResult){
+                        dispatch(SET_SEARCH_RESULT(data));
+                        setSearchLoading(false);
+                    }
+                    
+                }
+                
             });
         }
         

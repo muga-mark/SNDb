@@ -50,22 +50,25 @@ function PageContent({ type, chartResult, loading, title, sortBy, setSortBy, set
                                     }
                                 </div>
                             ))}
-                            {chartResult.results.length===0 && search? 
-                                <div>
-                                    No Search Found
-                                </div>
-                            :null}
                         </div>
 
-                        <div className="page__content page__content_pagination">
-                            {chartResult.results.length>0?
+                        
+                        {chartResult.results.length>0?
+                            <div className="page__content page__content_pagination">
                                 <PaginationCustom 
                                     totalPages={chartResult.total_pages}
                                     setPage={setPage}
                                     page={page}
                                 />
-                            :null}
-                        </div>
+                            </div>
+                        :null}
+                        
+
+                        {chartResult.results.length===0 && search? 
+                            <div className={`page__content ${ (chartResult.results.length===0 && search) && "noSearchFound"}`}>
+                                No Search Found
+                            </div>
+                        :null}
                     </div>
                 </>
             }

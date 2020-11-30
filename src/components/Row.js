@@ -6,6 +6,7 @@ import SpinnerContentCustom from "./SpinnerContentCustom";
 import CarouselCustom from "./CarouselCustom";
 
 import Hidden from '@material-ui/core/Hidden';
+
 import './Row.css';
 
 function Row({ type, chartLink, chartResult, page, title, loading,  }) {
@@ -51,7 +52,7 @@ function Row({ type, chartLink, chartResult, page, title, loading,  }) {
                     :
                         <>
                         {chartResult.length>0 && chartResult.map((result)=> (
-                            <div key={result.id} className="content__card">
+                            <div key={result.id} className="row__card">
                                 <Card key={result.id} {...result} type={type} />
                             </div>
                         ))}

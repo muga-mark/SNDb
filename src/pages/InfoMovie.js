@@ -100,7 +100,6 @@ function InfoMovie() {
                         });
                         if(langauge[0]?.name){
                             setLanguage(langauge[0].english_name);
-                            console.log(langauge[0].english_name);
                         }
                     });
 

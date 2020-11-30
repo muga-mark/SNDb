@@ -23,7 +23,9 @@
 .row__link > span {
   font-size: 26px;
   font-weight: 700;
+  
 }
+
 
 .row__container {   
   height: 500px;
@@ -54,8 +56,11 @@
   background: #d1302dbe !important;
 }
 
-
 @media screen and (max-width: 380px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   .row__title {
     padding: 10px 5px !important;
     margin: 40px 15px 20px 15px !important;
@@ -92,6 +97,10 @@
 }
 
 @media screen and (min-width: 380px) and (max-width: 600px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
   .row__title {
     padding: 10px 5px !important;
     margin: 40px 15px 20px 15px !important;
