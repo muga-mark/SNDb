@@ -55,7 +55,7 @@ function CarouselCustom({
       <Carousel
         responsive={responsive}
         draggable={false}
-        swipeable={false}
+        swipeable={true}
         ssr
         infinite={false}
         arrows

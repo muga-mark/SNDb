@@ -3,13 +3,13 @@
 }
 
 body {
-  background-color: #ECF0F3;
+  background-color: #ecf0f3;
 }
 
 .App {
   height: 100%;
+  overflow-x: hidden;
 }
-
 
 .wrapper {
   /* width: 1000px; */
@@ -17,7 +17,6 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
 
 @media screen and (max-width: 380px) {
   .wrapper {
@@ -27,23 +26,19 @@ body {
 }
 
 @media screen and (min-width: 380px) and (max-width: 500px) {
-
-
 }
 
 @media screen and (min-width: 500px) and (max-width: 600px) {
-
-
-
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media screen and (max-width: 600px) {  
+@media screen and (max-width: 600px) {
   .main_wrapper {
     margin: 60px 10px;
   }
   .wrapper {
     width: 100% !important;
+    transition: 0.5s;
   }
 }
 
