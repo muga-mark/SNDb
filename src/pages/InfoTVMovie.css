@@ -32,7 +32,6 @@
 .info_page__cast_container {
   margin: 20px 0;
   width: 100%;
-  /* align-self: flex-start; */
 }
 .info_page__cast_container_scroll {
   overflow: hidden;
@@ -110,37 +109,27 @@
 }
 
 .infopage__separator-footer {
-  font-weight: 700;
-  line-height: 10px;
-  position: relative;
-  padding: 10px 15px 10px 25px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  /* text-align: right; */
+}
+.infopage__separator-footer::before,
+.infopage__separator-footer::after {
+  content: "";
+  flex: 1;
+  border-bottom: 5px solid #aa211f;
 }
 .infopage__separator-footer::before {
-  background-color: #aa211f;
-  content: " ";
-  min-width: 800px;
-  height: 5px;
-  position: absolute;
-  left: 0;
+  margin-right: 0.5em;
 }
 .infopage__separator-footer::after {
-  position: absolute;
-  content: " ";
-  /* width: 100%; */
-  background-color: #aa211f;
-  min-width: 55px;
-  height: 5px;
-  right: 0;
+  margin-left: 0.5em;
 }
 .infopage__separator-footer > span {
-  position: absolute;
-  left: 815px !important;
   cursor: pointer;
   color: #aa211f;
   font-size: 20px;
+  font-weight: 700;
 }
 .infopage__separator-footer > span:hover {
   color: #d32e2b;
@@ -182,51 +171,14 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 600px) {
-  .infopage__separator-footer::before {
-    min-width: 200px;
-  }
-  .infopage__separator-footer::after {
-    min-width: 55px;
-  }
-  .infopage__separator-footer > span {
-    right: 80px;
-    font-size: 20px;
-  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  .infopage__separator-footer::before {
-    min-width: 400px;
-  }
-  .infopage__separator-footer::after {
-    min-width: 70px !important;
-  }
-  .infopage__separator-footer--less::after {
-    min-width: 80px !important;
-  }
-  .infopage__separator-footer > span {
-    left: 415px !important;
-    font-size: 20px;
-  }
 }
 
 @media only screen and (min-width: 830px) {
-  .infopage__separator-footer::before {
-    min-width: 600px !important;
-  }
-  .infopage__separator-footer > span {
-    left: 615px !important;
-    font-size: 20px;
-  }
 }
 
 @media screen and (min-width: 1020px) {
-  .infopage__separator-footer::before {
-    min-width: 800px !important;
-  }
-
-  .infopage__separator-footer > span {
-    left: 815px !important;
-  }
 }

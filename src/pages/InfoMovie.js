@@ -263,40 +263,72 @@ function InfoMovie() {
                     />
                   </div>
                 )}
+                {fullCast.length > 4 ? (
+                  <div
+                    className={`infopage__separator-footer ${
+                      viewFullCast && "infopage__separator-footer--less"
+                    }`}
+                  >
+                    <span onClick={viewFullCastHandler}>
+                      {viewFullCast ? "View Less" : "View More"}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="infopage__separator_footer" />
+                )}
               </Hidden>
 
               {/* Mobile View */}
               <Hidden smUp>
                 <div className="info_page__cast_container info_page__cast_container_scroll">
-                  {cast.length > 0 &&
-                    cast.map((result) => (
-                      <div key={result.id} className="info_page__cast">
-                        <InfoCast
-                          key={result.id}
-                          id={result.id}
-                          IMG_API={IMG_API}
-                          profile_path={result.profile_path}
-                          original_name={result.original_name}
-                          character={result.character}
-                        />
-                      </div>
-                    ))}
+                  {viewFullCast ? (
+                    <>
+                      {fullCast.length > 0 &&
+                        fullCast.map((result) => (
+                          <div key={result.id} className="info_page__cast">
+                            <InfoCast
+                              key={result.id}
+                              id={result.id}
+                              IMG_API={IMG_API}
+                              profile_path={result.profile_path}
+                              original_name={result.original_name}
+                              character={result.character}
+                            />
+                          </div>
+                        ))}
+                    </>
+                  ) : (
+                    <>
+                      {cast.length > 0 &&
+                        cast.map((result) => (
+                          <div key={result.id} className="info_page__cast">
+                            <InfoCast
+                              key={result.id}
+                              id={result.id}
+                              IMG_API={IMG_API}
+                              profile_path={result.profile_path}
+                              original_name={result.original_name}
+                              character={result.character}
+                            />
+                          </div>
+                        ))}
+                    </>
+                  )}
                 </div>
+                {fullCast.length > 14 ? (
+                  <div
+                    className={`infopage__separator-footer ${
+                      viewFullCast && "infopage__separator-footer--less"
+                    }`}
+                  >
+                    <span onClick={viewFullCastHandler}>
+                      {viewFullCast ? "View Less" : "View More"}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="infopage__separator_footer" />
+                )}
               </Hidden>
-
-              {fullCast.length > 4 ? (
-                <div
-                  className={`infopage__separator-footer ${
-                    viewFullCast && "infopage__separator-footer--less"
-                  }`}
-                >
-                  <span onClick={viewFullCastHandler}>
-                    {viewFullCast ? "View Less" : "View More"}
-                  </span>
-                </div>
-              ) : (
-                <div className="infopage__separator_footer" />
-              )}
             </>
           ) : null}
         </>
