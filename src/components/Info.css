@@ -260,7 +260,6 @@
 .cast__container {
   border-radius: 15px;
   margin: 0 auto;
-  margin-top: 10px;
   margin-bottom: 5px;
   background-color: #ecf0f3;
   box-shadow: 3px 3px 6px #cbced1, -3px -3px 6px #ffffff;
@@ -479,7 +478,7 @@
     font-size: 18px;
   }
   .info__text--x-small {
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
   .info__text--small {
     font-size: 16px !important;

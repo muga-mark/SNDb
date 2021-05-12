@@ -137,11 +137,11 @@
 
 @media screen and (max-width: 380px) {
   .infopage__separator {
-    line-height: 10px !important;
+    /* line-height: 10px !important; */
     font-size: 25px !important;
   }
-  .infopage__separator::before {
-    height: 10px !important;
+  /* .infopage__separator::before {
+    height: 5px !important;
   }
   .infopage__separator::after {
     height: 10px !important;
@@ -149,7 +149,7 @@
 
   .infopage__separator_footer {
     border-bottom: 10px solid #aa211f;
-  }
+  } */
 
   .infopage__details2 {
     padding: 20px;

@@ -174,6 +174,7 @@ function InfoTV() {
               <div className="infopage__separator">
                 <span>Cast and Crew</span>
               </div>
+              {/* Desktop View */}
               <Hidden xsDown>
                 {viewFullCast ? (
                   <div className="info-page__cast-container--full-view">
@@ -237,6 +238,7 @@ function InfoTV() {
                 )}
               </Hidden>
 
+              {/* Mobile View */}
               <Hidden smUp>
                 <div className="info_page__cast_container info_page__cast_container_scroll">
                   {viewFullCast ? (
