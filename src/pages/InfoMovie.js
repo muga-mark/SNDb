@@ -174,36 +174,58 @@ function InfoMovie() {
           {trailer.length > 0 ? (
             <>
               <div className="infopage__separator">
-                <span>Videos</span>
+                {trailer.length > 1 ? <span>Videos</span> : <span>Video</span>}
               </div>
+
               <div className="infopage__video_container">
-                <CarouselCustom
-                  huge_desktop={2}
-                  big_desktop={2}
-                  desktop={2}
-                  small_desktop={2}
-                  tablet={2}
-                  small_tablet={1}
-                  mobile={1}
-                  content={trailer.map((result) => (
-                    <div className="infopage__video_player" key={result.id}>
-                      <div className="player-wrapper">
-                        <ReactPlayer
-                          className="react-player"
-                          url={`https://www.youtube.com/watch?v=${result.key}`}
-                          width="100%"
-                          height="100%"
-                          controls={true}
-                          playing
-                          light={
-                            `https://img.youtube.com/vi/${result.key}/sddefault.jpg` ||
-                            `https://img.youtube.com/vi/${result.key}/sddefault.jpg`
-                          }
-                        />
+                {trailer.length > 1 ? (
+                  <CarouselCustom
+                    huge_desktop={2}
+                    big_desktop={2}
+                    desktop={2}
+                    small_desktop={2}
+                    tablet={2}
+                    small_tablet={1}
+                    mobile={1}
+                    content={trailer.map((result) => (
+                      <div className="infopage__video_player" key={result.id}>
+                        <div className="player-wrapper">
+                          <ReactPlayer
+                            className="react-player"
+                            url={`https://www.youtube.com/watch?v=${result.key}`}
+                            width="100%"
+                            height="100%"
+                            controls={true}
+                            playing
+                            light={`https://img.youtube.com/vi/${result.key}/${
+                              "sddefault" || "0"
+                            }.jpg`}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                />
+                    ))}
+                  />
+                ) : (
+                  <div className="infopage__video_container">
+                    {trailer.map((result) => (
+                      <div className="infopage__video_player" key={result.id}>
+                        <div className="player-wrapper">
+                          <ReactPlayer
+                            className="react-player"
+                            url={`https://www.youtube.com/watch?v=${result.key}`}
+                            width="100%"
+                            height="100%"
+                            controls={true}
+                            playing
+                            light={`https://img.youtube.com/vi/${result.key}/${
+                              "sddefault" || "0"
+                            }.jpg`}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="infopage__separator_footer" />
             </>
@@ -270,7 +292,11 @@ function InfoMovie() {
                     }`}
                   >
                     <span onClick={viewFullCastHandler}>
-                      {viewFullCast ? "View Less" : "View More"}
+                      {viewFullCast ? (
+                        "View Less"
+                      ) : (
+                        <>{fullCast.length > 14 ? "View More" : "Expand"}</>
+                      )}
                     </span>
                   </div>
                 ) : (
